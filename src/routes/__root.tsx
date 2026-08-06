@@ -77,12 +77,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Protocolo de Diabetes" },
-      { name: "description", content: "Protocolo natural de 14 dias para a diabetes tipo 2." },
-      { property: "og:title", content: "Protocolo de Diabetes" },
+      { title: "The Diabetes Protocol" },
+      {
+        name: "description",
+        content: "Natural 14-day protocol for type 2 diabetes.",
+      },
+      { property: "og:title", content: "The Diabetes Protocol" },
       {
         property: "og:description",
-        content: "Protocolo natural de 14 dias para a diabetes tipo 2.",
+        content: "Natural 14-day protocol for type 2 diabetes.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -98,7 +101,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400..900;1,400..900&display=swap",
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
   }),
 
