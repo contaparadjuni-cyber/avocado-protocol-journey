@@ -205,20 +205,22 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
           <img
             src={brainScan}
             alt="MRI exam showing nodules caused by parasite eggs in a young patient's brain"
-            width={1088}
-            height={608}
+            width={1000}
+            height={559}
             loading="lazy"
+            decoding="async"
             className="mt-4 block h-auto w-full rounded-lg"
           />
-          <p className="mt-2 text-[0.7rem] leading-snug text-muted-foreground">
-            Exam shows the nodules caused by parasite eggs in the brain — Photo: Medical College
-          </p>
-          <p className="mt-3 text-[0.8rem] leading-relaxed text-muted-foreground sm:text-sm">
-            Once ingested, the eggs hatch into larvae that can settle in many parts of the body,
-            including muscle and brain tissue. Once lodged, the larvae form cysts.
-          </p>
         </div>
       </article>
+
+      <p className="mt-3 text-[0.72rem] leading-snug text-muted-foreground">
+        Exam shows the nodules caused by parasite eggs in the brain — Photo: Medical College
+      </p>
+      <p className="mt-3 text-[0.85rem] leading-relaxed text-muted-foreground sm:text-sm">
+        Once ingested, the eggs hatch into larvae that can settle in many parts of the body,
+        including muscle and brain tissue. Once lodged, the larvae form cysts.
+      </p>
 
       <CtaButton onClick={onNext}>Continue</CtaButton>
     </section>
