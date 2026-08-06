@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
-import manImg from "@/assets/man.jpg";
-import womanImg from "@/assets/woman.jpg";
-import symptomsWoman from "@/assets/symptoms-woman.png";
-import brainScan from "@/assets/brain-scan.jpg";
-import glucoseHigh from "@/assets/glucose-high.jpg";
-import glucoseNormal from "@/assets/glucose-normal.jpg";
-import avatarAna from "@/assets/avatar-ana.jpg";
-import avatarRita from "@/assets/avatar-rita.jpg";
+import manImg from "@/assets/man.webp";
+import womanImg from "@/assets/woman.webp";
+import symptomsWoman from "@/assets/symptoms-woman.webp";
+import brainScan from "@/assets/brain-scan.webp";
+import glucoseHigh from "@/assets/glucose-high.webp";
+import glucoseNormal from "@/assets/glucose-normal.webp";
+import avatarAna from "@/assets/avatar-ana.webp";
+import avatarRita from "@/assets/avatar-rita.webp";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
