@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
-import manImg from "@/assets/man.jpg";
-import womanImg from "@/assets/woman.jpg";
-import symptomsWoman from "@/assets/symptoms-woman.png";
-import brainScan from "@/assets/brain-scan.jpg";
-import glucoseHigh from "@/assets/glucose-high.jpg";
-import glucoseNormal from "@/assets/glucose-normal.jpg";
-import avatarAna from "@/assets/avatar-ana.jpg";
-import avatarRita from "@/assets/avatar-rita.jpg";
+import manImg from "@/assets/man.webp";
+import womanImg from "@/assets/woman.webp";
+import symptomsWoman from "@/assets/symptoms-woman.webp";
+import brainScan from "@/assets/brain-scan.webp";
+import glucoseHigh from "@/assets/glucose-high.webp";
+import glucoseNormal from "@/assets/glucose-normal.webp";
+import avatarAna from "@/assets/avatar-ana.webp";
+import avatarRita from "@/assets/avatar-rita.webp";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
@@ -205,20 +205,22 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
           <img
             src={brainScan}
             alt="MRI exam showing nodules caused by parasite eggs in a young patient's brain"
-            width={1088}
-            height={608}
+            width={1000}
+            height={559}
             loading="lazy"
+            decoding="async"
             className="mt-4 block h-auto w-full rounded-lg"
           />
-          <p className="mt-2 text-[0.7rem] leading-snug text-muted-foreground">
-            Exam shows the nodules caused by parasite eggs in the brain — Photo: Medical College
-          </p>
-          <p className="mt-3 text-[0.8rem] leading-relaxed text-muted-foreground sm:text-sm">
-            Once ingested, the eggs hatch into larvae that can settle in many parts of the body,
-            including muscle and brain tissue. Once lodged, the larvae form cysts.
-          </p>
         </div>
       </article>
+
+      <p className="mt-3 text-[0.72rem] leading-snug text-muted-foreground">
+        Exam shows the nodules caused by parasite eggs in the brain — Photo: Medical College
+      </p>
+      <p className="mt-3 text-[0.85rem] leading-relaxed text-muted-foreground sm:text-sm">
+        Once ingested, the eggs hatch into larvae that can settle in many parts of the body,
+        including muscle and brain tissue. Once lodged, the larvae form cysts.
+      </p>
 
       <CtaButton onClick={onNext}>Continue</CtaButton>
     </section>
@@ -372,8 +374,8 @@ function StepResults() {
           <img
             src={avatarAna}
             alt="Ana Lima"
-            width={512}
-            height={512}
+            width={160}
+            height={160}
             loading="lazy"
             className="h-10 w-10 shrink-0 rounded-full object-cover"
           />
@@ -412,7 +414,7 @@ function StepResults() {
           src={glucoseHigh}
           alt="Glucose meter reading 240 mg/dL before the protocol"
           width={600}
-          height={800}
+          height={600}
           loading="lazy"
           className="aspect-[3/4] w-full object-cover"
         />
@@ -420,7 +422,7 @@ function StepResults() {
           src={glucoseNormal}
           alt="Glucose meter reading 105 mg/dL after the protocol"
           width={600}
-          height={800}
+          height={600}
           loading="lazy"
           className="aspect-[3/4] w-full object-cover"
         />
@@ -431,8 +433,8 @@ function StepResults() {
           <img
             src={avatarRita}
             alt="Rita Lima"
-            width={512}
-            height={512}
+            width={160}
+            height={160}
             loading="lazy"
             className="h-10 w-10 shrink-0 rounded-full object-cover"
           />
@@ -530,8 +532,8 @@ function GenderCard({
       <img
         src={img}
         alt={label}
-        width={768}
-        height={960}
+        width={600}
+        height={750}
         loading="lazy"
         className="aspect-[4/5] w-full rounded-lg object-cover"
       />
