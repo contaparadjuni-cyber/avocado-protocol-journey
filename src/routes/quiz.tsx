@@ -8,16 +8,16 @@ import symptomsWoman from "@/assets/symptoms-woman.png";
 export const Route = createFileRoute("/quiz")({
   head: () => ({
     meta: [
-      { title: "Avaliação Gratuita | Protocolo de Diabetes" },
+      { title: "Free Assessment | The Diabetes Protocol" },
       {
         name: "description",
         content:
-          "Responda algumas perguntas rápidas sobre seus sintomas e descubra o protocolo de 14 dias para a diabetes tipo 2.",
+          "Answer a few quick questions about your symptoms and discover the 14-day type 2 diabetes protocol.",
       },
-      { property: "og:title", content: "Avaliação Gratuita | Protocolo de Diabetes" },
+      { property: "og:title", content: "Free Assessment | The Diabetes Protocol" },
       {
         property: "og:description",
-        content: "Teste rápido e gratuito sobre seus sintomas de diabetes tipo 2.",
+        content: "Free quick test about your type 2 diabetes symptoms.",
       },
     ],
   }),
@@ -26,8 +26,8 @@ export const Route = createFileRoute("/quiz")({
 
 const TOTAL_STEPS = 3;
 
-const SYMPTOMS_LEFT = ["VISÃO EMBAÇADA", "SEDE EXCESSIVA", "CANSAÇO", "NÁUSEA E VÔMITO"];
-const SYMPTOMS_RIGHT = ["DORES NAS PERNAS", "FORMIGAMENTO", "INSONIA", "FADIGA"];
+const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA & VOMITING"];
+const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
 
 function Quiz() {
   const [step, setStep] = useState(1);
@@ -38,12 +38,12 @@ function Quiz() {
       {step === 1 && (
         <section>
           <h1 className="text-center text-2xl font-black sm:text-3xl">
-            Vamos iniciar sua avaliação
+            Let's start your assessment
           </h1>
-          <p className="mt-4 text-center text-lg font-bold">Selecione sua opção abaixo!</p>
+          <p className="mt-4 text-center text-lg font-bold">Select your option below!</p>
           <div className="mt-7 grid grid-cols-2 gap-4">
-            <GenderCard img={manImg} label="Sou Homem" onClick={next} />
-            <GenderCard img={womanImg} label="Sou mulher" onClick={next} />
+            <GenderCard img={manImg} label="I'm a man" onClick={next} />
+            <GenderCard img={womanImg} label="I'm a woman" onClick={next} />
           </div>
         </section>
       )}
@@ -51,14 +51,14 @@ function Quiz() {
       {step === 2 && (
         <section>
           <h1 className="text-center text-xl font-black uppercase leading-tight sm:text-2xl">
-            Você sente algum desses sintomas{" "}
-            <span className="text-brand-green">a mais de 1 ano ?</span>
+            Do you feel any of these symptoms{" "}
+            <span className="text-brand-green">for more than 1 year?</span>
           </h1>
 
           <div className="relative mt-6 flex items-end justify-center">
             <img
               src={symptomsWoman}
-              alt="Mulher idosa sentada com sintomas de diabetes"
+              alt="Older woman seated with diabetes symptoms"
               width={700}
               height={800}
               loading="lazy"
@@ -81,32 +81,32 @@ function Quiz() {
           </div>
 
           <div className="mt-6 space-y-4">
-            <BigButton onClick={next}>Sinto mais de 1 🤧</BigButton>
-            <BigButton onClick={next}>Sinto 2 ou mais 🤦</BigButton>
+            <BigButton onClick={next}>I feel 1 or more 🤧</BigButton>
+            <BigButton onClick={next}>I feel 2 or more 🤦</BigButton>
           </div>
         </section>
       )}
 
-      {step === 3 && <StepDesparasitou />}
+      {step === 3 && <StepDeworming />}
     </QuizShell>
   );
 }
 
-function StepDesparasitou() {
+function StepDeworming() {
   const [choice, setChoice] = useState<string | null>(null);
 
   return (
     <section>
       <h1 className="text-center text-2xl font-black leading-tight sm:text-[1.7rem]">
-        Você já <span className="text-brand-green">Desparasitou</span> de alguma maneira?
+        Have you ever <span className="text-brand-green">dewormed</span> in any way?
       </h1>
       <p className="mt-3 text-center text-sm text-muted-foreground">
-        Utilizando remédios ou formas naturais.
+        Using medication or natural methods.
       </p>
       <div className="mt-7 space-y-4">
         {[
-          { emoji: "😐", label: "Não, eu nunca desparasitei." },
-          { emoji: "😁", label: "Sim, eu já desparasitei." },
+          { emoji: "😐", label: "No, I have never dewormed." },
+          { emoji: "😁", label: "Yes, I have dewormed before." },
         ].map((opt) => (
           <button
             key={opt.label}
