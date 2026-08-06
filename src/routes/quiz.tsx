@@ -374,8 +374,8 @@ function StepResults() {
           <img
             src={avatarAna}
             alt="Ana Lima"
-            width={512}
-            height={512}
+            width={160}
+            height={160}
             loading="lazy"
             className="h-10 w-10 shrink-0 rounded-full object-cover"
           />
@@ -414,7 +414,7 @@ function StepResults() {
           src={glucoseHigh}
           alt="Glucose meter reading 240 mg/dL before the protocol"
           width={600}
-          height={800}
+          height={600}
           loading="lazy"
           className="aspect-[3/4] w-full object-cover"
         />
@@ -422,7 +422,7 @@ function StepResults() {
           src={glucoseNormal}
           alt="Glucose meter reading 105 mg/dL after the protocol"
           width={600}
-          height={800}
+          height={600}
           loading="lazy"
           className="aspect-[3/4] w-full object-cover"
         />
@@ -433,8 +433,8 @@ function StepResults() {
           <img
             src={avatarRita}
             alt="Rita Lima"
-            width={512}
-            height={512}
+            width={160}
+            height={160}
             loading="lazy"
             className="h-10 w-10 shrink-0 rounded-full object-cover"
           />
@@ -532,8 +532,8 @@ function GenderCard({
       <img
         src={img}
         alt={label}
-        width={768}
-        height={960}
+        width={600}
+        height={750}
         loading="lazy"
         className="aspect-[4/5] w-full rounded-lg object-cover"
       />
