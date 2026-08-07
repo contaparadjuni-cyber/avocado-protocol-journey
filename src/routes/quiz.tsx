@@ -516,14 +516,15 @@ function GenderCard({
       onClick={onClick}
       className="overflow-hidden rounded-xl border border-border bg-card p-1.5 text-left shadow-sm transition-shadow hover:shadow-md"
     >
-      <img
+      <SmartImage
         src={img}
         alt={label}
         width={600}
         height={750}
-        loading="lazy"
-        className="aspect-[4/5] w-full rounded-lg object-cover"
+        priority
+        wrapperClassName="w-full rounded-lg"
       />
+
       <span className="block px-1 pb-1.5 pt-2.5 text-center text-[0.85rem] font-bold sm:text-[0.95rem]">
         {label}
       </span>
