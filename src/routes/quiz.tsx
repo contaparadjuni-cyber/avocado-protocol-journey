@@ -396,11 +396,15 @@ function StepResults() {
               type="button"
               onClick={() => setPlaying((p) => !p)}
               aria-label={playing ? "Pause audio" : "Play audio"}
-              className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground"
             >
               {playing ? "❚❚" : "▶"}
             </button>
-            <div className="flex min-w-0 flex-1 items-end gap-[2px] overflow-hidden">
+            <div
+              aria-hidden="true"
+              className="flex min-w-0 flex-1 items-end gap-[2px] overflow-hidden"
+            >
+
               {Array.from({ length: 34 }).map((_, i) => (
                 <span
                   key={i}
