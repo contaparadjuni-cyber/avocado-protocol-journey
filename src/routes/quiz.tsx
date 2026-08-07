@@ -205,8 +205,8 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
           <img
             src={brainScan}
             alt="MRI exam showing nodules caused by parasite eggs in a young patient's brain"
-            width={1000}
-            height={559}
+            width={888}
+            height={550}
             loading="lazy"
             decoding="async"
             className="mt-4 block h-auto w-full rounded-lg"
