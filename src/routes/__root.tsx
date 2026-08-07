@@ -97,10 +97,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      // Subset to the weights actually used + latin only, and preload so text
+      // paints without waiting on a render-blocking stylesheet.
+      {
+        rel: "preload",
+        as: "style",
+        href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap",
+      },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400..900;1,400..900&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap",
       },
+      {
+        rel: "preload",
+        as: "font",
+        type: "font/woff2",
+        crossOrigin: "anonymous",
+        href: "https://fonts.gstatic.com/s/montserrat/v31/JTUSjIg1_i6t8kCHKm459WRhyzbi.woff2",
+      },
+
       { rel: "icon", type: "image/png", href: "/favicon.png" },
     ],
   }),
