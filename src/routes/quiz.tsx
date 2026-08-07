@@ -1,10 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
 import symptomsWoman from "@/assets/symptoms-woman.webp";
-import newsArticle from "@/assets/news-article.webp.asset.json";
+import news600 from "@/assets/news-600.webp.asset.json";
+import news900 from "@/assets/news-900.webp.asset.json";
+import { SmartImage } from "@/components/SmartImage";
 import glucoseHigh from "@/assets/glucose-high.webp";
 import glucoseNormal from "@/assets/glucose-normal.webp";
 import avatarAna from "@/assets/avatar-ana.webp";
@@ -46,6 +48,15 @@ const SYMPTOM_LIST = [
 function Quiz() {
   const [step, setStep] = useState(1);
   const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS));
+
+  // Warm the heavy news image up one step before it is shown.
+  useEffect(() => {
+    if (step !== 3) return;
+    const img = new Image();
+    img.src = news900.url;
+  }, [step]);
+
+
 
   return (
     <QuizShell progress={(step / TOTAL_STEPS) * 100}>
@@ -93,7 +104,8 @@ function StepSymptomsIllustration({ onNext }: { onNext: () => void }) {
           alt="Older woman sitting with diabetes symptoms"
           width={768}
           height={896}
-          loading="lazy"
+          decoding="async"
+          fetchPriority="high"
           className="mx-auto h-56 w-auto object-contain sm:h-64"
         />
         <div className="pointer-events-none absolute inset-0 flex flex-col justify-between py-2">
@@ -186,16 +198,18 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
       </p>
 
       <figure className="mt-4 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-        <img
-          src={newsArticle.url}
+        <SmartImage
+          src={news900.url}
+          srcSet={`${news600.url} 600w, ${news900.url} 900w`}
+          sizes="(max-width: 640px) 100vw, 600px"
           alt="News report: young man dies after parasites are found in his brain, with MRI exam showing nodules caused by parasite eggs"
           width={900}
-          height={1489}
-          loading="lazy"
-          decoding="async"
-          className="block h-auto w-full"
+          height={1490}
+          className="object-contain"
+          wrapperClassName="w-full"
         />
       </figure>
+
 
 
       <CtaButton onClick={onNext}>Continue</CtaButton>
@@ -347,14 +361,14 @@ function StepResults() {
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
         <p className="text-xs font-bold sm:text-sm">Ana Lima</p>
         <div className="mt-2.5 flex items-center gap-3">
-          <img
+          <SmartImage
             src={avatarAna}
             alt="Ana Lima"
             width={160}
             height={160}
-            loading="lazy"
-            className="h-10 w-10 shrink-0 rounded-full object-cover"
+            wrapperClassName="h-10 w-10 shrink-0 rounded-full"
           />
+
           <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-full bg-muted px-3 py-2">
             <button
               type="button"
@@ -386,34 +400,32 @@ function StepResults() {
       </p>
 
       <div className="mt-4 grid grid-cols-2 gap-1.5 overflow-hidden rounded-xl">
-        <img
+        <SmartImage
           src={glucoseHigh}
           alt="Glucose meter reading 240 mg/dL before the protocol"
           width={600}
-          height={600}
-          loading="lazy"
-          className="aspect-[3/4] w-full object-cover"
+          height={800}
+          wrapperClassName="w-full"
         />
-        <img
+        <SmartImage
           src={glucoseNormal}
           alt="Glucose meter reading 105 mg/dL after the protocol"
           width={600}
-          height={600}
-          loading="lazy"
-          className="aspect-[3/4] w-full object-cover"
+          height={800}
+          wrapperClassName="w-full"
         />
       </div>
 
       <div className="mt-5 rounded-xl border border-border bg-card p-4 shadow-sm">
         <div className="flex items-center gap-3">
-          <img
+          <SmartImage
             src={avatarRita}
             alt="Rita Lima"
             width={160}
             height={160}
-            loading="lazy"
-            className="h-10 w-10 shrink-0 rounded-full object-cover"
+            wrapperClassName="h-10 w-10 shrink-0 rounded-full"
           />
+
           <div className="min-w-0">
             <p className="truncate text-sm font-bold">Rita Lima</p>
             <p className="truncate text-xs text-brand-green">Porto Alegre, BR</p>
@@ -505,14 +517,15 @@ function GenderCard({
       onClick={onClick}
       className="overflow-hidden rounded-xl border border-border bg-card p-1.5 text-left shadow-sm transition-shadow hover:shadow-md"
     >
-      <img
+      <SmartImage
         src={img}
         alt={label}
         width={600}
         height={750}
-        loading="lazy"
-        className="aspect-[4/5] w-full rounded-lg object-cover"
+        priority
+        wrapperClassName="w-full rounded-lg"
       />
+
       <span className="block px-1 pb-1.5 pt-2.5 text-center text-[0.85rem] font-bold sm:text-[0.95rem]">
         {label}
       </span>
