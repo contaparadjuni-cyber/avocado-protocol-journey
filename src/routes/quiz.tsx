@@ -413,19 +413,18 @@ function StepResults() {
           height={800}
           wrapperClassName="w-full"
         />
-
       </div>
 
       <div className="mt-5 rounded-xl border border-border bg-card p-4 shadow-sm">
         <div className="flex items-center gap-3">
-          <img
+          <SmartImage
             src={avatarRita}
             alt="Rita Lima"
             width={160}
             height={160}
-            loading="lazy"
-            className="h-10 w-10 shrink-0 rounded-full object-cover"
+            wrapperClassName="h-10 w-10 shrink-0 rounded-full"
           />
+
           <div className="min-w-0">
             <p className="truncate text-sm font-bold">Rita Lima</p>
             <p className="truncate text-xs text-brand-green">Porto Alegre, BR</p>
