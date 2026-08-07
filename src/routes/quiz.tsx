@@ -37,13 +37,14 @@ const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
 
 const SYMPTOM_LIST = [
-  "INSOMNIA",
-  "FATIGUE",
-  "EXCESSIVE THIRST",
-  "TINGLING",
-  "BLURRY VISION",
-  "BODY ACHES",
+  { label: "INSOMNIA", emoji: "😴" },
+  { label: "FATIGUE", emoji: "🥱" },
+  { label: "EXCESSIVE THIRST", emoji: "🥤" },
+  { label: "TINGLING", emoji: "🦶" },
+  { label: "BLURRY VISION", emoji: "👁️" },
+  { label: "BODY ACHES", emoji: "💪" },
 ];
+
 
 function Quiz() {
   const [step, setStep] = useState(1);
