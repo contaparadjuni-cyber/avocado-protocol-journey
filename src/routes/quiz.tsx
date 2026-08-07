@@ -188,16 +188,18 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
       </p>
 
       <figure className="mt-4 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-        <img
-          src={newsArticle.url}
+        <SmartImage
+          src={news900.url}
+          srcSet={`${news600.url} 600w, ${news900.url} 900w`}
+          sizes="(max-width: 640px) 100vw, 600px"
           alt="News report: young man dies after parasites are found in his brain, with MRI exam showing nodules caused by parasite eggs"
           width={900}
-          height={1489}
-          loading="lazy"
-          decoding="async"
-          className="block h-auto w-full"
+          height={1490}
+          className="object-contain"
+          wrapperClassName="w-full"
         />
       </figure>
+
 
 
       <CtaButton onClick={onNext}>Continue</CtaButton>
