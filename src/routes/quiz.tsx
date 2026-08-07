@@ -360,14 +360,14 @@ function StepResults() {
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
         <p className="text-xs font-bold sm:text-sm">Ana Lima</p>
         <div className="mt-2.5 flex items-center gap-3">
-          <img
+          <SmartImage
             src={avatarAna}
             alt="Ana Lima"
             width={160}
             height={160}
-            loading="lazy"
-            className="h-10 w-10 shrink-0 rounded-full object-cover"
+            wrapperClassName="h-10 w-10 shrink-0 rounded-full"
           />
+
           <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-full bg-muted px-3 py-2">
             <button
               type="button"
