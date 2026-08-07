@@ -4,7 +4,7 @@ import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
 import symptomsWoman from "@/assets/symptoms-woman.webp";
-import brainScan from "@/assets/brain-scan.webp";
+import newsArticle from "@/assets/news-article.webp.asset.json";
 import glucoseHigh from "@/assets/glucose-high.webp";
 import glucoseNormal from "@/assets/glucose-normal.webp";
 import avatarAna from "@/assets/avatar-ana.webp";
