@@ -11,6 +11,8 @@ import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
 
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
+import parasiteIntestine from "@/assets/parasite-intestine.webp";
+import avocadoImg from "@/assets/avocado.webp";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
@@ -31,7 +33,7 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 9;
+const TOTAL_STEPS = 15;
 
 const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
@@ -69,7 +71,13 @@ function Quiz() {
       {step === 6 && <StepSweets onNext={next} />}
       {step === 7 && <StepSymptomPicker onNext={next} />}
       {step === 8 && <StepImpact onNext={next} />}
-      {step === 9 && <StepResults />}
+      {step === 9 && <StepResults onNext={next} />}
+      {step === 10 && <StepMedications onNext={next} />}
+      {step === 11 && <StepMonitoring onNext={next} />}
+      {step === 12 && <StepHealthValue onNext={next} />}
+      {step === 13 && <StepCommitment onNext={next} />}
+      {step === 14 && <StepAnalyzing onNext={next} />}
+      {step === 15 && <StepProtocol />}
     </QuizShell>
   );
 }
@@ -360,7 +368,7 @@ function StepImpact({ onNext }: { onNext: () => void }) {
 
 /* ---------- Step 9 ---------- */
 
-function StepResults() {
+function StepResults({ onNext }: { onNext: () => void }) {
   const [playing, setPlaying] = useState(false);
 
   return (
@@ -492,7 +500,281 @@ function StepResults() {
         </p>
       </div>
 
-      <CtaButton>Continue</CtaButton>
+      <CtaButton onClick={onNext}>Generate My Custom Protocol! ✅</CtaButton>
+    </section>
+  );
+}
+
+/* ---------- Step 10 ---------- */
+
+const MEDS = [
+  "Metformin",
+  "Glifage",
+  "Gliclazide",
+  "Glimepiride",
+  "Insulin",
+  "I take other medications",
+  "I'm not taking anything right now",
+];
+
+function StepMedications({ onNext }: { onNext: () => void }) {
+  const [picked, setPicked] = useState<string[]>([]);
+  const toggle = (m: string) =>
+    setPicked((p) => (p.includes(m) ? p.filter((x) => x !== m) : [...p, m]));
+
+  return (
+    <section>
+      <Heading>
+        Are you currently taking any of{" "}
+        <span className="text-brand-green">these medications?</span>
+      </Heading>
+      <div className="mt-6 space-y-2.5">
+        {MEDS.map((m) => {
+          const on = picked.includes(m);
+          return (
+            <button
+              key={m}
+              type="button"
+              onClick={() => toggle(m)}
+              aria-pressed={on}
+              className={`flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-3.5 text-left shadow-sm transition-colors ${
+                on
+                  ? "border-brand-green bg-brand-green/10"
+                  : "border-border bg-card hover:border-brand-green/50"
+              }`}
+            >
+              <span className="min-w-0 text-sm font-semibold sm:text-[0.95rem]">{m}</span>
+              <span
+                aria-hidden="true"
+                className={`grid h-5 w-5 shrink-0 place-items-center rounded-md border text-[0.7rem] font-black ${
+                  on
+                    ? "border-brand-green bg-brand-green text-primary-foreground"
+                    : "border-border"
+                }`}
+              >
+                {on ? "✓" : ""}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+      <CtaButton onClick={onNext} disabled={picked.length === 0}>
+        Continue
+      </CtaButton>
+    </section>
+  );
+}
+
+/* ---------- Step 11 ---------- */
+
+const MONITORING = [
+  { label: "ALWAYS BEFORE EATING", emoji: "⚠️" },
+  { label: "ONCE A DAY", emoji: "✅" },
+  { label: "SEVERAL TIMES A DAY", emoji: "😰" },
+  { label: "A FEW TIMES A WEEK", emoji: "🩸" },
+  { label: "I DON'T DO IT YET", emoji: "😳" },
+];
+
+function StepMonitoring({ onNext }: { onNext: () => void }) {
+  return (
+    <section>
+      <Heading>
+        How often do you <span className="text-brand-green">monitor your glucose?</span>
+      </Heading>
+      <div className="mt-6 space-y-2.5">
+        {MONITORING.map((o) => (
+          <button
+            key={o.label}
+            type="button"
+            onClick={onNext}
+            className="flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-card px-4 py-3.5 text-left shadow-sm transition-colors hover:border-brand-green/60"
+          >
+            <span className="min-w-0 text-[0.8rem] font-bold uppercase tracking-wide sm:text-sm">
+              {o.label}
+            </span>
+            <span aria-hidden="true" className="shrink-0 text-xl">
+              {o.emoji}
+            </span>
+          </button>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Step 12 ---------- */
+
+function StepHealthValue({ onNext }: { onNext: () => void }) {
+  return (
+    <section>
+      <Heading>
+        Do you agree that our health{" "}
+        <span className="text-brand-green">is the most important thing we have?</span>
+      </Heading>
+      <Sub>Without it, we are nothing.</Sub>
+      <div className="mt-6 space-y-3">
+        <OptionButton emoji="☑️" onClick={onNext}>
+          I agree!
+        </OptionButton>
+        <OptionButton emoji="🙄" onClick={onNext}>
+          I don&apos;t agree.
+        </OptionButton>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Step 13 ---------- */
+
+function StepCommitment({ onNext }: { onNext: () => void }) {
+  return (
+    <section>
+      <Heading>
+        Do you commit to following our{" "}
+        <span className="text-brand-green">14-Day Protocol</span> at home?
+      </Heading>
+      <Sub>I&apos;ll help you with everything you need.</Sub>
+      <div className="mt-6 space-y-3">
+        <OptionButton emoji="🤩" onClick={onNext}>
+          Yes, I commit!
+        </OptionButton>
+        <OptionButton emoji="😜" onClick={onNext}>
+          I&apos;ll try!
+        </OptionButton>
+      </div>
+
+      <figure className="mt-8 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <SmartImage
+          src={glucoseBeforeAfter.url}
+          alt="Glucose meter readings before and after the deworming protocol"
+          width={701}
+          height={688}
+          className="object-contain"
+          wrapperClassName="w-full bg-muted"
+        />
+      </figure>
+    </section>
+  );
+}
+
+/* ---------- Step 14 ---------- */
+
+function StepAnalyzing({ onNext }: { onNext: () => void }) {
+  const [pct, setPct] = useState(4);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setPct((p) => {
+        if (p >= 100) {
+          clearInterval(id);
+          return 100;
+        }
+        return p + 2;
+      });
+    }, 60);
+    return () => clearInterval(id);
+  }, []);
+
+  return (
+    <section>
+      <div className="rounded-2xl bg-brand-green px-5 py-8 text-center text-primary-foreground shadow-lg">
+        <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em]">The Protocol of</p>
+        <p className="mt-1 text-4xl font-black italic leading-none sm:text-5xl">Diabetes</p>
+        <p className="mx-auto mt-5 max-w-[18rem] text-balance text-sm font-bold leading-snug sm:text-base">
+          I&apos;m analyzing your answers and building your{" "}
+          <span className="rounded bg-white/25 px-1.5 py-0.5">custom Protocol!</span>
+        </p>
+      </div>
+
+      <div className="mt-7 space-y-5">
+        <Meter label="Building your custom protocol" value={pct} />
+        <Meter label="Analyzing your answers" value={pct} />
+      </div>
+
+      {pct >= 100 && <CtaButton onClick={onNext}>See My Protocol! ✅</CtaButton>}
+    </section>
+  );
+}
+
+function Meter({ label, value }: { label: string; value: number }) {
+  return (
+    <div>
+      <div className="flex items-center justify-between text-xs font-black sm:text-sm">
+        <span className="text-muted-foreground">{label}</span>
+        <span>{value}%</span>
+      </div>
+      <div
+        role="progressbar"
+        aria-valuenow={value}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={label}
+        className="mt-1.5 h-2.5 w-full overflow-hidden rounded-full bg-muted"
+      >
+        <div
+          className="h-full rounded-full bg-brand-green transition-[width] duration-100"
+          style={{ width: `${value}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ---------- Step 15 ---------- */
+
+function StepProtocol() {
+  return (
+    <section>
+      <div className="space-y-4">
+        <Meter label="Chances of worsening soon" value={77} />
+        <Meter label="Chances of deworming" value={100} />
+        <Meter label="Chances of fully reversing diabetes" value={100} />
+      </div>
+
+      <p className="mt-8 text-balance text-center text-[1.05rem] font-black leading-snug sm:text-xl">
+        <span className="text-brand-green">Possible parasitic agent</span> based on your symptoms:
+      </p>
+      <p className="mt-2 text-center text-sm italic underline sm:text-base">
+        Ascaris lumbricoides
+      </p>
+
+      <figure className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <SmartImage
+          src={parasiteIntestine}
+          alt="Endoscopic image of Ascaris lumbricoides roundworms inside the intestine"
+          width={760}
+          height={591}
+          wrapperClassName="w-full bg-muted"
+        />
+      </figure>
+
+      <div className="mt-5 rounded-xl border border-border bg-card p-4 shadow-sm">
+        <p className="text-sm font-black sm:text-base">⚠️ Heads up!</p>
+        <p className="mt-2 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
+          With our Protocol you can relax —{" "}
+          <span className="text-brand-green">no worm or parasite will come out alive</span> in an
+          uncomfortable way. They are eliminated{" "}
+          <span className="text-brand-green">already dead and broken down</span>, almost unnoticed.
+          🤗
+        </p>
+      </div>
+
+      <p className="mt-7 text-balance text-center text-[0.95rem] font-bold leading-relaxed sm:text-base">
+        <span className="text-brand-green">The deworming starts</span> with an avocado smoothie plus
+        a secret ingredient that is easy to find at any market and rarely used.
+      </p>
+
+      <figure className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <SmartImage
+          src={avocadoImg}
+          alt="Hands holding a halved avocado on a wooden table"
+          width={760}
+          height={506}
+          wrapperClassName="w-full bg-muted"
+        />
+      </figure>
+
+      <CtaButton>Generate Treatment Protocol! ✅</CtaButton>
     </section>
   );
 }
