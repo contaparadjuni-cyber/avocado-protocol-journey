@@ -39,6 +39,10 @@ export function SmartImage({
         />
       )}
       <img
+        ref={(el) => {
+          // Cached images can finish before React attaches onLoad.
+          if (el?.complete) setLoaded(true);
+        }}
         src={src}
         alt={alt}
         width={width}
