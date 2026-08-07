@@ -104,7 +104,8 @@ function StepSymptomsIllustration({ onNext }: { onNext: () => void }) {
           alt="Older woman sitting with diabetes symptoms"
           width={768}
           height={896}
-          loading="lazy"
+          decoding="async"
+          fetchPriority="high"
           className="mx-auto h-56 w-auto object-contain sm:h-64"
         />
         <div className="pointer-events-none absolute inset-0 flex flex-col justify-between py-2">
