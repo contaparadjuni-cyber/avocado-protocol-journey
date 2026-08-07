@@ -37,13 +37,14 @@ const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
 
 const SYMPTOM_LIST = [
-  "INSOMNIA",
-  "FATIGUE",
-  "EXCESSIVE THIRST",
-  "TINGLING",
-  "BLURRY VISION",
-  "BODY ACHES",
+  { label: "INSOMNIA", emoji: "😴" },
+  { label: "FATIGUE", emoji: "🥱" },
+  { label: "EXCESSIVE THIRST", emoji: "🥤" },
+  { label: "TINGLING", emoji: "🦶" },
+  { label: "BLURRY VISION", emoji: "👁️" },
+  { label: "BODY ACHES", emoji: "💪" },
 ];
+
 
 function Quiz() {
   const [step, setStep] = useState(1);
@@ -274,40 +275,61 @@ function StepSymptomPicker({ onNext }: { onNext: () => void }) {
         the most?
       </Heading>
       <Sub>Select one or more.</Sub>
-      <div className="mt-6 space-y-2.5">
-        {SYMPTOM_LIST.map((s) => {
-          const active = selected.includes(s);
+
+      <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
+        {SYMPTOM_LIST.map(({ label, emoji }) => {
+          const active = selected.includes(label);
           return (
             <button
-              key={s}
+              key={label}
               type="button"
-              onClick={() => toggle(s)}
-              className={`flex w-full items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition-colors ${
+              aria-pressed={active}
+              onClick={() => toggle(label)}
+              className={`flex w-full items-center gap-3 rounded-2xl border-2 px-4 py-3.5 text-left transition-all active:scale-[0.99] ${
                 active
-                  ? "border-brand-green bg-brand-green text-primary-foreground"
-                  : "border-border bg-card text-foreground hover:border-brand-green"
+                  ? "border-brand-green bg-brand-green text-primary-foreground shadow-md"
+                  : "border-border bg-card text-foreground hover:border-brand-green hover:bg-muted/40"
               }`}
             >
               <span
-                className={`grid h-5 w-5 shrink-0 place-items-center rounded-md border-2 text-[0.7rem] font-black ${
-                  active ? "border-primary-foreground" : "border-border"
+                aria-hidden="true"
+                className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl text-lg ${
+                  active ? "bg-primary-foreground/20" : "bg-muted"
                 }`}
               >
-                {active ? "✓" : ""}
+                {emoji}
               </span>
-              <span className="min-w-0 text-sm font-semibold tracking-wide sm:text-[0.95rem]">
-                {s}
+              <span className="min-w-0 flex-1 text-[0.9rem] font-bold uppercase tracking-wide sm:text-[0.95rem]">
+                {label}
+              </span>
+              <span
+                aria-hidden="true"
+                className={`grid h-6 w-6 shrink-0 place-items-center rounded-full border-2 text-[0.7rem] font-black transition-colors ${
+                  active
+                    ? "border-primary-foreground bg-primary-foreground text-brand-green"
+                    : "border-border text-transparent"
+                }`}
+              >
+                ✓
               </span>
             </button>
           );
         })}
       </div>
+
+      <p className="mt-4 text-center text-xs font-semibold text-muted-foreground sm:text-sm">
+        {selected.length === 0
+          ? "Select at least one symptom to continue"
+          : `${selected.length} symptom${selected.length > 1 ? "s" : ""} selected`}
+      </p>
+
       <CtaButton onClick={onNext} disabled={selected.length === 0}>
         Continue
       </CtaButton>
     </section>
   );
 }
+
 
 /* ---------- Step 8 ---------- */
 
