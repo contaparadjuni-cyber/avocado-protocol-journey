@@ -185,42 +185,18 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
         See this news report 👇
       </p>
 
-      <article className="mt-4 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-        <div className="flex items-center gap-2 bg-destructive px-4 py-2.5">
-          <span className="text-sm font-black uppercase tracking-wide text-destructive-foreground">
-            Health News
-          </span>
-          <span className="text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-destructive-foreground/80">
-            Science &amp; Health
-          </span>
-        </div>
-        <div className="px-4 py-4 sm:px-5">
-          <h3 className="text-base font-bold leading-snug sm:text-lg">
-            Young man dies after parasites are found in his brain
-          </h3>
-          <p className="mt-2 text-[0.8rem] leading-relaxed text-muted-foreground sm:text-sm">
-            He sought medical help after seizures and groin pain. The diagnosis came after an MRI:
-            neurocysticercosis, caused by ingesting tapeworm eggs.
-          </p>
-          <img
-            src={brainScan}
-            alt="MRI exam showing nodules caused by parasite eggs in a young patient's brain"
-            width={888}
-            height={550}
-            loading="lazy"
-            decoding="async"
-            className="mt-4 block h-auto w-full rounded-lg"
-          />
-        </div>
-      </article>
+      <figure className="mt-4 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+        <img
+          src={newsArticle.url}
+          alt="News report: young man dies after parasites are found in his brain, with MRI exam showing nodules caused by parasite eggs"
+          width={900}
+          height={1489}
+          loading="lazy"
+          decoding="async"
+          className="block h-auto w-full"
+        />
+      </figure>
 
-      <p className="mt-3 text-[0.72rem] leading-snug text-muted-foreground">
-        Exam shows the nodules caused by parasite eggs in the brain — Photo: Medical College
-      </p>
-      <p className="mt-3 text-[0.85rem] leading-relaxed text-muted-foreground sm:text-sm">
-        Once ingested, the eggs hatch into larvae that can settle in many parts of the body,
-        including muscle and brain tissue. Once lodged, the larvae form cysts.
-      </p>
 
       <CtaButton onClick={onNext}>Continue</CtaButton>
     </section>
