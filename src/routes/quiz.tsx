@@ -399,22 +399,21 @@ function StepResults() {
       </p>
 
       <div className="mt-4 grid grid-cols-2 gap-1.5 overflow-hidden rounded-xl">
-        <img
+        <SmartImage
           src={glucoseHigh}
           alt="Glucose meter reading 240 mg/dL before the protocol"
           width={600}
-          height={600}
-          loading="lazy"
-          className="aspect-[3/4] w-full object-cover"
+          height={800}
+          wrapperClassName="w-full"
         />
-        <img
+        <SmartImage
           src={glucoseNormal}
           alt="Glucose meter reading 105 mg/dL after the protocol"
           width={600}
-          height={600}
-          loading="lazy"
-          className="aspect-[3/4] w-full object-cover"
+          height={800}
+          wrapperClassName="w-full"
         />
+
       </div>
 
       <div className="mt-5 rounded-xl border border-border bg-card p-4 shadow-sm">
