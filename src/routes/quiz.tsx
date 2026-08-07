@@ -416,29 +416,55 @@ function StepResults() {
         </div>
       </div>
 
-      <h3 className="mt-8 text-center text-lg font-black sm:text-xl">Just look at this case</h3>
-      <p className="mt-1 text-center text-xs text-muted-foreground sm:text-sm">
+      <h3 className="mt-8 text-balance text-center text-lg font-black leading-snug sm:text-xl">
+        Just look at this case
+      </h3>
+      <p className="mx-auto mt-1.5 max-w-[22rem] text-center text-xs leading-snug text-muted-foreground sm:text-sm">
         1 week after starting the deworming
       </p>
 
-      <figure className="mt-4 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+      <figure
+        role="group"
+        aria-labelledby="glucose-caption"
+        className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
+      >
         <SmartImage
           src={glucoseBeforeAfter.url}
-          alt="Glucose meter comparison: 240 mg/dL before and 105 mg/dL one week after the protocol"
+          alt="Two Accu-Chek glucose meters side by side: the left one reads 240 mg/dL before the protocol, the right one reads 105 mg/dL one week after the deworming protocol."
           width={701}
           height={688}
           className="object-contain"
-          wrapperClassName="w-full"
+          wrapperClassName="w-full bg-muted"
         />
-        <figcaption className="grid grid-cols-2 gap-1.5 border-t border-border px-3 py-2.5 text-center">
-          <span className="text-[0.7rem] font-black uppercase tracking-wide text-destructive sm:text-xs">
-            Before · 240 mg/dL
+        <figcaption
+          id="glucose-caption"
+          className="grid grid-cols-2 divide-x divide-border border-t border-border"
+        >
+          <span
+            aria-label="Before the protocol: 240 milligrams per deciliter"
+            className="flex min-w-0 flex-col items-center gap-0.5 px-2 py-2.5 text-center"
+          >
+            <span className="text-[0.65rem] font-black uppercase tracking-[0.08em] text-muted-foreground sm:text-[0.7rem]">
+              Before
+            </span>
+            <span className="text-sm font-black leading-none text-destructive sm:text-base">
+              240 mg/dL
+            </span>
           </span>
-          <span className="text-[0.7rem] font-black uppercase tracking-wide text-brand-green sm:text-xs">
-            After · 105 mg/dL
+          <span
+            aria-label="One week after the protocol: 105 milligrams per deciliter"
+            className="flex min-w-0 flex-col items-center gap-0.5 px-2 py-2.5 text-center"
+          >
+            <span className="text-[0.65rem] font-black uppercase tracking-[0.08em] text-muted-foreground sm:text-[0.7rem]">
+              After 1 week
+            </span>
+            <span className="text-sm font-black leading-none text-brand-green sm:text-base">
+              105 mg/dL
+            </span>
           </span>
         </figcaption>
       </figure>
+
 
 
       <div className="mt-5 rounded-xl border border-border bg-card p-4 shadow-sm">
