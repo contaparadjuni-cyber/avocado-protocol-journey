@@ -11,6 +11,8 @@ import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
 
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
+import parasiteIntestine from "@/assets/parasite-intestine.webp";
+import avocadoImg from "@/assets/avocado.webp";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
@@ -31,7 +33,7 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 9;
+const TOTAL_STEPS = 15;
 
 const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
@@ -69,7 +71,13 @@ function Quiz() {
       {step === 6 && <StepSweets onNext={next} />}
       {step === 7 && <StepSymptomPicker onNext={next} />}
       {step === 8 && <StepImpact onNext={next} />}
-      {step === 9 && <StepResults />}
+      {step === 9 && <StepResults onNext={next} />}
+      {step === 10 && <StepMedications onNext={next} />}
+      {step === 11 && <StepMonitoring onNext={next} />}
+      {step === 12 && <StepHealthValue onNext={next} />}
+      {step === 13 && <StepCommitment onNext={next} />}
+      {step === 14 && <StepAnalyzing onNext={next} />}
+      {step === 15 && <StepProtocol />}
     </QuizShell>
   );
 }
