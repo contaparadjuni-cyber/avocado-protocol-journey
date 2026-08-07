@@ -421,22 +421,25 @@ function StepResults() {
         1 week after starting the deworming
       </p>
 
-      <div className="mt-4 grid grid-cols-2 gap-1.5 overflow-hidden rounded-xl">
+      <figure className="mt-4 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
         <SmartImage
-          src={glucoseHigh}
-          alt="Glucose meter reading 240 mg/dL before the protocol"
-          width={600}
-          height={800}
+          src={glucoseBeforeAfter.url}
+          alt="Glucose meter comparison: 240 mg/dL before and 105 mg/dL one week after the protocol"
+          width={701}
+          height={688}
+          className="object-contain"
           wrapperClassName="w-full"
         />
-        <SmartImage
-          src={glucoseNormal}
-          alt="Glucose meter reading 105 mg/dL after the protocol"
-          width={600}
-          height={800}
-          wrapperClassName="w-full"
-        />
-      </div>
+        <figcaption className="grid grid-cols-2 gap-1.5 border-t border-border px-3 py-2.5 text-center">
+          <span className="text-[0.7rem] font-black uppercase tracking-wide text-destructive sm:text-xs">
+            Before · 240 mg/dL
+          </span>
+          <span className="text-[0.7rem] font-black uppercase tracking-wide text-brand-green sm:text-xs">
+            After · 105 mg/dL
+          </span>
+        </figcaption>
+      </figure>
+
 
       <div className="mt-5 rounded-xl border border-border bg-card p-4 shadow-sm">
         <div className="flex items-center gap-3">
