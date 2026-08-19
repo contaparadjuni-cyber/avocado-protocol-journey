@@ -19,6 +19,7 @@ import glucose14DaysV2 from "@/assets/glucose-14days-v2.png.asset.json";
 import slide588 from "@/assets/slide-588.webp.asset.json";
 import slide198 from "@/assets/slide-198.webp.asset.json";
 import slide108 from "@/assets/slide-108.webp.asset.json";
+import remediesVsProtocol from "@/assets/remedies-vs-protocol.webp.asset.json";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
@@ -39,7 +40,7 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 16;
+const TOTAL_STEPS = 17;
 
 const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
@@ -84,7 +85,8 @@ function Quiz() {
       {step === 13 && <StepCommitment onNext={next} />}
       {step === 14 && <StepAudioProof onNext={next} />}
       {step === 15 && <StepAnalyzing onNext={next} />}
-      {step === 16 && <StepProtocol />}
+      {step === 16 && <StepComparison onNext={next} />}
+      {step === 17 && <StepProtocol />}
     </QuizShell>
   );
 }
@@ -1038,21 +1040,36 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
 /* ---------- Step 16 ---------- */
 
 
+const ANALYZING_TASKS = [
+  "Analyzing your answers",
+  "Checking your symptoms",
+  "Identifying possible parasites",
+  "Calculating your risk level",
+  "Building your custom protocol",
+];
+
 function StepAnalyzing({ onNext }: { onNext: () => void }) {
-  const [pct, setPct] = useState(4);
+  const [pcts, setPcts] = useState<number[]>(() => ANALYZING_TASKS.map(() => 0));
+  const done = pcts.every((p) => p >= 100);
 
   useEffect(() => {
     const id = setInterval(() => {
-      setPct((p) => {
-        if (p >= 100) {
-          clearInterval(id);
-          return 100;
-        }
-        return p + 2;
+      setPcts((prev) => {
+        const i = prev.findIndex((p) => p < 100);
+        if (i === -1) return prev;
+        const nextArr = [...prev];
+        nextArr[i] = Math.min(100, (prev[i] ?? 0) + 5);
+        return nextArr;
       });
-    }, 60);
+    }, 45);
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    if (!done) return;
+    const t = setTimeout(onNext, 700);
+    return () => clearTimeout(t);
+  }, [done, onNext]);
 
   return (
     <section>
@@ -1066,16 +1083,62 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
       </div>
 
       <div className="mt-7 space-y-5">
-        <Meter label="Building your custom protocol" value={pct} />
-        <Meter label="Analyzing your answers" value={pct} />
+        {ANALYZING_TASKS.map((label, i) => (
+          <Meter key={label} label={label} value={pcts[i] ?? 0} />
+        ))}
       </div>
-
-      {pct >= 100 && <CtaButton onClick={onNext}>See My Protocol! ✅</CtaButton>}
     </section>
   );
 }
 
-function Meter({ label, value }: { label: string; value: number }) {
+/* ---------- Step 16: Remedies vs Protocol + analysis ---------- */
+
+const ANALYSIS_ROWS: { label: string; value: number; tone: "red" | "green" }[] = [
+  { label: "Chances of having parasites in your body", value: 95, tone: "red" },
+  { label: "Life risk", value: 66, tone: "red" },
+  { label: "Chances of autoimmune diseases if untreated soon", value: 77, tone: "red" },
+  { label: "Chances of successful deworming", value: 100, tone: "green" },
+  { label: "Chances of fully eliminating diabetes", value: 100, tone: "green" },
+];
+
+function StepComparison({ onNext }: { onNext: () => void }) {
+  return (
+    <section>
+      <figure className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <SmartImage
+          src={remediesVsProtocol.url}
+          alt="Comparison table: traditional remedies versus our diabetes protocol"
+          width={1426}
+          height={1103}
+          wrapperClassName="w-full bg-muted"
+        />
+      </figure>
+
+      <p className="mt-7 text-balance text-center text-[1rem] font-black leading-snug sm:text-lg">
+        Below is the analysis of your current situation,{" "}
+        <span className="text-brand-green">based on your answers.</span> 👇
+      </p>
+
+      <div className="mt-5 space-y-4">
+        {ANALYSIS_ROWS.map((r) => (
+          <Meter key={r.label} label={r.label} value={r.value} tone={r.tone} />
+        ))}
+      </div>
+
+      <CtaButton onClick={onNext}>Continue</CtaButton>
+    </section>
+  );
+}
+
+function Meter({
+  label,
+  value,
+  tone = "green",
+}: {
+  label: string;
+  value: number;
+  tone?: "green" | "red";
+}) {
   return (
     <div>
       <div className="flex items-center justify-between text-xs font-black sm:text-sm">
@@ -1091,7 +1154,9 @@ function Meter({ label, value }: { label: string; value: number }) {
         className="mt-1.5 h-2.5 w-full overflow-hidden rounded-full bg-muted"
       >
         <div
-          className="h-full rounded-full bg-brand-green transition-[width] duration-100"
+          className={`h-full rounded-full transition-[width] duration-100 ${
+            tone === "red" ? "bg-destructive" : "bg-brand-green"
+          }`}
           style={{ width: `${value}%` }}
         />
       </div>
