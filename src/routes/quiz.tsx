@@ -556,7 +556,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
       </div>
 
 
-      <CtaButton onClick={onNext}>Generate My Custom Protocol! ✅</CtaButton>
+      <CtaButton onClick={onNext}>Continue</CtaButton>
     </section>
   );
 }
