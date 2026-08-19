@@ -15,6 +15,8 @@ import avatarRita from "@/assets/avatar-rita.webp";
 import parasiteIntestine from "@/assets/parasite-intestine.webp";
 import avocadoImg from "@/assets/avocado.webp";
 import audioAna from "@/assets/diabetes-protocol-audio.mp3.asset.json";
+import audioProof from "@/assets/diabetes-protocol-audio-2.mp3.asset.json";
+import glucose14DaysV2 from "@/assets/glucose-14days-v2.png.asset.json";
 import slide588 from "@/assets/slide-588.webp.asset.json";
 import slide198 from "@/assets/slide-198.webp.asset.json";
 import slide108 from "@/assets/slide-108.webp.asset.json";
