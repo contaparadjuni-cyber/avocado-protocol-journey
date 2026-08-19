@@ -722,6 +722,27 @@ function StepHealthValue({ onNext }: { onNext: () => void }) {
   );
 }
 
+/* ---------- Step 14 ---------- */
+
+function StepInterest({ onNext }: { onNext: () => void }) {
+  return (
+    <section>
+      <Heading>
+        Would you be interested in receiving a{" "}
+        <span className="text-brand-green">personalized protocol</span> for Deworming in 14 days?
+      </Heading>
+      <div className="mt-7 space-y-4">
+        <OptionButton emoji="☑️" onClick={onNext}>
+          Yes, I want it badly!
+        </OptionButton>
+        <OptionButton emoji="🤪" onClick={onNext}>
+          I&apos;m interested, but I have questions.
+        </OptionButton>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- Step 13 ---------- */
 
 function StepCommitment({ onNext }: { onNext: () => void }) {
