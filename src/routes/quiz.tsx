@@ -423,11 +423,11 @@ function StepResults({ onNext }: { onNext: () => void }) {
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
-        <p className="text-xs font-bold sm:text-sm">Ana Lima</p>
+        <p className="text-xs font-bold sm:text-sm">Lerato</p>
         <div className="mt-2.5 flex items-center gap-3">
           <SmartImage
             src={avatarAna}
-            alt="Ana Lima"
+            alt="Lerato"
             width={160}
             height={160}
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
@@ -437,12 +437,17 @@ function StepResults({ onNext }: { onNext: () => void }) {
             <button
               type="button"
               onClick={toggleAudio}
-              aria-label={playing ? "Pause audio" : "Play audio"}
-              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground"
+              aria-label={playing ? "Pause Lerato's audio message" : "Play Lerato's audio message"}
+              aria-pressed={playing}
+              aria-controls="lerato-audio"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              {playing ? "❚❚" : "▶"}
+              <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
             </button>
-            <audio ref={audioRef} src={audioAna.url} preload="metadata" />
+            <audio id="lerato-audio" ref={audioRef} src={audioAna.url} preload="metadata" />
+            <span className="sr-only" aria-live="polite">
+              {playing ? "Audio playing" : "Audio paused"}
+            </span>
             <div
               aria-hidden="true"
               className="flex min-w-0 flex-1 items-end gap-[2px] overflow-hidden"
@@ -462,6 +467,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
           </div>
         </div>
       </div>
+
 
       <h3 className="mt-8 text-balance text-center text-lg font-black leading-snug sm:text-xl">
         Just look at this case
