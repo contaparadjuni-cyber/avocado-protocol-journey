@@ -519,8 +519,11 @@ const MEDS = [
 
 function StepMedications({ onNext }: { onNext: () => void }) {
   const [picked, setPicked] = useState<string[]>([]);
-  const toggle = (m: string) =>
+  const [error, setError] = useState(false);
+  const toggle = (m: string) => {
+    setError(false);
     setPicked((p) => (p.includes(m) ? p.filter((x) => x !== m) : [...p, m]));
+  };
 
   return (
     <section>
@@ -528,7 +531,8 @@ function StepMedications({ onNext }: { onNext: () => void }) {
         Are you currently taking any of{" "}
         <span className="text-brand-green">these medications?</span>
       </Heading>
-      <div className="mt-6 space-y-2.5">
+      <Sub>Select all that apply.</Sub>
+      <div className="mt-6 space-y-3">
         {MEDS.map((m) => {
           const on = picked.includes(m);
           return (
@@ -537,16 +541,18 @@ function StepMedications({ onNext }: { onNext: () => void }) {
               type="button"
               onClick={() => toggle(m)}
               aria-pressed={on}
-              className={`flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-3.5 text-left shadow-sm transition-colors ${
+              className={`btn-glow flex w-full items-center justify-between gap-3 rounded-xl border-2 px-4 py-4 text-left shadow-sm active:scale-[0.99] ${
                 on
                   ? "border-brand-green bg-brand-green/10"
-                  : "border-border bg-card hover:border-brand-green/50"
+                  : "border-border bg-card hover:border-brand-green/60"
               }`}
             >
-              <span className="min-w-0 text-sm font-semibold sm:text-[0.95rem]">{m}</span>
+              <span className="min-w-0 text-[0.95rem] font-semibold leading-snug sm:text-base">
+                {m}
+              </span>
               <span
                 aria-hidden="true"
-                className={`grid h-5 w-5 shrink-0 place-items-center rounded-md border text-[0.7rem] font-black ${
+                className={`grid h-6 w-6 shrink-0 place-items-center rounded-md border-2 text-[0.75rem] font-black ${
                   on
                     ? "border-brand-green bg-brand-green text-primary-foreground"
                     : "border-border"
@@ -558,7 +564,14 @@ function StepMedications({ onNext }: { onNext: () => void }) {
           );
         })}
       </div>
-      <CtaButton onClick={onNext} disabled={picked.length === 0}>
+      <ValidationMessage
+        show={error}
+        message="Please select at least one option to continue."
+      />
+      <CtaButton
+        onClick={() => (picked.length === 0 ? setError(true) : onNext())}
+        invalid={error}
+      >
         Continue
       </CtaButton>
     </section>
@@ -576,28 +589,43 @@ const MONITORING = [
 ];
 
 function StepMonitoring({ onNext }: { onNext: () => void }) {
+  const { choice, setChoice, error, attempt } = useSingleChoice(onNext);
+
   return (
     <section>
       <Heading>
         How often do you <span className="text-brand-green">monitor your glucose?</span>
       </Heading>
-      <div className="mt-6 space-y-2.5">
-        {MONITORING.map((o) => (
-          <button
-            key={o.label}
-            type="button"
-            onClick={onNext}
-            className="flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-card px-4 py-3.5 text-left shadow-sm transition-colors hover:border-brand-green/60"
-          >
-            <span className="min-w-0 text-[0.8rem] font-bold uppercase tracking-wide sm:text-sm">
-              {o.label}
-            </span>
-            <span aria-hidden="true" className="shrink-0 text-xl">
-              {o.emoji}
-            </span>
-          </button>
-        ))}
+      <Sub>Pick the answer that fits you best.</Sub>
+      <div className="mt-6 space-y-3">
+        {MONITORING.map((o) => {
+          const on = choice === o.label;
+          return (
+            <button
+              key={o.label}
+              type="button"
+              aria-pressed={on}
+              onClick={() => setChoice(o.label)}
+              className={`btn-glow flex w-full items-center justify-between gap-3 rounded-xl border-2 px-4 py-4 text-left shadow-sm active:scale-[0.99] ${
+                on
+                  ? "border-brand-green bg-brand-green/10"
+                  : "border-border bg-card hover:border-brand-green/60"
+              }`}
+            >
+              <span className="min-w-0 text-[0.85rem] font-bold uppercase tracking-wide sm:text-[0.95rem]">
+                {o.label}
+              </span>
+              <span aria-hidden="true" className="shrink-0 text-2xl">
+                {o.emoji}
+              </span>
+            </button>
+          );
+        })}
       </div>
+      <ValidationMessage show={error} message="Please choose one option to continue." />
+      <CtaButton onClick={attempt} invalid={error}>
+        Continue
+      </CtaButton>
     </section>
   );
 }
@@ -605,6 +633,8 @@ function StepMonitoring({ onNext }: { onNext: () => void }) {
 /* ---------- Step 12 ---------- */
 
 function StepHealthValue({ onNext }: { onNext: () => void }) {
+  const { choice, setChoice, error, attempt } = useSingleChoice(onNext);
+
   return (
     <section>
       <Heading>
@@ -612,14 +642,26 @@ function StepHealthValue({ onNext }: { onNext: () => void }) {
         <span className="text-brand-green">is the most important thing we have?</span>
       </Heading>
       <Sub>Without it, we are nothing.</Sub>
-      <div className="mt-6 space-y-3">
-        <OptionButton emoji="☑️" onClick={onNext}>
+      <div className="mt-6 space-y-3.5">
+        <OptionButton
+          emoji="☑️"
+          selected={choice === "agree"}
+          onClick={() => setChoice("agree")}
+        >
           I agree!
         </OptionButton>
-        <OptionButton emoji="🙄" onClick={onNext}>
+        <OptionButton
+          emoji="🙄"
+          selected={choice === "disagree"}
+          onClick={() => setChoice("disagree")}
+        >
           I don&apos;t agree.
         </OptionButton>
       </div>
+      <ValidationMessage show={error} message="Please choose one option to continue." />
+      <CtaButton onClick={attempt} invalid={error}>
+        Continue
+      </CtaButton>
     </section>
   );
 }
@@ -627,6 +669,8 @@ function StepHealthValue({ onNext }: { onNext: () => void }) {
 /* ---------- Step 13 ---------- */
 
 function StepCommitment({ onNext }: { onNext: () => void }) {
+  const { choice, setChoice, error, attempt } = useSingleChoice(onNext);
+
   return (
     <section>
       <Heading>
@@ -634,16 +678,24 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
         <span className="text-brand-green">14-Day Protocol</span> at home?
       </Heading>
       <Sub>I&apos;ll help you with everything you need.</Sub>
-      <div className="mt-6 space-y-3">
-        <OptionButton emoji="🤩" onClick={onNext}>
+      <div className="mt-6 space-y-3.5">
+        <OptionButton
+          emoji="🤩"
+          selected={choice === "commit"}
+          onClick={() => setChoice("commit")}
+        >
           Yes, I commit!
         </OptionButton>
-        <OptionButton emoji="😜" onClick={onNext}>
+        <OptionButton emoji="😜" selected={choice === "try"} onClick={() => setChoice("try")}>
           I&apos;ll try!
         </OptionButton>
       </div>
+      <ValidationMessage show={error} message="Please choose one option to continue." />
+      <CtaButton onClick={attempt} invalid={error}>
+        Continue
+      </CtaButton>
 
-      <figure className="mt-8 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+      <figure className="mt-9 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
         <SmartImage
           src={glucoseBeforeAfter.url}
           alt="Glucose meter readings before and after the deworming protocol"
@@ -656,6 +708,7 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
     </section>
   );
 }
+
 
 /* ---------- Step 14 ---------- */
 
