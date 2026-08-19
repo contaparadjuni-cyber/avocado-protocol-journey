@@ -8,13 +8,14 @@ import news600 from "@/assets/news-600.webp.asset.json";
 import news900 from "@/assets/news-900.webp.asset.json";
 import { SmartImage } from "@/components/SmartImage";
 import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
-import glucose14Days from "@/assets/glucose-14days.webp.asset.json";
 
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
 import parasiteIntestine from "@/assets/parasite-intestine.webp";
 import avocadoImg from "@/assets/avocado.webp";
 import audioAna from "@/assets/diabetes-protocol-audio.mp3.asset.json";
+import audioProof from "@/assets/diabetes-protocol-audio-2.mp3.asset.json";
+import glucose14DaysV2 from "@/assets/glucose-14days-v2.png.asset.json";
 import slide588 from "@/assets/slide-588.webp.asset.json";
 import slide198 from "@/assets/slide-198.webp.asset.json";
 import slide108 from "@/assets/slide-108.webp.asset.json";
@@ -1022,7 +1023,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
             >
               <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
             </button>
-            <audio id="lerato-audio-proof" ref={audioRef} src={audioAna.url} preload="none" />
+            <audio id="lerato-audio-proof" ref={audioRef} src={audioProof.url} preload="none" />
             <span className="sr-only" aria-live="polite">
               {playing ? "Audio playing" : "Audio paused"}
             </span>
@@ -1049,17 +1050,17 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
 
       <figure className="mt-4 overflow-hidden rounded-2xl border-2 border-brand-green bg-card shadow-md">
         <SmartImage
-          src={glucose14Days.url}
-          alt="Two glucose meters side by side: before deworming the reading is 255 mg/dL, and 14 days after deworming it reads 78 mg/dL."
-          width={700}
-          height={466}
+          src={glucose14DaysV2.url}
+          alt="Two glucose meters side by side, labelled Before Deworming reading 255 mg/dL and 14 Days After Deworming reading 118 mg/dL."
+          width={1537}
+          height={1023}
           sizes="(max-width: 640px) 92vw, 480px"
           className="object-contain"
           wrapperClassName="w-full bg-muted"
         />
       </figure>
 
-      <CtaButton onClick={onNext}>Continue</CtaButton>
+      <CtaButton onClick={onNext}>Generate Personalized Protocol! ✅</CtaButton>
     </section>
   );
 }
