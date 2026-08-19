@@ -73,11 +73,11 @@ function Quiz() {
       {step === 7 && <StepSymptomPicker onNext={next} />}
       {step === 8 && <StepImpact onNext={next} />}
       {step === 9 && <StepResults onNext={next} />}
-      {step === 10 && <StepMedications onNext={next} />}
-      {step === 11 && <StepMonitoring onNext={next} />}
-      {step === 12 && <StepHealthValue onNext={next} />}
-      {step === 13 && <StepCommitment onNext={next} />}
-      {step === 14 && <StepInterest onNext={next} />}
+      {step === 10 && <StepInterest onNext={next} />}
+      {step === 11 && <StepMedications onNext={next} />}
+      {step === 12 && <StepMonitoring onNext={next} />}
+      {step === 13 && <StepHealthValue onNext={next} />}
+      {step === 14 && <StepCommitment onNext={next} />}
       {step === 15 && <StepAnalyzing onNext={next} />}
       {step === 16 && <StepProtocol />}
     </QuizShell>
@@ -729,10 +729,10 @@ function StepInterest({ onNext }: { onNext: () => void }) {
         <span className="text-brand-green">personalized protocol</span> for Deworming in 14 days?
       </Heading>
       <div className="mx-auto mt-8 max-w-md space-y-4 sm:space-y-5">
-        <OptionButton emoji="☑️" onClick={onNext}>
+        <OptionButton emoji="✅" onClick={onNext}>
           Yes, I want it badly!
         </OptionButton>
-        <OptionButton emoji="🤪" onClick={onNext}>
+        <OptionButton emoji="😍" onClick={onNext}>
           I&apos;m interested, but I have questions.
         </OptionButton>
       </div>
