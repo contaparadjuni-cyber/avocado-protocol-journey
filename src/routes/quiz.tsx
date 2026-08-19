@@ -445,7 +445,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
             >
               <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
             </button>
-            <audio id="lerato-audio" ref={audioRef} src={audioAna.url} preload="metadata" />
+            <audio id="lerato-audio" ref={audioRef} src={audioAna.url} preload="none" />
             <span className="sr-only" aria-live="polite">
               {playing ? "Audio playing" : "Audio paused"}
             </span>
@@ -556,7 +556,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
       </div>
 
 
-      <CtaButton onClick={onNext}>Generate My Custom Protocol! ✅</CtaButton>
+      <CtaButton onClick={onNext}>Continue</CtaButton>
     </section>
   );
 }
