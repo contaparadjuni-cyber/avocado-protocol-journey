@@ -771,33 +771,78 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
 }
 
 const COMMIT_SLIDES = [
-  { src: glucoseBeforeAfter.url, alt: "Glucose meter comparison before and after the 14-day protocol" },
-  { src: parasiteIntestine, alt: "Intestinal parasite shown under a microscope" },
-  { src: symptomsWoman, alt: "Woman describing her diabetes symptoms" },
+  {
+    src: slide588.url,
+    alt: "Glucose meter reading 588 mg/dL before the protocol",
+    caption: "Before: 588 mg/dL",
+  },
+  {
+    src: slide198.url,
+    alt: "Woman showing a glucose meter reading 198 mg/dL",
+    caption: "Day 7: 198 mg/dL",
+  },
+  {
+    src: slide108.url,
+    alt: "Glucose meter reading 108 mg/dL after the protocol",
+    caption: "Day 14: 108 mg/dL",
+  },
 ];
 
 function PhotoCarousel() {
   const [i, setI] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const startX = useRef<number | null>(null);
+
+  const go = (n: number) => setI((n + COMMIT_SLIDES.length) % COMMIT_SLIDES.length);
+
   useEffect(() => {
-    const id = setInterval(() => setI((p) => (p + 1) % COMMIT_SLIDES.length), 3200);
+    if (paused) return;
+    const id = setInterval(() => setI((p) => (p + 1) % COMMIT_SLIDES.length), 3800);
     return () => clearInterval(id);
-  }, []);
+  }, [paused]);
+
   return (
-    <div className="mx-auto mt-7 max-w-md" aria-roledescription="carousel" aria-label="Protocol photo gallery">
-      <div className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
+    <div
+      className="mx-auto mt-7 w-full max-w-[19rem] sm:max-w-sm"
+      aria-roledescription="carousel"
+      aria-label="Real glucose results gallery"
+      onPointerDown={(e) => {
+        startX.current = e.clientX;
+        setPaused(true);
+      }}
+      onPointerUp={(e) => {
+        const s = startX.current;
+        startX.current = null;
+        if (s === null) return;
+        const dx = e.clientX - s;
+        if (Math.abs(dx) > 40) go(dx < 0 ? i + 1 : i - 1);
+        setPaused(false);
+      }}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      <div className="overflow-hidden rounded-2xl border-2 border-brand-green/30 bg-muted shadow-md">
         <div
           className="flex transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${i * 100}%)` }}
         >
-          {COMMIT_SLIDES.map((s) => (
-            <img
-              key={s.alt}
-              src={s.src}
-              alt={s.alt}
-              loading="lazy"
-              decoding="async"
-              className="h-44 w-full shrink-0 object-cover sm:h-56"
-            />
+          {COMMIT_SLIDES.map((s, idx) => (
+            <div key={s.alt} className="w-full shrink-0">
+              <SmartImage
+                src={s.src}
+                alt={s.alt}
+                width={800}
+                height={900}
+                priority={idx === 0}
+                sizes="(max-width: 640px) 90vw, 384px"
+                className="object-contain"
+                wrapperClassName="w-full bg-muted"
+                draggable={false}
+              />
+              <p className="bg-brand-green/10 px-3 py-2 text-center text-[0.8rem] font-extrabold uppercase tracking-wide text-foreground sm:text-sm">
+                {s.caption}
+              </p>
+            </div>
           ))}
         </div>
       </div>
@@ -808,8 +853,8 @@ function PhotoCarousel() {
             type="button"
             aria-label={`View photo ${idx + 1}`}
             aria-pressed={i === idx}
-            onClick={() => setI(idx)}
-            className={`h-2 rounded-full transition-all duration-300 ${i === idx ? "w-6 bg-brand-green" : "w-2 bg-border"}`}
+            onClick={() => go(idx)}
+            className={`h-2.5 rounded-full transition-all duration-300 ${i === idx ? "w-7 bg-brand-green" : "w-2.5 bg-border"}`}
           />
         ))}
       </div>
