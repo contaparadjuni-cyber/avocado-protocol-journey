@@ -73,11 +73,11 @@ function Quiz() {
       {step === 7 && <StepSymptomPicker onNext={next} />}
       {step === 8 && <StepImpact onNext={next} />}
       {step === 9 && <StepResults onNext={next} />}
-      {step === 10 && <StepMedications onNext={next} />}
-      {step === 11 && <StepMonitoring onNext={next} />}
-      {step === 12 && <StepHealthValue onNext={next} />}
-      {step === 13 && <StepCommitment onNext={next} />}
-      {step === 14 && <StepInterest onNext={next} />}
+      {step === 10 && <StepInterest onNext={next} />}
+      {step === 11 && <StepMedications onNext={next} />}
+      {step === 12 && <StepMonitoring onNext={next} />}
+      {step === 13 && <StepHealthValue onNext={next} />}
+      {step === 14 && <StepCommitment onNext={next} />}
       {step === 15 && <StepAnalyzing onNext={next} />}
       {step === 16 && <StepProtocol />}
     </QuizShell>
