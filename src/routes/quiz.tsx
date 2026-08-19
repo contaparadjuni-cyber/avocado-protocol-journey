@@ -1051,17 +1051,17 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
 
       <figure className="mt-4 overflow-hidden rounded-2xl border-2 border-brand-green bg-card shadow-md">
         <SmartImage
-          src={glucose14Days.url}
-          alt="Two glucose meters side by side: before deworming the reading is 255 mg/dL, and 14 days after deworming it reads 78 mg/dL."
-          width={700}
-          height={466}
+          src={glucose14DaysV2.url}
+          alt="Two glucose meters side by side, labelled Before Deworming reading 255 mg/dL and 14 Days After Deworming reading 118 mg/dL."
+          width={1537}
+          height={1023}
           sizes="(max-width: 640px) 92vw, 480px"
           className="object-contain"
           wrapperClassName="w-full bg-muted"
         />
       </figure>
 
-      <CtaButton onClick={onNext}>Continue</CtaButton>
+      <CtaButton onClick={onNext}>Generate Personalized Protocol! ✅</CtaButton>
     </section>
   );
 }
