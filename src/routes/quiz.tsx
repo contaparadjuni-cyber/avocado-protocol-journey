@@ -1154,7 +1154,9 @@ function Meter({
         className="mt-1.5 h-2.5 w-full overflow-hidden rounded-full bg-muted"
       >
         <div
-          className="h-full rounded-full bg-brand-green transition-[width] duration-100"
+          className={`h-full rounded-full transition-[width] duration-100 ${
+            tone === "red" ? "bg-destructive" : "bg-brand-green"
+          }`}
           style={{ width: `${value}%` }}
         />
       </div>
