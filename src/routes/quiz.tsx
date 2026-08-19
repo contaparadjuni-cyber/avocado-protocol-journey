@@ -729,10 +729,10 @@ function StepInterest({ onNext }: { onNext: () => void }) {
         <span className="text-brand-green">personalized protocol</span> for Deworming in 14 days?
       </Heading>
       <div className="mx-auto mt-8 max-w-md space-y-4 sm:space-y-5">
-        <OptionButton emoji="☑️" onClick={onNext}>
+        <OptionButton emoji="✅" onClick={onNext}>
           Yes, I want it badly!
         </OptionButton>
-        <OptionButton emoji="🤪" onClick={onNext}>
+        <OptionButton emoji="😍" onClick={onNext}>
           I&apos;m interested, but I have questions.
         </OptionButton>
       </div>
