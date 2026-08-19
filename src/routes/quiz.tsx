@@ -20,6 +20,7 @@ import slide198 from "@/assets/slide-198.webp.asset.json";
 import slide108 from "@/assets/slide-108.webp.asset.json";
 import remediesVsProtocol from "@/assets/remedies-vs-protocol.webp.asset.json";
 import ascarisPhoto from "@/assets/ascaris-lumbricoides.webp.asset.json";
+import avocadoBg from "@/assets/avocado-bg.webp.asset.json";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
