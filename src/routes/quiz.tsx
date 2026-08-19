@@ -8,7 +8,6 @@ import news600 from "@/assets/news-600.webp.asset.json";
 import news900 from "@/assets/news-900.webp.asset.json";
 import { SmartImage } from "@/components/SmartImage";
 import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
-import glucose14Days from "@/assets/glucose-14days.webp.asset.json";
 
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
@@ -1024,7 +1023,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
             >
               <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
             </button>
-            <audio id="lerato-audio-proof" ref={audioRef} src={audioAna.url} preload="none" />
+            <audio id="lerato-audio-proof" ref={audioRef} src={audioProof.url} preload="none" />
             <span className="sr-only" aria-live="polite">
               {playing ? "Audio playing" : "Audio paused"}
             </span>
