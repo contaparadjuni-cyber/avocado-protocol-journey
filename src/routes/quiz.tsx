@@ -76,8 +76,8 @@ function Quiz() {
       {step === 10 && <StepInterest onNext={next} />}
       {step === 11 && <StepMedications onNext={next} />}
       {step === 12 && <StepMonitoring onNext={next} />}
-      {step === 13 && <StepHealthValue onNext={next} />}
-      {step === 14 && <StepCommitment onNext={next} />}
+      {step === 13 && <StepCommitment onNext={next} />}
+      {step === 14 && <StepHealthValue onNext={next} />}
       {step === 15 && <StepAnalyzing onNext={next} />}
       {step === 16 && <StepProtocol />}
     </QuizShell>
@@ -645,7 +645,7 @@ const MONITORING = [
 ];
 
 function StepMonitoring({ onNext }: { onNext: () => void }) {
-  const { choice, setChoice, error, attempt } = useSingleChoice(onNext);
+  const [choice, setChoice] = useState<string | null>(null);
 
   return (
     <section>
@@ -661,7 +661,10 @@ function StepMonitoring({ onNext }: { onNext: () => void }) {
               key={o.label}
               type="button"
               aria-pressed={on}
-              onClick={() => setChoice(o.label)}
+              onClick={() => {
+                setChoice(o.label);
+                window.setTimeout(onNext, 180);
+              }}
               className={`btn-glow flex w-full items-center justify-between gap-3 rounded-xl border-2 px-4 py-4 text-left shadow-sm active:scale-[0.99] ${
                 on
                   ? "border-brand-green bg-brand-green/10"
@@ -678,13 +681,10 @@ function StepMonitoring({ onNext }: { onNext: () => void }) {
           );
         })}
       </div>
-      <ValidationMessage show={error} message="Please choose one option to continue." />
-      <CtaButton onClick={attempt} invalid={error}>
-        Continue
-      </CtaButton>
     </section>
   );
 }
+
 
 /* ---------- Step 12 ---------- */
 
@@ -743,7 +743,11 @@ function StepInterest({ onNext }: { onNext: () => void }) {
 /* ---------- Step 13 ---------- */
 
 function StepCommitment({ onNext }: { onNext: () => void }) {
-  const { choice, setChoice, error, attempt } = useSingleChoice(onNext);
+  const [choice, setChoice] = useState<string | null>(null);
+  const pick = (v: string) => {
+    setChoice(v);
+    window.setTimeout(onNext, 180);
+  };
 
   return (
     <section>
@@ -752,33 +756,15 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
         <span className="text-brand-green">14-Day Protocol</span> at home?
       </Heading>
       <Sub>I&apos;ll help you with everything you need.</Sub>
-      <div className="mt-6 space-y-3.5">
-        <OptionButton
-          emoji="🤩"
-          selected={choice === "commit"}
-          onClick={() => setChoice("commit")}
-        >
+      <div className="mx-auto mt-8 max-w-md space-y-4 sm:space-y-5">
+        <OptionButton emoji="🤩" selected={choice === "commit"} onClick={() => pick("commit")}>
           Yes, I commit!
         </OptionButton>
-        <OptionButton emoji="😜" selected={choice === "try"} onClick={() => setChoice("try")}>
+        <OptionButton emoji="😜" selected={choice === "try"} onClick={() => pick("try")}>
           I&apos;ll try!
         </OptionButton>
       </div>
-      <ValidationMessage show={error} message="Please choose one option to continue." />
-      <CtaButton onClick={attempt} invalid={error}>
-        Continue
-      </CtaButton>
 
-      <figure className="mt-9 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-        <SmartImage
-          src={glucoseBeforeAfter.url}
-          alt="Glucose meter readings before and after the deworming protocol"
-          width={701}
-          height={688}
-          className="object-contain"
-          wrapperClassName="w-full bg-muted"
-        />
-      </figure>
     </section>
   );
 }
