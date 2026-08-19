@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
@@ -726,8 +726,8 @@ function StepHealthValue({ onNext }: { onNext: () => void }) {
 
 const StepInterest = memo(function StepInterest({ onNext }: { onNext: () => void }) {
   return (
-    <section aria-labelledby="interest-q">
-      <Heading id="interest-q">
+    <section>
+      <Heading>
         Would you be interested in receiving a{" "}
         <span className="text-brand-green">personalized protocol</span> for Deworming in 14 days?
       </Heading>
