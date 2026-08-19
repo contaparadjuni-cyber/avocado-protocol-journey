@@ -645,7 +645,7 @@ const MONITORING = [
 ];
 
 function StepMonitoring({ onNext }: { onNext: () => void }) {
-  const { choice, setChoice, error, attempt } = useSingleChoice(onNext);
+  const [choice, setChoice] = useState<string | null>(null);
 
   return (
     <section>
@@ -661,7 +661,10 @@ function StepMonitoring({ onNext }: { onNext: () => void }) {
               key={o.label}
               type="button"
               aria-pressed={on}
-              onClick={() => setChoice(o.label)}
+              onClick={() => {
+                setChoice(o.label);
+                window.setTimeout(onNext, 180);
+              }}
               className={`btn-glow flex w-full items-center justify-between gap-3 rounded-xl border-2 px-4 py-4 text-left shadow-sm active:scale-[0.99] ${
                 on
                   ? "border-brand-green bg-brand-green/10"
@@ -678,13 +681,10 @@ function StepMonitoring({ onNext }: { onNext: () => void }) {
           );
         })}
       </div>
-      <ValidationMessage show={error} message="Please choose one option to continue." />
-      <CtaButton onClick={attempt} invalid={error}>
-        Continue
-      </CtaButton>
     </section>
   );
 }
+
 
 /* ---------- Step 12 ---------- */
 
