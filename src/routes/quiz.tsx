@@ -11,7 +11,6 @@ import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
 
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
-import parasiteIntestine from "@/assets/parasite-intestine.webp";
 import avocadoImg from "@/assets/avocado.webp";
 import audioAna from "@/assets/diabetes-protocol-audio.mp3.asset.json";
 import audioProof from "@/assets/diabetes-protocol-audio-2.mp3.asset.json";
