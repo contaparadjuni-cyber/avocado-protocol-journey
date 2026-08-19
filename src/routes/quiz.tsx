@@ -273,8 +273,11 @@ function StepSweets({ onNext }: { onNext: () => void }) {
 
 function StepSymptomPicker({ onNext }: { onNext: () => void }) {
   const [selected, setSelected] = useState<string[]>([]);
-  const toggle = (s: string) =>
+  const [error, setError] = useState(false);
+  const toggle = (s: string) => {
+    setError(false);
     setSelected((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
+  };
 
   return (
     <section>
@@ -325,13 +328,21 @@ function StepSymptomPicker({ onNext }: { onNext: () => void }) {
         })}
       </div>
 
-      <p className="mt-4 text-center text-xs font-semibold text-muted-foreground sm:text-sm">
+      <p className="mt-4 text-center text-[0.8rem] font-semibold text-muted-foreground sm:text-sm">
         {selected.length === 0
           ? "Select at least one symptom to continue"
           : `${selected.length} symptom${selected.length > 1 ? "s" : ""} selected`}
       </p>
 
-      <CtaButton onClick={onNext} disabled={selected.length === 0}>
+      <ValidationMessage
+        show={error}
+        message="Please select at least one symptom to continue."
+      />
+
+      <CtaButton
+        onClick={() => (selected.length === 0 ? setError(true) : onNext())}
+        invalid={error}
+      >
         Continue
       </CtaButton>
     </section>
