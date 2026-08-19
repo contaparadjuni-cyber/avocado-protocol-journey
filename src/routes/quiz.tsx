@@ -19,6 +19,7 @@ import glucose14DaysV2 from "@/assets/glucose-14days-v2.png.asset.json";
 import slide588 from "@/assets/slide-588.webp.asset.json";
 import slide198 from "@/assets/slide-198.webp.asset.json";
 import slide108 from "@/assets/slide-108.webp.asset.json";
+import remediesVsProtocol from "@/assets/remedies-vs-protocol.webp.asset.json";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
