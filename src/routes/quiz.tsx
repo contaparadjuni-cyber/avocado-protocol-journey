@@ -1160,26 +1160,6 @@ function StepProtocol() {
 
 /* ---------- Shared UI ---------- */
 
-function useSingleChoice(onNext: () => void) {
-  const [choice, setChoiceState] = useState<string | null>(null);
-  const [error, setError] = useState(false);
-
-  const setChoice = (value: string) => {
-    setError(false);
-    setChoiceState(value);
-  };
-
-  const attempt = () => {
-    if (!choice) {
-      setError(true);
-      return;
-    }
-    onNext();
-  };
-
-  return { choice, setChoice, error, attempt };
-}
-
 function ValidationMessage({ show, message }: { show: boolean; message: string }) {
   if (!show) return null;
   return (
