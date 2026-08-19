@@ -1059,10 +1059,10 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
         const i = prev.findIndex((p) => p < 100);
         if (i === -1) return prev;
         const nextArr = [...prev];
-        nextArr[i] = Math.min(100, (prev[i] ?? 0) + 5);
+        nextArr[i] = Math.min(100, (prev[i] ?? 0) + 4);
         return nextArr;
       });
-    }, 45);
+    }, 55);
     return () => clearInterval(id);
   }, []);
 
