@@ -715,9 +715,6 @@ function StepHealthValue({ onNext }: { onNext: () => void }) {
         </OptionButton>
       </div>
       <ValidationMessage show={error} message="Please choose one option to continue." />
-      <CtaButton onClick={attempt} invalid={error}>
-        Continue
-      </CtaButton>
     </section>
   );
 }
