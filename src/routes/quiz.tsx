@@ -80,9 +80,10 @@ function Quiz() {
       {step === 11 && <StepMedications onNext={next} />}
       {step === 12 && <StepMonitoring onNext={next} />}
       {step === 13 && <StepCommitment onNext={next} />}
-      {step === 14 && <StepHealthValue onNext={next} />}
-      {step === 15 && <StepAnalyzing onNext={next} />}
-      {step === 16 && <StepProtocol />}
+      {step === 14 && <StepAudioProof onNext={next} />}
+      {step === 15 && <StepHealthValue onNext={next} />}
+      {step === 16 && <StepAnalyzing onNext={next} />}
+      {step === 17 && <StepProtocol />}
     </QuizShell>
   );
 }
