@@ -423,11 +423,11 @@ function StepResults({ onNext }: { onNext: () => void }) {
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
-        <p className="text-xs font-bold sm:text-sm">Ana Lima</p>
+        <p className="text-xs font-bold sm:text-sm">Lerato</p>
         <div className="mt-2.5 flex items-center gap-3">
           <SmartImage
             src={avatarAna}
-            alt="Ana Lima"
+            alt="Lerato"
             width={160}
             height={160}
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
@@ -437,12 +437,17 @@ function StepResults({ onNext }: { onNext: () => void }) {
             <button
               type="button"
               onClick={toggleAudio}
-              aria-label={playing ? "Pause audio" : "Play audio"}
-              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground"
+              aria-label={playing ? "Pause Lerato's audio message" : "Play Lerato's audio message"}
+              aria-pressed={playing}
+              aria-controls="lerato-audio"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
-              {playing ? "❚❚" : "▶"}
+              <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
             </button>
-            <audio ref={audioRef} src={audioAna.url} preload="metadata" />
+            <audio id="lerato-audio" ref={audioRef} src={audioAna.url} preload="metadata" />
+            <span className="sr-only" aria-live="polite">
+              {playing ? "Audio playing" : "Audio paused"}
+            </span>
             <div
               aria-hidden="true"
               className="flex min-w-0 flex-1 items-end gap-[2px] overflow-hidden"
@@ -462,6 +467,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
           </div>
         </div>
       </div>
+
 
       <h3 className="mt-8 text-balance text-center text-lg font-black leading-snug sm:text-xl">
         Just look at this case
@@ -515,25 +521,39 @@ function StepResults({ onNext }: { onNext: () => void }) {
 
 
       <div className="mt-5 rounded-xl border border-border bg-card p-4 shadow-sm">
-        <div className="flex items-center gap-3">
+        <div className="flex items-start gap-2.5">
           <SmartImage
             src={avatarRita}
-            alt="Rita Lima"
+            alt="Profile photo of Rachel Bennett"
             width={160}
             height={160}
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
           />
 
-          <div className="min-w-0">
-            <p className="truncate text-sm font-bold">Rita Lima</p>
-            <p className="truncate text-xs text-brand-green">Porto Alegre, BR</p>
+          <div className="min-w-0 flex-1">
+            <div className="rounded-2xl bg-muted px-3.5 py-2.5">
+              <p className="truncate text-[0.85rem] font-bold leading-tight sm:text-sm">
+                Rachel Bennett
+              </p>
+              <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
+                Thank you so much Lerato! I&apos;ve been deworming for 30 days and my glucose levels
+                are finally stable. I&apos;m so happy about this victory in my life 🎁 you were an
+                angel.
+              </p>
+            </div>
+            <div className="mt-1.5 flex items-center gap-3 px-3 text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
+              <span>2 h</span>
+              <span className="text-brand-green">Like</span>
+              <span className="text-brand-green">Reply</span>
+              <span className="ml-auto flex items-center gap-1">
+                <span aria-hidden="true">👍❤️</span>
+                <span aria-label="47 reactions">47</span>
+              </span>
+            </div>
           </div>
         </div>
-        <p className="mt-3 text-[0.85rem] leading-relaxed text-muted-foreground sm:text-sm">
-          Thank you so much Ana, I&apos;ve been deworming for 30 days and my glucose levels are
-          stable. I&apos;m so happy about this victory in my life 🎁 you were an angel.
-        </p>
       </div>
+
 
       <CtaButton onClick={onNext}>Generate My Custom Protocol! ✅</CtaButton>
     </section>
