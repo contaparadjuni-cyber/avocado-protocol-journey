@@ -168,7 +168,7 @@ function StepDeworming({ onNext }: { onNext: () => void }) {
               setChoice(opt.label);
               onNext();
             }}
-            className="flex w-full items-center gap-3 rounded-xl bg-brand-green px-4 py-4 text-left text-primary-foreground shadow-md transition-colors hover:bg-primary-strong"
+            className="btn-glow flex w-full items-center gap-3 rounded-xl bg-brand-green px-4 py-4 text-left text-primary-foreground shadow-md hover:bg-primary-strong active:scale-[0.99]"
           >
             <span className="shrink-0 text-xl">{opt.emoji}</span>
             <span
@@ -293,7 +293,7 @@ function StepSymptomPicker({ onNext }: { onNext: () => void }) {
               type="button"
               aria-pressed={active}
               onClick={() => toggle(label)}
-              className={`flex w-full items-center gap-3 rounded-2xl border-2 px-4 py-3.5 text-left transition-all active:scale-[0.99] ${
+              className={`btn-glow flex w-full items-center gap-3 rounded-2xl border-2 px-4 py-4 text-left active:scale-[0.99] ${
                 active
                   ? "border-brand-green bg-brand-green text-primary-foreground shadow-md"
                   : "border-border bg-card text-foreground hover:border-brand-green hover:bg-muted/40"
@@ -953,7 +953,7 @@ function GenderCard({
     <button
       type="button"
       onClick={onClick}
-      className="overflow-hidden rounded-xl border border-border bg-card p-1.5 text-left shadow-sm transition-shadow hover:shadow-md"
+      className="btn-glow overflow-hidden rounded-xl border-2 border-border bg-card p-1.5 text-left shadow-sm hover:border-brand-green/60 hover:shadow-md active:scale-[0.99]"
     >
       <SmartImage
         src={img}
