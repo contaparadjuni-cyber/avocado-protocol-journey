@@ -85,7 +85,8 @@ function Quiz() {
       {step === 13 && <StepCommitment onNext={next} />}
       {step === 14 && <StepAudioProof onNext={next} />}
       {step === 15 && <StepAnalyzing onNext={next} />}
-      {step === 16 && <StepProtocol />}
+      {step === 16 && <StepComparison onNext={next} />}
+      {step === 17 && <StepProtocol />}
     </QuizShell>
   );
 }
