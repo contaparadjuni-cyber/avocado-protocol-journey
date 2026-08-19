@@ -436,12 +436,13 @@ function StepResults({ onNext }: { onNext: () => void }) {
           <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-full bg-muted px-3 py-2">
             <button
               type="button"
-              onClick={() => setPlaying((p) => !p)}
+              onClick={toggleAudio}
               aria-label={playing ? "Pause audio" : "Play audio"}
               className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground"
             >
               {playing ? "❚❚" : "▶"}
             </button>
+            <audio ref={audioRef} src={audioAna.url} preload="metadata" />
             <div
               aria-hidden="true"
               className="flex min-w-0 flex-1 items-end gap-[2px] overflow-hidden"
