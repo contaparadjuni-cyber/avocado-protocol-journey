@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
@@ -724,14 +724,14 @@ function StepHealthValue({ onNext }: { onNext: () => void }) {
 
 /* ---------- Step 14 ---------- */
 
-function StepInterest({ onNext }: { onNext: () => void }) {
+const StepInterest = memo(function StepInterest({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
         Would you be interested in receiving a{" "}
         <span className="text-brand-green">personalized protocol</span> for Deworming in 14 days?
       </Heading>
-      <div className="mt-7 space-y-4">
+      <div className="mx-auto mt-8 max-w-md space-y-4 sm:space-y-5">
         <OptionButton emoji="☑️" onClick={onNext}>
           Yes, I want it badly!
         </OptionButton>
@@ -741,7 +741,7 @@ function StepInterest({ onNext }: { onNext: () => void }) {
       </div>
     </section>
   );
-}
+});
 
 /* ---------- Step 13 ---------- */
 
