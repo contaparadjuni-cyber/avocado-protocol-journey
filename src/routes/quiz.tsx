@@ -1130,7 +1130,15 @@ function StepComparison({ onNext }: { onNext: () => void }) {
   );
 }
 
-function Meter({ label, value }: { label: string; value: number }) {
+function Meter({
+  label,
+  value,
+  tone = "green",
+}: {
+  label: string;
+  value: number;
+  tone?: "green" | "red";
+}) {
   return (
     <div>
       <div className="flex items-center justify-between text-xs font-black sm:text-sm">
