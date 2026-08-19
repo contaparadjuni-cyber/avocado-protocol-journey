@@ -8,6 +8,7 @@ import news600 from "@/assets/news-600.webp.asset.json";
 import news900 from "@/assets/news-900.webp.asset.json";
 import { SmartImage } from "@/components/SmartImage";
 import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
+import glucose14Days from "@/assets/glucose-14days.webp.asset.json";
 
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
@@ -37,7 +38,7 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 16;
+const TOTAL_STEPS = 17;
 
 const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
@@ -80,9 +81,10 @@ function Quiz() {
       {step === 11 && <StepMedications onNext={next} />}
       {step === 12 && <StepMonitoring onNext={next} />}
       {step === 13 && <StepCommitment onNext={next} />}
-      {step === 14 && <StepHealthValue onNext={next} />}
-      {step === 15 && <StepAnalyzing onNext={next} />}
-      {step === 16 && <StepProtocol />}
+      {step === 14 && <StepAudioProof onNext={next} />}
+      {step === 15 && <StepHealthValue onNext={next} />}
+      {step === 16 && <StepAnalyzing onNext={next} />}
+      {step === 17 && <StepProtocol />}
     </QuizShell>
   );
 }
@@ -963,8 +965,107 @@ function PhotoCarousel() {
   );
 }
 
+/* ---------- Step 14: audio + 14-day proof ---------- */
 
-/* ---------- Step 14 ---------- */
+function StepAudioProof({ onNext }: { onNext: () => void }) {
+  const [playing, setPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const toggleAudio = () => {
+    const el = audioRef.current;
+    if (!el) return;
+    if (playing) {
+      el.pause();
+      setPlaying(false);
+    } else {
+      el.play()
+        .then(() => setPlaying(true))
+        .catch(() => setPlaying(false));
+    }
+  };
+
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el) return;
+    const onEnd = () => setPlaying(false);
+    el.addEventListener("ended", onEnd);
+    return () => el.removeEventListener("ended", onEnd);
+  }, []);
+
+  return (
+    <section>
+      <p className="text-center text-base font-black sm:text-lg">
+        Listen to the audio below: <span aria-hidden="true">👇</span>
+      </p>
+      <p className="mt-1.5 text-center text-xs text-muted-foreground sm:text-sm">
+        If the AUDIO doesn&apos;t start, just tap it!
+      </p>
+
+      <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
+        <p className="text-xs font-bold sm:text-sm">Lerato</p>
+        <div className="mt-2.5 flex items-center gap-3">
+          <SmartImage
+            src={avatarAna}
+            alt="Lerato"
+            width={160}
+            height={160}
+            wrapperClassName="h-10 w-10 shrink-0 rounded-full"
+          />
+          <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-full bg-muted px-3 py-2">
+            <button
+              type="button"
+              onClick={toggleAudio}
+              aria-label={playing ? "Pause Lerato's audio message" : "Play Lerato's audio message"}
+              aria-pressed={playing}
+              aria-controls="lerato-audio-proof"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
+            </button>
+            <audio id="lerato-audio-proof" ref={audioRef} src={audioAna.url} preload="none" />
+            <span className="sr-only" aria-live="polite">
+              {playing ? "Audio playing" : "Audio paused"}
+            </span>
+            <div aria-hidden="true" className="flex min-w-0 flex-1 items-end gap-[2px] overflow-hidden">
+              {Array.from({ length: 34 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="w-[3px] shrink-0 rounded-full bg-muted-foreground/60"
+                  style={{ height: `${6 + ((i * 7) % 16)}px` }}
+                />
+              ))}
+            </div>
+            <span className="shrink-0 text-[0.7rem] font-semibold text-muted-foreground">00:33</span>
+          </div>
+        </div>
+      </div>
+
+      <h3 className="mt-7 text-center text-lg font-black leading-snug sm:text-xl">
+        Just look at this case
+      </h3>
+      <p className="mt-1.5 text-center text-xs leading-snug text-muted-foreground sm:text-sm">
+        1 week after starting the deworming
+      </p>
+
+      <figure className="mt-4 overflow-hidden rounded-2xl border-2 border-brand-green bg-card shadow-md">
+        <SmartImage
+          src={glucose14Days.url}
+          alt="Two glucose meters side by side: before deworming the reading is 255 mg/dL, and 14 days after deworming it reads 78 mg/dL."
+          width={700}
+          height={466}
+          sizes="(max-width: 640px) 92vw, 480px"
+          className="object-contain"
+          wrapperClassName="w-full bg-muted"
+        />
+      </figure>
+
+      <CtaButton onClick={onNext}>Continue</CtaButton>
+    </section>
+  );
+}
+
+/* ---------- Step 16 ---------- */
+
 
 function StepAnalyzing({ onNext }: { onNext: () => void }) {
   const [pct, setPct] = useState(4);
