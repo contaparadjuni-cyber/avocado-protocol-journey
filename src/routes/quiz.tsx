@@ -39,7 +39,7 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 17;
+const TOTAL_STEPS = 16;
 
 const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
@@ -83,9 +83,8 @@ function Quiz() {
       {step === 12 && <StepMonitoring onNext={next} />}
       {step === 13 && <StepCommitment onNext={next} />}
       {step === 14 && <StepAudioProof onNext={next} />}
-      {step === 15 && <StepHealthValue onNext={next} />}
-      {step === 16 && <StepAnalyzing onNext={next} />}
-      {step === 17 && <StepProtocol />}
+      {step === 15 && <StepAnalyzing onNext={next} />}
+      {step === 16 && <StepProtocol />}
     </QuizShell>
   );
 }
@@ -694,36 +693,7 @@ function StepMonitoring({ onNext }: { onNext: () => void }) {
 
 /* ---------- Step 12 ---------- */
 
-function StepHealthValue({ onNext }: { onNext: () => void }) {
-  const { choice, setChoice, error, attempt } = useSingleChoice(onNext);
 
-  return (
-    <section>
-      <Heading>
-        Do you agree that our health{" "}
-        <span className="text-brand-green">is the most important thing we have?</span>
-      </Heading>
-      <Sub>Without it, we are nothing.</Sub>
-      <div className="mt-6 space-y-3.5">
-        <OptionButton
-          emoji="☑️"
-          selected={choice === "agree"}
-          onClick={() => setChoice("agree")}
-        >
-          I agree!
-        </OptionButton>
-        <OptionButton
-          emoji="🙄"
-          selected={choice === "disagree"}
-          onClick={() => setChoice("disagree")}
-        >
-          I don&apos;t agree.
-        </OptionButton>
-      </div>
-      <ValidationMessage show={error} message="Please choose one option to continue." />
-    </section>
-  );
-}
 
 /* ---------- Step 14 ---------- */
 
@@ -1189,26 +1159,6 @@ function StepProtocol() {
 }
 
 /* ---------- Shared UI ---------- */
-
-function useSingleChoice(onNext: () => void) {
-  const [choice, setChoiceState] = useState<string | null>(null);
-  const [error, setError] = useState(false);
-
-  const setChoice = (value: string) => {
-    setError(false);
-    setChoiceState(value);
-  };
-
-  const attempt = () => {
-    if (!choice) {
-      setError(true);
-      return;
-    }
-    onNext();
-  };
-
-  return { choice, setChoice, error, attempt };
-}
 
 function ValidationMessage({ show, message }: { show: boolean; message: string }) {
   if (!show) return null;
