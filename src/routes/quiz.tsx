@@ -37,7 +37,7 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 16;
+const TOTAL_STEPS = 17;
 
 const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
