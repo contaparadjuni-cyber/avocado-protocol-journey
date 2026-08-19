@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
@@ -13,6 +13,7 @@ import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
 import parasiteIntestine from "@/assets/parasite-intestine.webp";
 import avocadoImg from "@/assets/avocado.webp";
+import audioAna from "@/assets/diabetes-protocol-audio.mp3.asset.json";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
@@ -381,6 +382,28 @@ function StepImpact({ onNext }: { onNext: () => void }) {
 
 function StepResults({ onNext }: { onNext: () => void }) {
   const [playing, setPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const toggleAudio = () => {
+    const el = audioRef.current;
+    if (!el) return;
+    if (playing) {
+      el.pause();
+      setPlaying(false);
+    } else {
+      el.play()
+        .then(() => setPlaying(true))
+        .catch(() => setPlaying(false));
+    }
+  };
+
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el) return;
+    const onEnd = () => setPlaying(false);
+    el.addEventListener("ended", onEnd);
+    return () => el.removeEventListener("ended", onEnd);
+  }, []);
 
   return (
     <section>
@@ -413,12 +436,13 @@ function StepResults({ onNext }: { onNext: () => void }) {
           <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-full bg-muted px-3 py-2">
             <button
               type="button"
-              onClick={() => setPlaying((p) => !p)}
+              onClick={toggleAudio}
               aria-label={playing ? "Pause audio" : "Play audio"}
               className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground"
             >
               {playing ? "❚❚" : "▶"}
             </button>
+            <audio ref={audioRef} src={audioAna.url} preload="metadata" />
             <div
               aria-hidden="true"
               className="flex min-w-0 flex-1 items-end gap-[2px] overflow-hidden"
