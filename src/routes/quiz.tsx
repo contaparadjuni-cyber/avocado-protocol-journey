@@ -1058,7 +1058,7 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
         const i = prev.findIndex((p) => p < 100);
         if (i === -1) return prev;
         const nextArr = [...prev];
-        nextArr[i] = Math.min(100, prev[i] + 5);
+        nextArr[i] = Math.min(100, (prev[i] ?? 0) + 5);
         return nextArr;
       });
     }, 45);
@@ -1084,7 +1084,7 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
 
       <div className="mt-7 space-y-5">
         {ANALYZING_TASKS.map((label, i) => (
-          <Meter key={label} label={label} value={pcts[i]} />
+          <Meter key={label} label={label} value={pcts[i] ?? 0} />
         ))}
       </div>
     </section>
