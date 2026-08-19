@@ -1062,7 +1062,7 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
         nextArr[i] = Math.min(100, (prev[i] ?? 0) + 5);
         return nextArr;
       });
-    }, 55);
+    }, 50);
     return () => clearInterval(id);
   }, []);
 
