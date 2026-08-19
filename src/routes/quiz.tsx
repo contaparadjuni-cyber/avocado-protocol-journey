@@ -1126,6 +1126,22 @@ function StepComparison({ onNext }: { onNext: () => void }) {
         ))}
       </div>
 
+      <p className="mt-8 text-balance text-center text-[1.05rem] font-black leading-snug sm:text-xl">
+        <span className="text-brand-green">Possible parasitic agent</span> according to your
+        symptoms:
+      </p>
+      <p className="mt-2 text-center text-sm italic underline sm:text-base">Ascaris lumbricoides</p>
+
+      <figure className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <SmartImage
+          src={ascarisPhoto.url}
+          alt="Endoscopic image of Ascaris lumbricoides roundworms inside the intestine"
+          width={350}
+          height={275}
+          wrapperClassName="w-full bg-muted"
+        />
+      </figure>
+
       <CtaButton onClick={onNext}>Continue</CtaButton>
     </section>
   );
