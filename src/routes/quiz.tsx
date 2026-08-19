@@ -834,9 +834,42 @@ function StepProtocol() {
 
 /* ---------- Shared UI ---------- */
 
+function useSingleChoice(onNext: () => void) {
+  const [choice, setChoiceState] = useState<string | null>(null);
+  const [error, setError] = useState(false);
+
+  const setChoice = (value: string) => {
+    setError(false);
+    setChoiceState(value);
+  };
+
+  const attempt = () => {
+    if (!choice) {
+      setError(true);
+      return;
+    }
+    onNext();
+  };
+
+  return { choice, setChoice, error, attempt };
+}
+
+function ValidationMessage({ show, message }: { show: boolean; message: string }) {
+  if (!show) return null;
+  return (
+    <p
+      role="alert"
+      className="shake mt-5 flex items-center justify-center gap-2 rounded-xl border-2 border-destructive/40 bg-destructive/10 px-4 py-3 text-center text-[0.85rem] font-bold leading-snug text-destructive sm:text-[0.95rem]"
+    >
+      <span aria-hidden="true">⚠️</span>
+      {message}
+    </p>
+  );
+}
+
 function Heading({ children }: { children: React.ReactNode }) {
   return (
-    <h1 className="text-balance text-center text-[1.15rem] font-black leading-snug sm:text-[1.45rem]">
+    <h1 className="text-balance text-center text-[1.25rem] font-black leading-[1.25] tracking-tight sm:text-[1.6rem]">
       {children}
     </h1>
   );
@@ -844,7 +877,7 @@ function Heading({ children }: { children: React.ReactNode }) {
 
 function Sub({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mt-2.5 text-center text-[0.85rem] text-muted-foreground sm:text-[0.95rem]">
+    <p className="mx-auto mt-3 max-w-[24rem] text-balance text-center text-[0.9rem] leading-relaxed text-muted-foreground sm:text-base">
       {children}
     </p>
   );
@@ -854,19 +887,30 @@ function OptionButton({
   children,
   emoji,
   onClick,
+  selected,
 }: {
   children: React.ReactNode;
   emoji?: string;
   onClick?: () => void;
+  selected?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-brand-green px-4 py-3.5 text-center text-primary-foreground shadow-md transition-colors hover:bg-primary-strong active:scale-[0.99] sm:py-4"
+      aria-pressed={selected}
+      className={`btn-glow flex w-full items-center justify-center gap-3 rounded-xl px-4 py-4 text-center text-primary-foreground shadow-md active:scale-[0.99] sm:py-[1.15rem] ${
+        selected
+          ? "bg-primary-strong ring-2 ring-brand-green-light ring-offset-2 ring-offset-background"
+          : "bg-brand-green hover:bg-primary-strong"
+      }`}
     >
-      {emoji ? <span className="shrink-0 text-lg">{emoji}</span> : null}
-      <span className="min-w-0 text-sm font-bold leading-snug sm:text-[0.95rem]">{children}</span>
+      {emoji ? (
+        <span aria-hidden="true" className="shrink-0 text-xl">
+          {emoji}
+        </span>
+      ) : null}
+      <span className="min-w-0 text-[0.95rem] font-bold leading-snug sm:text-base">{children}</span>
     </button>
   );
 }
@@ -875,22 +919,26 @@ function CtaButton({
   children,
   onClick,
   disabled,
+  invalid,
 }: {
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
+  invalid?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="mt-7 w-full rounded-xl bg-brand-green px-5 py-4 text-base font-bold text-primary-foreground shadow-lg transition-colors hover:bg-primary-strong disabled:opacity-50 sm:text-lg"
+      aria-invalid={invalid}
+      className="btn-glow mt-7 w-full rounded-xl bg-brand-green px-5 py-[1.1rem] text-[1.05rem] font-black tracking-tight text-primary-foreground shadow-lg hover:bg-primary-strong active:scale-[0.99] disabled:opacity-50 sm:text-lg"
     >
       {children}
     </button>
   );
 }
+
 
 function GenderCard({
   img,
