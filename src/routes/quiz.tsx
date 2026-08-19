@@ -8,6 +8,7 @@ import news600 from "@/assets/news-600.webp.asset.json";
 import news900 from "@/assets/news-900.webp.asset.json";
 import { SmartImage } from "@/components/SmartImage";
 import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
+import glucose14Days from "@/assets/glucose-14days.webp.asset.json";
 
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
