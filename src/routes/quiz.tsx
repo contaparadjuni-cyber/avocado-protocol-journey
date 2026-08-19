@@ -77,8 +77,9 @@ function Quiz() {
       {step === 11 && <StepMonitoring onNext={next} />}
       {step === 12 && <StepHealthValue onNext={next} />}
       {step === 13 && <StepCommitment onNext={next} />}
-      {step === 14 && <StepAnalyzing onNext={next} />}
-      {step === 15 && <StepProtocol />}
+      {step === 14 && <StepInterest onNext={next} />}
+      {step === 15 && <StepAnalyzing onNext={next} />}
+      {step === 16 && <StepProtocol />}
     </QuizShell>
   );
 }
