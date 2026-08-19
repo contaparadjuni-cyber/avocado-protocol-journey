@@ -1040,21 +1040,36 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
 /* ---------- Step 16 ---------- */
 
 
+const ANALYZING_TASKS = [
+  "Analyzing your answers",
+  "Checking your symptoms",
+  "Identifying possible parasites",
+  "Calculating your risk level",
+  "Building your custom protocol",
+];
+
 function StepAnalyzing({ onNext }: { onNext: () => void }) {
-  const [pct, setPct] = useState(4);
+  const [pcts, setPcts] = useState<number[]>(() => ANALYZING_TASKS.map(() => 0));
+  const done = pcts.every((p) => p >= 100);
 
   useEffect(() => {
     const id = setInterval(() => {
-      setPct((p) => {
-        if (p >= 100) {
-          clearInterval(id);
-          return 100;
-        }
-        return p + 2;
+      setPcts((prev) => {
+        const i = prev.findIndex((p) => p < 100);
+        if (i === -1) return prev;
+        const nextArr = [...prev];
+        nextArr[i] = Math.min(100, prev[i] + 5);
+        return nextArr;
       });
-    }, 60);
+    }, 45);
     return () => clearInterval(id);
   }, []);
+
+  useEffect(() => {
+    if (!done) return;
+    const t = setTimeout(onNext, 700);
+    return () => clearTimeout(t);
+  }, [done, onNext]);
 
   return (
     <section>
@@ -1068,11 +1083,49 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
       </div>
 
       <div className="mt-7 space-y-5">
-        <Meter label="Building your custom protocol" value={pct} />
-        <Meter label="Analyzing your answers" value={pct} />
+        {ANALYZING_TASKS.map((label, i) => (
+          <Meter key={label} label={label} value={pcts[i]} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Step 16: Remedies vs Protocol + analysis ---------- */
+
+const ANALYSIS_ROWS: { label: string; value: number; tone: "red" | "green" }[] = [
+  { label: "Chances of having parasites in your body", value: 95, tone: "red" },
+  { label: "Life risk", value: 66, tone: "red" },
+  { label: "Chances of autoimmune diseases if untreated soon", value: 77, tone: "red" },
+  { label: "Chances of successful deworming", value: 100, tone: "green" },
+  { label: "Chances of fully eliminating diabetes", value: 100, tone: "green" },
+];
+
+function StepComparison({ onNext }: { onNext: () => void }) {
+  return (
+    <section>
+      <figure className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <SmartImage
+          src={remediesVsProtocol.url}
+          alt="Comparison table: traditional remedies versus our diabetes protocol"
+          width={1426}
+          height={1103}
+          wrapperClassName="w-full bg-muted"
+        />
+      </figure>
+
+      <p className="mt-7 text-balance text-center text-[1rem] font-black leading-snug sm:text-lg">
+        Below is the analysis of your current situation,{" "}
+        <span className="text-brand-green">based on your answers.</span> 👇
+      </p>
+
+      <div className="mt-5 space-y-4">
+        {ANALYSIS_ROWS.map((r) => (
+          <Meter key={r.label} label={r.label} value={r.value} tone={r.tone} />
+        ))}
       </div>
 
-      {pct >= 100 && <CtaButton onClick={onNext}>See My Protocol! ✅</CtaButton>}
+      <CtaButton onClick={onNext}>Continue</CtaButton>
     </section>
   );
 }
