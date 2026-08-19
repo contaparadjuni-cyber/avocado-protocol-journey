@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { memo, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
@@ -724,7 +724,7 @@ function StepHealthValue({ onNext }: { onNext: () => void }) {
 
 /* ---------- Step 14 ---------- */
 
-const StepInterest = memo(function StepInterest({ onNext }: { onNext: () => void }) {
+function StepInterest({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
@@ -741,7 +741,7 @@ const StepInterest = memo(function StepInterest({ onNext }: { onNext: () => void
       </div>
     </section>
   );
-});
+}
 
 /* ---------- Step 13 ---------- */
 
