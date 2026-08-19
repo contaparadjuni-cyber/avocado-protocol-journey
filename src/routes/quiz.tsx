@@ -757,15 +757,63 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
       </Heading>
       <Sub>I&apos;ll help you with everything you need.</Sub>
       <div className="mx-auto mt-8 max-w-md space-y-4 sm:space-y-5">
-        <OptionButton emoji="🤩" selected={choice === "commit"} onClick={() => pick("commit")}>
+        <OptionButton emoji="😍" selected={choice === "commit"} onClick={() => pick("commit")}>
           Yes, I commit!
         </OptionButton>
-        <OptionButton emoji="😜" selected={choice === "try"} onClick={() => pick("try")}>
+        <OptionButton emoji="🤪" selected={choice === "try"} onClick={() => pick("try")}>
           I&apos;ll try!
         </OptionButton>
       </div>
 
+      <PhotoCarousel />
     </section>
+  );
+}
+
+const COMMIT_SLIDES = [
+  { src: glucoseBeforeAfter.url, alt: "Glucose meter comparison before and after the 14-day protocol" },
+  { src: parasiteIntestine, alt: "Intestinal parasite shown under a microscope" },
+  { src: symptomsWoman, alt: "Woman describing her diabetes symptoms" },
+];
+
+function PhotoCarousel() {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setI((p) => (p + 1) % COMMIT_SLIDES.length), 3200);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div className="mx-auto mt-7 max-w-md" aria-roledescription="carousel" aria-label="Protocol photo gallery">
+      <div className="overflow-hidden rounded-2xl border border-border/60 bg-card shadow-sm">
+        <div
+          className="flex transition-transform duration-500 ease-out"
+          style={{ transform: `translateX(-${i * 100}%)` }}
+        >
+          {COMMIT_SLIDES.map((s) => (
+            <img
+              key={s.alt}
+              src={s.src}
+              alt={s.alt}
+              loading="lazy"
+              decoding="async"
+              className="h-44 w-full shrink-0 object-cover sm:h-56"
+            />
+          ))}
+        </div>
+      </div>
+      <div className="mt-3 flex justify-center gap-2">
+        {COMMIT_SLIDES.map((s, idx) => (
+          <button
+            key={s.alt}
+            type="button"
+            aria-label={`View photo ${idx + 1}`}
+            aria-pressed={i === idx}
+            onClick={() => setI(idx)}
+            className={`h-2 rounded-full transition-all duration-300 ${i === idx ? "w-6 bg-brand-green" : "w-2 bg-border"}`}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
 
