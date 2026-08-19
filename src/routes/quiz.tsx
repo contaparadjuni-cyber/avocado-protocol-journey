@@ -794,6 +794,7 @@ const COMMIT_SLIDES = [
 function PhotoCarousel() {
   const [i, setI] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [fs, setFs] = useState<number | null>(null);
   const startX = useRef<number | null>(null);
 
   const go = (n: number) => setI((n + COMMIT_SLIDES.length) % COMMIT_SLIDES.length);
@@ -803,6 +804,23 @@ function PhotoCarousel() {
     const id = setInterval(() => setI((p) => (p + 1) % COMMIT_SLIDES.length), 3800);
     return () => clearInterval(id);
   }, [paused]);
+
+  // lock body scroll while the fullscreen lightbox is open
+  useEffect(() => {
+    if (fs === null) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setFs(null);
+      else if (e.key === "ArrowRight") setFs((p) => ((p ?? 0) + 1) % COMMIT_SLIDES.length);
+      else if (e.key === "ArrowLeft") setFs((p) => ((p ?? 0) - 1 + COMMIT_SLIDES.length) % COMMIT_SLIDES.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [fs]);
 
   return (
     <div
@@ -831,17 +849,29 @@ function PhotoCarousel() {
         >
           {COMMIT_SLIDES.map((s, idx) => (
             <div key={s.alt} className="w-full shrink-0">
-              <SmartImage
-                src={s.src}
-                alt={s.alt}
-                width={800}
-                height={900}
-                priority={idx === 0}
-                sizes="(max-width: 640px) 90vw, 384px"
-                className="object-contain"
-                wrapperClassName="w-full bg-muted"
-                draggable={false}
-              />
+              <button
+                type="button"
+                onClick={() => setFs(idx)}
+                aria-label={`Open photo ${idx + 1} fullscreen`}
+                className="group relative block w-full bg-muted aspect-square sm:aspect-[5/6]"
+              >
+                <SmartImage
+                  src={s.src}
+                  alt={s.alt}
+                  width={800}
+                  height={800}
+                  priority={idx === 0}
+                  sizes="(max-width: 640px) 90vw, 384px"
+                  className="h-full w-full object-contain"
+                  wrapperClassName="absolute inset-0 h-full w-full"
+                  draggable={false}
+                />
+                <span className="pointer-events-none absolute right-2 top-2 z-10 grid h-8 w-8 place-items-center rounded-full bg-black/55 text-white opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100 group-active:opacity-100">
+                  <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                  </svg>
+                </span>
+              </button>
               <p className="bg-brand-green/10 px-3 py-2 text-center text-[0.8rem] font-extrabold uppercase tracking-wide text-foreground sm:text-sm">
                 {s.caption}
               </p>
@@ -861,6 +891,74 @@ function PhotoCarousel() {
           />
         ))}
       </div>
+
+      {fs !== null && (() => {
+        const activeSlide = COMMIT_SLIDES[fs];
+        if (!activeSlide) return null;
+        return (
+        <div
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/90 backdrop-blur-sm"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Photo viewer"
+          onClick={() => setFs(null)}
+        >
+          <button
+            type="button"
+            onClick={() => setFs(null)}
+            aria-label="Close fullscreen"
+            className="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/30"
+          >
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+
+          <div
+            className="relative flex w-full max-w-3xl items-center justify-center px-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setFs((p) => ((p ?? 0) - 1 + COMMIT_SLIDES.length) % COMMIT_SLIDES.length)}
+              aria-label="Previous photo"
+              className="absolute left-1 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/30"
+            >
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
+                <path d="m15 18-6-6 6-6" />
+              </svg>
+            </button>
+
+            <SmartImage
+              src={activeSlide?.src}
+              alt={activeSlide?.alt}
+              width={800}
+              height={1000}
+              priority
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="max-h-[80vh] w-auto max-w-full object-contain"
+              wrapperClassName="max-h-[80vh] w-auto max-w-full"
+              draggable={false}
+            />
+
+            <button
+              type="button"
+              onClick={() => setFs((p) => ((p ?? 0) + 1) % COMMIT_SLIDES.length)}
+              aria-label="Next photo"
+              className="absolute right-1 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/30"
+            >
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            </button>
+          </div>
+
+          <p className="mt-4 px-4 text-center text-sm font-extrabold uppercase tracking-wide text-white">
+            {activeSlide.caption}
+          </p>
+        </div>
+        );
+      })()}
     </div>
   );
 }
