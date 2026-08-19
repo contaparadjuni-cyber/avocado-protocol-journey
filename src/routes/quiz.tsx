@@ -34,7 +34,7 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 15;
+const TOTAL_STEPS = 16;
 
 const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
@@ -77,8 +77,9 @@ function Quiz() {
       {step === 11 && <StepMonitoring onNext={next} />}
       {step === 12 && <StepHealthValue onNext={next} />}
       {step === 13 && <StepCommitment onNext={next} />}
-      {step === 14 && <StepAnalyzing onNext={next} />}
-      {step === 15 && <StepProtocol />}
+      {step === 14 && <StepInterest onNext={next} />}
+      {step === 15 && <StepAnalyzing onNext={next} />}
+      {step === 16 && <StepProtocol />}
     </QuizShell>
   );
 }
@@ -717,6 +718,27 @@ function StepHealthValue({ onNext }: { onNext: () => void }) {
       <CtaButton onClick={attempt} invalid={error}>
         Continue
       </CtaButton>
+    </section>
+  );
+}
+
+/* ---------- Step 14 ---------- */
+
+function StepInterest({ onNext }: { onNext: () => void }) {
+  return (
+    <section>
+      <Heading>
+        Would you be interested in receiving a{" "}
+        <span className="text-brand-green">personalized protocol</span> for Deworming in 14 days?
+      </Heading>
+      <div className="mt-7 space-y-4">
+        <OptionButton emoji="☑️" onClick={onNext}>
+          Yes, I want it badly!
+        </OptionButton>
+        <OptionButton emoji="🤪" onClick={onNext}>
+          I&apos;m interested, but I have questions.
+        </OptionButton>
+      </div>
     </section>
   );
 }
