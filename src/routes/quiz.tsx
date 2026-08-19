@@ -1104,45 +1104,81 @@ const ANALYSIS_ROWS: { label: string; value: number; tone: "red" | "green" }[] =
 
 function StepComparison({ onNext }: { onNext: () => void }) {
   return (
-    <section>
-      <figure className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-        <SmartImage
-          src={remediesVsProtocol.url}
-          alt="Comparison table: traditional remedies versus our diabetes protocol"
-          width={1426}
-          height={1103}
-          wrapperClassName="w-full bg-muted"
-        />
-      </figure>
+    <section className="relative overflow-hidden rounded-2xl">
+      {/* Background image with overlay for readability */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          backgroundImage: `url(${avocadoBg.url})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: 0.12,
+        }}
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-b from-background/80 via-background/70 to-background/85"
+      />
 
-      <p className="mt-7 text-balance text-center text-[1rem] font-black leading-snug sm:text-lg">
-        Below is the analysis of your current situation,{" "}
-        <span className="text-brand-green">based on your answers.</span> 👇
-      </p>
+      <div className="relative z-10">
+        <figure className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+          <SmartImage
+            src={remediesVsProtocol.url}
+            alt="Comparison table: traditional remedies versus our diabetes protocol"
+            width={1426}
+            height={1103}
+            wrapperClassName="w-full bg-muted"
+          />
+        </figure>
 
-      <div className="mt-5 space-y-4">
-        {ANALYSIS_ROWS.map((r) => (
-          <Meter key={r.label} label={r.label} value={r.value} tone={r.tone} />
-        ))}
+        <p className="mt-7 text-balance text-center text-[1rem] font-black leading-snug sm:text-lg">
+          Below is the analysis of your current situation,{" "}
+          <span className="text-brand-green">based on your answers.</span> 👇
+        </p>
+
+        <div className="mt-5 space-y-4">
+          {ANALYSIS_ROWS.map((r) => (
+            <Meter key={r.label} label={r.label} value={r.value} tone={r.tone} />
+          ))}
+        </div>
+
+        <p className="mt-12 text-balance text-center text-[1.05rem] font-black leading-snug sm:text-xl">
+          <span className="text-brand-green">Possible parasitic agent</span> according to your
+          symptoms:
+        </p>
+        <p className="mt-4 text-center text-base italic underline sm:text-lg">
+          Ascaris lumbricoides
+        </p>
+
+        <figure className="mt-6 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+          <SmartImage
+            src={ascarisPhoto.url}
+            alt="Endoscopic image of Ascaris lumbricoides roundworms inside the intestine"
+            width={350}
+            height={275}
+            wrapperClassName="w-full bg-muted"
+          />
+        </figure>
+
+        {/* Warning + deworming intro */}
+        <div className="mt-10 rounded-xl border border-border bg-card/90 p-4 shadow-sm backdrop-blur-sm sm:p-5">
+          <p className="text-sm font-black sm:text-base">⚠️ Attention!</p>
+          <p className="mt-2.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
+            With our Protocol you can relax —{" "}
+            <span className="text-brand-green">no worm or parasite will come out alive</span> in an
+            uncomfortable way. They are eliminated{" "}
+            <span className="text-brand-green">already dead and broken down</span>, almost
+            imperceptible. ☺️
+          </p>
+          <p className="mt-3 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
+            The deworming will start first with an avocado smoothie plus a secret ingredient that is
+            easy to find at any market and rarely used.
+          </p>
+        </div>
+
+        <CtaButton onClick={onNext}>Continue</CtaButton>
       </div>
-
-      <p className="mt-8 text-balance text-center text-[1.05rem] font-black leading-snug sm:text-xl">
-        <span className="text-brand-green">Possible parasitic agent</span> according to your
-        symptoms:
-      </p>
-      <p className="mt-2 text-center text-sm italic underline sm:text-base">Ascaris lumbricoides</p>
-
-      <figure className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-        <SmartImage
-          src={ascarisPhoto.url}
-          alt="Endoscopic image of Ascaris lumbricoides roundworms inside the intestine"
-          width={350}
-          height={275}
-          wrapperClassName="w-full bg-muted"
-        />
-      </figure>
-
-      <CtaButton onClick={onNext}>Continue</CtaButton>
     </section>
   );
 }
