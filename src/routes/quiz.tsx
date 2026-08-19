@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
@@ -13,6 +13,7 @@ import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
 import parasiteIntestine from "@/assets/parasite-intestine.webp";
 import avocadoImg from "@/assets/avocado.webp";
+import audioAna from "@/assets/diabetes-protocol-audio.mp3.asset.json";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
