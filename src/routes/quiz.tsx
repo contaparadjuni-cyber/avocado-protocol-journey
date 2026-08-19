@@ -521,25 +521,39 @@ function StepResults({ onNext }: { onNext: () => void }) {
 
 
       <div className="mt-5 rounded-xl border border-border bg-card p-4 shadow-sm">
-        <div className="flex items-center gap-3">
+        <div className="flex items-start gap-2.5">
           <SmartImage
             src={avatarRita}
-            alt="Rita Lima"
+            alt="Profile photo of Rachel Bennett"
             width={160}
             height={160}
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
           />
 
-          <div className="min-w-0">
-            <p className="truncate text-sm font-bold">Rita Lima</p>
-            <p className="truncate text-xs text-brand-green">Porto Alegre, BR</p>
+          <div className="min-w-0 flex-1">
+            <div className="rounded-2xl bg-muted px-3.5 py-2.5">
+              <p className="truncate text-[0.85rem] font-bold leading-tight sm:text-sm">
+                Rachel Bennett
+              </p>
+              <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
+                Thank you so much Lerato! I&apos;ve been deworming for 30 days and my glucose levels
+                are finally stable. I&apos;m so happy about this victory in my life 🎁 you were an
+                angel.
+              </p>
+            </div>
+            <div className="mt-1.5 flex items-center gap-3 px-3 text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
+              <span>2 h</span>
+              <span className="text-brand-green">Like</span>
+              <span className="text-brand-green">Reply</span>
+              <span className="ml-auto flex items-center gap-1">
+                <span aria-hidden="true">👍❤️</span>
+                <span aria-label="47 reactions">47</span>
+              </span>
+            </div>
           </div>
         </div>
-        <p className="mt-3 text-[0.85rem] leading-relaxed text-muted-foreground sm:text-sm">
-          Thank you so much Ana, I&apos;ve been deworming for 30 days and my glucose levels are
-          stable. I&apos;m so happy about this victory in my life 🎁 you were an angel.
-        </p>
       </div>
+
 
       <CtaButton onClick={onNext}>Generate My Custom Protocol! ✅</CtaButton>
     </section>
