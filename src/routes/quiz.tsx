@@ -11,7 +11,6 @@ import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
 
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
-import parasiteIntestine from "@/assets/parasite-intestine.webp";
 import avocadoImg from "@/assets/avocado.webp";
 import audioAna from "@/assets/diabetes-protocol-audio.mp3.asset.json";
 import audioProof from "@/assets/diabetes-protocol-audio-2.mp3.asset.json";
@@ -1186,30 +1185,7 @@ function Meter({
 function StepProtocol() {
   return (
     <section>
-      <div className="space-y-4">
-        <Meter label="Chances of worsening soon" value={77} />
-        <Meter label="Chances of deworming" value={100} />
-        <Meter label="Chances of fully reversing diabetes" value={100} />
-      </div>
-
-      <p className="mt-8 text-balance text-center text-[1.05rem] font-black leading-snug sm:text-xl">
-        <span className="text-brand-green">Possible parasitic agent</span> based on your symptoms:
-      </p>
-      <p className="mt-2 text-center text-sm italic underline sm:text-base">
-        Ascaris lumbricoides
-      </p>
-
-      <figure className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-        <SmartImage
-          src={parasiteIntestine}
-          alt="Endoscopic image of Ascaris lumbricoides roundworms inside the intestine"
-          width={760}
-          height={591}
-          wrapperClassName="w-full bg-muted"
-        />
-      </figure>
-
-      <div className="mt-5 rounded-xl border border-border bg-card p-4 shadow-sm">
+      <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
         <p className="text-sm font-black sm:text-base">⚠️ Heads up!</p>
         <p className="mt-2 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
           With our Protocol you can relax —{" "}
@@ -1230,7 +1206,7 @@ function StepProtocol() {
           src={avocadoImg}
           alt="Hands holding a halved avocado on a wooden table"
           width={760}
-          height={506}
+          height={475}
           wrapperClassName="w-full bg-muted"
         />
       </figure>
