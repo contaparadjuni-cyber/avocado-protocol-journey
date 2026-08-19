@@ -168,7 +168,7 @@ function StepDeworming({ onNext }: { onNext: () => void }) {
               setChoice(opt.label);
               onNext();
             }}
-            className="flex w-full items-center gap-3 rounded-xl bg-brand-green px-4 py-4 text-left text-primary-foreground shadow-md transition-colors hover:bg-primary-strong"
+            className="btn-glow flex w-full items-center gap-3 rounded-xl bg-brand-green px-4 py-4 text-left text-primary-foreground shadow-md hover:bg-primary-strong active:scale-[0.99]"
           >
             <span className="shrink-0 text-xl">{opt.emoji}</span>
             <span
@@ -273,8 +273,11 @@ function StepSweets({ onNext }: { onNext: () => void }) {
 
 function StepSymptomPicker({ onNext }: { onNext: () => void }) {
   const [selected, setSelected] = useState<string[]>([]);
-  const toggle = (s: string) =>
+  const [error, setError] = useState(false);
+  const toggle = (s: string) => {
+    setError(false);
     setSelected((prev) => (prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]));
+  };
 
   return (
     <section>
@@ -293,7 +296,7 @@ function StepSymptomPicker({ onNext }: { onNext: () => void }) {
               type="button"
               aria-pressed={active}
               onClick={() => toggle(label)}
-              className={`flex w-full items-center gap-3 rounded-2xl border-2 px-4 py-3.5 text-left transition-all active:scale-[0.99] ${
+              className={`btn-glow flex w-full items-center gap-3 rounded-2xl border-2 px-4 py-4 text-left active:scale-[0.99] ${
                 active
                   ? "border-brand-green bg-brand-green text-primary-foreground shadow-md"
                   : "border-border bg-card text-foreground hover:border-brand-green hover:bg-muted/40"
@@ -325,13 +328,21 @@ function StepSymptomPicker({ onNext }: { onNext: () => void }) {
         })}
       </div>
 
-      <p className="mt-4 text-center text-xs font-semibold text-muted-foreground sm:text-sm">
+      <p className="mt-4 text-center text-[0.8rem] font-semibold text-muted-foreground sm:text-sm">
         {selected.length === 0
           ? "Select at least one symptom to continue"
           : `${selected.length} symptom${selected.length > 1 ? "s" : ""} selected`}
       </p>
 
-      <CtaButton onClick={onNext} disabled={selected.length === 0}>
+      <ValidationMessage
+        show={error}
+        message="Please select at least one symptom to continue."
+      />
+
+      <CtaButton
+        onClick={() => (selected.length === 0 ? setError(true) : onNext())}
+        invalid={error}
+      >
         Continue
       </CtaButton>
     </section>
@@ -519,8 +530,11 @@ const MEDS = [
 
 function StepMedications({ onNext }: { onNext: () => void }) {
   const [picked, setPicked] = useState<string[]>([]);
-  const toggle = (m: string) =>
+  const [error, setError] = useState(false);
+  const toggle = (m: string) => {
+    setError(false);
     setPicked((p) => (p.includes(m) ? p.filter((x) => x !== m) : [...p, m]));
+  };
 
   return (
     <section>
@@ -528,7 +542,8 @@ function StepMedications({ onNext }: { onNext: () => void }) {
         Are you currently taking any of{" "}
         <span className="text-brand-green">these medications?</span>
       </Heading>
-      <div className="mt-6 space-y-2.5">
+      <Sub>Select all that apply.</Sub>
+      <div className="mt-6 space-y-3">
         {MEDS.map((m) => {
           const on = picked.includes(m);
           return (
@@ -537,16 +552,18 @@ function StepMedications({ onNext }: { onNext: () => void }) {
               type="button"
               onClick={() => toggle(m)}
               aria-pressed={on}
-              className={`flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-3.5 text-left shadow-sm transition-colors ${
+              className={`btn-glow flex w-full items-center justify-between gap-3 rounded-xl border-2 px-4 py-4 text-left shadow-sm active:scale-[0.99] ${
                 on
                   ? "border-brand-green bg-brand-green/10"
-                  : "border-border bg-card hover:border-brand-green/50"
+                  : "border-border bg-card hover:border-brand-green/60"
               }`}
             >
-              <span className="min-w-0 text-sm font-semibold sm:text-[0.95rem]">{m}</span>
+              <span className="min-w-0 text-[0.95rem] font-semibold leading-snug sm:text-base">
+                {m}
+              </span>
               <span
                 aria-hidden="true"
-                className={`grid h-5 w-5 shrink-0 place-items-center rounded-md border text-[0.7rem] font-black ${
+                className={`grid h-6 w-6 shrink-0 place-items-center rounded-md border-2 text-[0.75rem] font-black ${
                   on
                     ? "border-brand-green bg-brand-green text-primary-foreground"
                     : "border-border"
@@ -558,7 +575,14 @@ function StepMedications({ onNext }: { onNext: () => void }) {
           );
         })}
       </div>
-      <CtaButton onClick={onNext} disabled={picked.length === 0}>
+      <ValidationMessage
+        show={error}
+        message="Please select at least one option to continue."
+      />
+      <CtaButton
+        onClick={() => (picked.length === 0 ? setError(true) : onNext())}
+        invalid={error}
+      >
         Continue
       </CtaButton>
     </section>
@@ -576,28 +600,43 @@ const MONITORING = [
 ];
 
 function StepMonitoring({ onNext }: { onNext: () => void }) {
+  const { choice, setChoice, error, attempt } = useSingleChoice(onNext);
+
   return (
     <section>
       <Heading>
         How often do you <span className="text-brand-green">monitor your glucose?</span>
       </Heading>
-      <div className="mt-6 space-y-2.5">
-        {MONITORING.map((o) => (
-          <button
-            key={o.label}
-            type="button"
-            onClick={onNext}
-            className="flex w-full items-center justify-between gap-3 rounded-xl border border-border bg-card px-4 py-3.5 text-left shadow-sm transition-colors hover:border-brand-green/60"
-          >
-            <span className="min-w-0 text-[0.8rem] font-bold uppercase tracking-wide sm:text-sm">
-              {o.label}
-            </span>
-            <span aria-hidden="true" className="shrink-0 text-xl">
-              {o.emoji}
-            </span>
-          </button>
-        ))}
+      <Sub>Pick the answer that fits you best.</Sub>
+      <div className="mt-6 space-y-3">
+        {MONITORING.map((o) => {
+          const on = choice === o.label;
+          return (
+            <button
+              key={o.label}
+              type="button"
+              aria-pressed={on}
+              onClick={() => setChoice(o.label)}
+              className={`btn-glow flex w-full items-center justify-between gap-3 rounded-xl border-2 px-4 py-4 text-left shadow-sm active:scale-[0.99] ${
+                on
+                  ? "border-brand-green bg-brand-green/10"
+                  : "border-border bg-card hover:border-brand-green/60"
+              }`}
+            >
+              <span className="min-w-0 text-[0.85rem] font-bold uppercase tracking-wide sm:text-[0.95rem]">
+                {o.label}
+              </span>
+              <span aria-hidden="true" className="shrink-0 text-2xl">
+                {o.emoji}
+              </span>
+            </button>
+          );
+        })}
       </div>
+      <ValidationMessage show={error} message="Please choose one option to continue." />
+      <CtaButton onClick={attempt} invalid={error}>
+        Continue
+      </CtaButton>
     </section>
   );
 }
@@ -605,6 +644,8 @@ function StepMonitoring({ onNext }: { onNext: () => void }) {
 /* ---------- Step 12 ---------- */
 
 function StepHealthValue({ onNext }: { onNext: () => void }) {
+  const { choice, setChoice, error, attempt } = useSingleChoice(onNext);
+
   return (
     <section>
       <Heading>
@@ -612,14 +653,26 @@ function StepHealthValue({ onNext }: { onNext: () => void }) {
         <span className="text-brand-green">is the most important thing we have?</span>
       </Heading>
       <Sub>Without it, we are nothing.</Sub>
-      <div className="mt-6 space-y-3">
-        <OptionButton emoji="☑️" onClick={onNext}>
+      <div className="mt-6 space-y-3.5">
+        <OptionButton
+          emoji="☑️"
+          selected={choice === "agree"}
+          onClick={() => setChoice("agree")}
+        >
           I agree!
         </OptionButton>
-        <OptionButton emoji="🙄" onClick={onNext}>
+        <OptionButton
+          emoji="🙄"
+          selected={choice === "disagree"}
+          onClick={() => setChoice("disagree")}
+        >
           I don&apos;t agree.
         </OptionButton>
       </div>
+      <ValidationMessage show={error} message="Please choose one option to continue." />
+      <CtaButton onClick={attempt} invalid={error}>
+        Continue
+      </CtaButton>
     </section>
   );
 }
@@ -627,6 +680,8 @@ function StepHealthValue({ onNext }: { onNext: () => void }) {
 /* ---------- Step 13 ---------- */
 
 function StepCommitment({ onNext }: { onNext: () => void }) {
+  const { choice, setChoice, error, attempt } = useSingleChoice(onNext);
+
   return (
     <section>
       <Heading>
@@ -634,16 +689,24 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
         <span className="text-brand-green">14-Day Protocol</span> at home?
       </Heading>
       <Sub>I&apos;ll help you with everything you need.</Sub>
-      <div className="mt-6 space-y-3">
-        <OptionButton emoji="🤩" onClick={onNext}>
+      <div className="mt-6 space-y-3.5">
+        <OptionButton
+          emoji="🤩"
+          selected={choice === "commit"}
+          onClick={() => setChoice("commit")}
+        >
           Yes, I commit!
         </OptionButton>
-        <OptionButton emoji="😜" onClick={onNext}>
+        <OptionButton emoji="😜" selected={choice === "try"} onClick={() => setChoice("try")}>
           I&apos;ll try!
         </OptionButton>
       </div>
+      <ValidationMessage show={error} message="Please choose one option to continue." />
+      <CtaButton onClick={attempt} invalid={error}>
+        Continue
+      </CtaButton>
 
-      <figure className="mt-8 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+      <figure className="mt-9 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
         <SmartImage
           src={glucoseBeforeAfter.url}
           alt="Glucose meter readings before and after the deworming protocol"
@@ -656,6 +719,7 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
     </section>
   );
 }
+
 
 /* ---------- Step 14 ---------- */
 
@@ -781,9 +845,42 @@ function StepProtocol() {
 
 /* ---------- Shared UI ---------- */
 
+function useSingleChoice(onNext: () => void) {
+  const [choice, setChoiceState] = useState<string | null>(null);
+  const [error, setError] = useState(false);
+
+  const setChoice = (value: string) => {
+    setError(false);
+    setChoiceState(value);
+  };
+
+  const attempt = () => {
+    if (!choice) {
+      setError(true);
+      return;
+    }
+    onNext();
+  };
+
+  return { choice, setChoice, error, attempt };
+}
+
+function ValidationMessage({ show, message }: { show: boolean; message: string }) {
+  if (!show) return null;
+  return (
+    <p
+      role="alert"
+      className="shake mt-5 flex items-center justify-center gap-2 rounded-xl border-2 border-destructive/40 bg-destructive/10 px-4 py-3 text-center text-[0.85rem] font-bold leading-snug text-destructive sm:text-[0.95rem]"
+    >
+      <span aria-hidden="true">⚠️</span>
+      {message}
+    </p>
+  );
+}
+
 function Heading({ children }: { children: React.ReactNode }) {
   return (
-    <h1 className="text-balance text-center text-[1.15rem] font-black leading-snug sm:text-[1.45rem]">
+    <h1 className="text-balance text-center text-[1.25rem] font-black leading-[1.25] tracking-tight sm:text-[1.6rem]">
       {children}
     </h1>
   );
@@ -791,7 +888,7 @@ function Heading({ children }: { children: React.ReactNode }) {
 
 function Sub({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mt-2.5 text-center text-[0.85rem] text-muted-foreground sm:text-[0.95rem]">
+    <p className="mx-auto mt-3 max-w-[24rem] text-balance text-center text-[0.9rem] leading-relaxed text-muted-foreground sm:text-base">
       {children}
     </p>
   );
@@ -801,19 +898,30 @@ function OptionButton({
   children,
   emoji,
   onClick,
+  selected,
 }: {
   children: React.ReactNode;
   emoji?: string;
   onClick?: () => void;
+  selected?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
-      className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-brand-green px-4 py-3.5 text-center text-primary-foreground shadow-md transition-colors hover:bg-primary-strong active:scale-[0.99] sm:py-4"
+      aria-pressed={selected}
+      className={`btn-glow flex w-full items-center justify-center gap-3 rounded-xl px-4 py-4 text-center text-primary-foreground shadow-md active:scale-[0.99] sm:py-[1.15rem] ${
+        selected
+          ? "bg-primary-strong ring-2 ring-brand-green-light ring-offset-2 ring-offset-background"
+          : "bg-brand-green hover:bg-primary-strong"
+      }`}
     >
-      {emoji ? <span className="shrink-0 text-lg">{emoji}</span> : null}
-      <span className="min-w-0 text-sm font-bold leading-snug sm:text-[0.95rem]">{children}</span>
+      {emoji ? (
+        <span aria-hidden="true" className="shrink-0 text-xl">
+          {emoji}
+        </span>
+      ) : null}
+      <span className="min-w-0 text-[0.95rem] font-bold leading-snug sm:text-base">{children}</span>
     </button>
   );
 }
@@ -822,22 +930,26 @@ function CtaButton({
   children,
   onClick,
   disabled,
+  invalid,
 }: {
   children: React.ReactNode;
   onClick?: () => void;
   disabled?: boolean;
+  invalid?: boolean;
 }) {
   return (
     <button
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="mt-7 w-full rounded-xl bg-brand-green px-5 py-4 text-base font-bold text-primary-foreground shadow-lg transition-colors hover:bg-primary-strong disabled:opacity-50 sm:text-lg"
+      aria-invalid={invalid}
+      className="btn-glow mt-7 w-full rounded-xl bg-brand-green px-5 py-[1.1rem] text-[1.05rem] font-black tracking-tight text-primary-foreground shadow-lg hover:bg-primary-strong active:scale-[0.99] disabled:opacity-50 sm:text-lg"
     >
       {children}
     </button>
   );
 }
+
 
 function GenderCard({
   img,
@@ -852,7 +964,7 @@ function GenderCard({
     <button
       type="button"
       onClick={onClick}
-      className="overflow-hidden rounded-xl border border-border bg-card p-1.5 text-left shadow-sm transition-shadow hover:shadow-md"
+      className="btn-glow overflow-hidden rounded-xl border-2 border-border bg-card p-1.5 text-left shadow-sm hover:border-brand-green/60 hover:shadow-md active:scale-[0.99]"
     >
       <SmartImage
         src={img}

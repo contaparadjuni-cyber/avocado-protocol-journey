@@ -62,7 +62,7 @@ function Index() {
 
         <Link
           to="/quiz"
-          className="mt-5 flex w-full items-center justify-center rounded-xl bg-brand-green px-4 py-4 text-center text-[0.95rem] font-bold uppercase leading-tight tracking-tight text-primary-foreground shadow-lg transition-transform hover:bg-primary-strong active:scale-[0.99] sm:mt-7 sm:py-5 sm:text-lg"
+          className="btn-glow mt-5 flex w-full items-center justify-center rounded-xl bg-brand-green px-4 py-[1.15rem] text-center text-[1rem] font-black uppercase leading-tight tracking-tight text-primary-foreground shadow-lg hover:bg-primary-strong active:scale-[0.99] sm:mt-7 sm:py-5 sm:text-lg"
         >
           I want to learn it too!
         </Link>
