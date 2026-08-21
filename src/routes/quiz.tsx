@@ -1234,43 +1234,7 @@ function Meter({
   );
 }
 
-/* ---------- Step 15 ---------- */
-
-function StepProtocol() {
-  return (
-    <section>
-      <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-        <p className="text-sm font-black sm:text-base">⚠️ Heads up!</p>
-        <p className="mt-2 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
-          With our Protocol you can relax —{" "}
-          <span className="text-brand-green">no worm or parasite will come out alive</span> in an
-          uncomfortable way. They are eliminated{" "}
-          <span className="text-brand-green">already dead and broken down</span>, almost unnoticed.
-          🤗
-        </p>
-      </div>
-
-      <div className="mt-6 rounded-xl border border-border bg-card/80 p-4 shadow-sm backdrop-blur-sm sm:p-5">
-        <p className="text-balance text-center text-[0.95rem] font-bold leading-relaxed sm:text-base">
-          <span className="text-brand-green">The deworming starts</span> with an avocado smoothie
-          plus a secret ingredient that is easy to find at any market and rarely used.
-        </p>
-      </div>
-
-      <figure className="mt-5 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
-        <SmartImage
-          src={avocadoImg.url}
-          alt="Hands holding a halved avocado on a wooden table"
-          width={760}
-          height={475}
-          wrapperClassName="w-full bg-muted"
-        />
-      </figure>
-
-      <CtaButton>Gerar Protocolo de Tratamento! ✅</CtaButton>
-    </section>
-  );
-}
+/* ---------- Shared UI ---------- */
 
 /* ---------- Shared UI ---------- */
 
