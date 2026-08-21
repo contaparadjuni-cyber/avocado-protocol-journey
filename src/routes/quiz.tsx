@@ -41,7 +41,7 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 17;
+const TOTAL_STEPS = 16;
 
 const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
@@ -86,8 +86,7 @@ function Quiz() {
       {step === 13 && <StepCommitment onNext={next} />}
       {step === 14 && <StepAudioProof onNext={next} />}
       {step === 15 && <StepAnalyzing onNext={next} />}
-      {step === 16 && <StepComparison onNext={next} />}
-      {step === 17 && <StepProtocol />}
+      {step === 16 && <StepProtocol />}
     </QuizShell>
   );
 }
