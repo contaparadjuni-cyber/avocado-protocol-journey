@@ -1091,7 +1091,7 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
   );
 }
 
-/* ---------- Step 16: Remedies vs Protocol + analysis ---------- */
+/* ---------- Step 16: Remedies vs Protocol + analysis + protocol ---------- */
 
 const ANALYSIS_ROWS: { label: string; value: number; tone: "red" | "green" }[] = [
   { label: "Chances of having parasites in your body", value: 95, tone: "red" },
@@ -1101,7 +1101,7 @@ const ANALYSIS_ROWS: { label: string; value: number; tone: "red" | "green" }[] =
   { label: "Chances of fully eliminating diabetes", value: 100, tone: "green" },
 ];
 
-function StepComparison({ onNext }: { onNext: () => void }) {
+function StepProtocol() {
   return (
     <section className="relative overflow-hidden rounded-2xl">
       {/* Background image with overlay for readability */}
@@ -1176,7 +1176,25 @@ function StepComparison({ onNext }: { onNext: () => void }) {
           </p>
         </div>
 
-        <CtaButton onClick={onNext}>Continue</CtaButton>
+        {/* Final protocol CTA block */}
+        <div className="mt-6 rounded-xl border border-border bg-card/80 p-4 shadow-sm backdrop-blur-sm sm:p-5">
+          <p className="text-balance text-center text-[0.95rem] font-bold leading-relaxed sm:text-base">
+            <span className="text-brand-green">The deworming starts</span> with an avocado smoothie
+            plus a secret ingredient that is easy to find at any market and rarely used.
+          </p>
+        </div>
+
+        <figure className="mt-5 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+          <SmartImage
+            src={avocadoImg.url}
+            alt="Hands holding a halved avocado on a wooden table"
+            width={760}
+            height={475}
+            wrapperClassName="w-full bg-muted"
+          />
+        </figure>
+
+        <CtaButton>Gerar Protocolo de Tratamento! ✅</CtaButton>
       </div>
     </section>
   );
