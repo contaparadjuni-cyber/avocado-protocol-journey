@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "e72d01a0-0c2c-4abc-81c1-9dd550d02982",
-  "project_id": "eb9c3531-ab38-4968-bfc8-d17f0884b675",
-  "url": "/__l5e/assets-v1/e72d01a0-0c2c-4abc-81c1-9dd550d02982/glucose-14days-v2.png",
-  "r2_key": "a/v1/eb9c3531-ab38-4968-bfc8-d17f0884b675/e72d01a0-0c2c-4abc-81c1-9dd550d02982/glucose-14days-v2.png",
-  "original_filename": "glucose-14days-v2.png",
-  "size": 1872886,
   "content_type": "image/png",
-  "created_at": "2026-08-19T19:42:55Z"
+  "created_at": "2026-08-19T19:42:55Z",
+  "original_filename": "glucose-14days-v2.png",
+  "project_id": "eca69c53-ec11-4dbc-a315-8b9352500776",
+  "r2_key": "a/v1/eca69c53-ec11-4dbc-a315-8b9352500776/e72d01a0-0c2c-4abc-81c1-9dd550d02982/glucose-14days-v2.png",
+  "size": 1872886,
+  "url": "/__l5e/assets-v1/e72d01a0-0c2c-4abc-81c1-9dd550d02982/glucose-14days-v2.png",
+  "version": 1
 }
