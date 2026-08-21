@@ -1233,14 +1233,16 @@ function StepProtocol() {
         </p>
       </div>
 
-      <p className="mt-7 text-balance text-center text-[0.95rem] font-bold leading-relaxed sm:text-base">
-        <span className="text-brand-green">The deworming starts</span> with an avocado smoothie plus
-        a secret ingredient that is easy to find at any market and rarely used.
-      </p>
+      <div className="mt-6 rounded-xl border border-border bg-card/80 p-4 shadow-sm backdrop-blur-sm sm:p-5">
+        <p className="text-balance text-center text-[0.95rem] font-bold leading-relaxed sm:text-base">
+          <span className="text-brand-green">The deworming starts</span> with an avocado smoothie
+          plus a secret ingredient that is easy to find at any market and rarely used.
+        </p>
+      </div>
 
-      <figure className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+      <figure className="mt-5 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
         <SmartImage
-          src={avocadoImg}
+          src={avocadoImg.url}
           alt="Hands holding a halved avocado on a wooden table"
           width={760}
           height={475}
@@ -1248,7 +1250,7 @@ function StepProtocol() {
         />
       </figure>
 
-      <CtaButton>Generate Treatment Protocol! ✅</CtaButton>
+      <CtaButton>Gerar Protocolo de Tratamento! ✅</CtaButton>
     </section>
   );
 }
