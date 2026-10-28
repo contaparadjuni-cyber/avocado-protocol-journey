@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
-import symptomsWoman from "@/assets/symptoms-woman.webp";
+import sintomasWoman from "@/assets/sintomas-woman.webp";
 import news600 from "@/assets/news-v2-600.webp.asset.json";
 import news900 from "@/assets/news-v2-900.webp.asset.json";
 import { SmartImage } from "@/components/SmartImage";
-import glucoseAntesAfter from "@/assets/glucose-before-after.webp.asset.json";
+import glicoseAntesDepois from "@/assets/glicose-before-after.webp.asset.json";
 
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
@@ -15,7 +15,7 @@ import avocadoImg from "@/assets/abacate-para-diabetes.webp.asset.json";
 import audioAna from "@/assets/som-01.mp3.asset.json";
 import audioProof from "@/assets/som-02.mp3.asset.json";
 import audioOffer from "@/assets/som-03.mp3.asset.json";
-import glucose14DaysV2 from "@/assets/glucose-255-118.webp.asset.json";
+import glicose14DaysV2 from "@/assets/glicose-255-118.webp.asset.json";
 import slide588 from "@/assets/slide-588.webp.asset.json";
 import slide198 from "@/assets/slide-198.webp.asset.json";
 import slide108 from "@/assets/slide-108.webp.asset.json";
@@ -125,7 +125,7 @@ function StepSymptomsIllustration({ onNext }: { onNext: () => void }) {
 
       <div className="relative mx-auto mt-6 w-full max-w-[22rem]">
         <img
-          src={symptomsWoman}
+          src={sintomasWoman}
           alt="Mulher idosa sentada, com sintomas associados à diabetes"
           width={768}
           height={896}
@@ -383,7 +383,7 @@ function StepImpact({ onNext }: { onNext: () => void }) {
           Yes, it&apos;s so normal in my life that I got used to it.
         </OptionButton>
         <OptionButton emoji="🤯" onClick={onNext}>
-          If you hadn&apos;t told me, I wouldn&apos;t even know it could be parasites.
+          Se não me tivessem dito, nem saberia que poderiam ser parasitas.
         </OptionButton>
         <OptionButton emoji="😌" onClick={onNext}>
           No, it doesn&apos;t bother me.
@@ -425,7 +425,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
       <div className="rounded-xl bg-brand-green px-4 py-4 text-primary-foreground shadow-md sm:px-5">
         <p className="text-sm font-black sm:text-base">⚠️ Os resultados não mentem:</p>
         <p className="mt-1.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
-          Your symptoms point to something very dangerous —{" "}
+          Your sintomas point to something very dangerous —{" "}
           <span className="underline">ouça com atenção!</span>
         </p>
       </div>
@@ -493,11 +493,11 @@ function StepResults({ onNext }: { onNext: () => void }) {
 
       <figure
         role="group"
-        aria-labelledby="glucose-caption"
+        aria-labelledby="glicose-caption"
         className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
       >
         <SmartImage
-          src={glucoseAntesAfter.url}
+          src={glicoseAntesDepois.url}
           alt="Dois medidores de glicose Accu-Chek lado a lado: antes do protocolo, 240 mg/dL; uma semana depois, 105 mg/dL."
           width={701}
           height={688}
@@ -505,7 +505,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
           wrapperClassName="w-full bg-muted"
         />
         <figcaption
-          id="glucose-caption"
+          id="glicose-caption"
           className="grid grid-cols-2 divide-x divide-border border-t border-border"
         >
           <span
@@ -520,7 +520,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
             </span>
           </span>
           <span
-            aria-label="One week after the protocol: 105 milligrams per deciliter"
+            aria-label="Uma semana após o protocolo: 105 miligramas por decilitro"
             className="flex min-w-0 flex-col items-center gap-0.5 px-2 py-2.5 text-center"
           >
             <span className="text-[0.65rem] font-black uppercase tracking-[0.08em] text-muted-foreground sm:text-[0.7rem]">
@@ -551,7 +551,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
                 Rachel Bennett
               </p>
               <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
-                Thank you so much Lerato! I&apos;ve been deworming for 30 dias and my glucose levels
+                Muito obrigado, Lerato! Estou a fazer desparasitação há 30 dias e os meus níveis de glicose
                 are finally stable. I&apos;m so happy about this victory in my life 🎁 you were an
                 anjo.
               </p>
@@ -1029,7 +1029,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
 
       <figure className="mt-4 overflow-hidden rounded-2xl border-2 border-brand-green bg-card shadow-md">
         <SmartImage
-          src={glucose14DaysV2.url}
+          src={glicose14DaysV2.url}
           alt="Dois medidores de glicose lado a lado: antes da desparasitação, 255 mg/dL; 14 dias depois, 118 mg/dL."
           width={1537}
           height={1023}
@@ -1084,7 +1084,7 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em]">O Protocolo da</p>
         <p className="mt-1 text-4xl font-black italic leading-none sm:text-5xl">Diabetes</p>
         <p className="mx-auto mt-5 max-w-[18rem] text-balance text-sm font-bold leading-snug sm:text-base">
-          I&apos;m analyzing your answers and building your{" "}
+          I&apos;m analyzing as suas respostas and building your{" "}
           <span className="rounded bg-white/25 px-1.5 py-0.5">protocolo personalizado!</span>
         </p>
       </div>
@@ -1167,7 +1167,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
           />
         </figure>
 
-        {/* Warning + deworming intro */}
+        {/* Warning + desparasitação intro */}
         <div className="mt-10 rounded-xl border border-border bg-card/90 p-4 shadow-sm backdrop-blur-sm sm:p-5">
           <p className="text-sm font-black sm:text-base">⚠️ Atenção!</p>
           <p className="mt-2.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
@@ -1178,7 +1178,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
             imperceptible. ☺️
           </p>
           <p className="mt-3 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
-            The deworming will start first with an avocado smoothie plus a secret ingredient that is
+            A desparasitação começa com um batido de abacate e um ingrediente secreto que é
             easy to find at any market and rarely used.
           </p>
         </div>
@@ -1431,7 +1431,7 @@ function StepOffer() {
         </h1>
       </div>
 
-      {/* Antes / After cartoons */}
+      {/* Antes / Depois cartoons */}
       <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5">
         <figure className="text-center">
           <figcaption className="text-[0.75rem] font-black uppercase tracking-[0.08em] text-muted-foreground sm:text-sm">
@@ -1448,7 +1448,7 @@ function StepOffer() {
             />
           </div>
           <p className="mt-2 text-[0.75rem] font-semibold leading-snug text-muted-foreground sm:text-sm">
-            This is you suffering with the parasites.
+            This is you suffering with the parasitas.
           </p>
           <div
             role="progressbar"
@@ -1464,7 +1464,7 @@ function StepOffer() {
 
         <figure className="text-center">
           <figcaption className="text-[0.75rem] font-black uppercase tracking-[0.08em] text-brand-green sm:text-sm">
-            After
+            Depois
           </figcaption>
           <div className="mt-2 rounded-xl border-2 border-brand-green/50 bg-card p-2 shadow-sm">
             <SmartImage
@@ -1481,7 +1481,7 @@ function StepOffer() {
           </p>
           <div
             role="progressbar"
-            aria-label="Progress after the protocol"
+            aria-label="Progress após o protocolo"
             aria-valuenow={95}
             aria-valuemin={0}
             aria-valuemax={100}
@@ -1494,7 +1494,7 @@ function StepOffer() {
 
       {/* Audio explainer */}
       <p className="mt-8 text-balance text-center text-sm font-bold leading-snug sm:text-base">
-        Listen to the audio. I&apos;ll explain{" "}
+        Ouça o áudio. Vou explicar{" "}
         <span className="text-brand-green">como funciona o Protocolo da Diabetes</span>. 👇
       </p>
 
@@ -1545,7 +1545,7 @@ function StepOffer() {
       {/* Everything you'll get — price box */}
       <div className="mt-8 rounded-2xl border-2 border-brand-green/60 bg-gradient-to-b from-brand-green/10 to-background p-4 shadow-md sm:p-6">
         <p className="text-center text-[0.7rem] font-black uppercase tracking-[0.2em] text-brand-green sm:text-xs">
-          The Diabetes Protocol
+          O Protocolo da Diabetes
         </p>
         <h2 className="mt-1.5 text-balance text-center text-lg font-black leading-snug sm:text-xl">
           Everything you <span className="text-brand-green-light">irá receber</span>
@@ -1600,7 +1600,7 @@ function StepOffer() {
         </div>
       </div>
 
-      {/* 30-day de garantia seal */}
+      {/* garantia de 30 dias seal */}
       <div className="mt-6 flex items-center gap-4 rounded-2xl border border-border bg-gradient-to-r from-amber-100/70 to-amber-50/60 p-4 shadow-sm sm:p-5">
         <div
           aria-hidden="true"
@@ -1629,7 +1629,7 @@ function StepOffer() {
         <div className="relative">
           <SmartImage
             src={womanImg}
-            alt="Maria, a doctor from Brazil, sharing her results with the protocol"
+            alt="Maria, a doctor from Brazil, sharing her results with o protocolo"
             width={600}
             height={750}
             className="object-cover"
@@ -1697,7 +1697,7 @@ function StepOffer() {
               </p>
               <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
                 Thank you so much Lerato. I did everything exactly as you showed me, and it&apos;s
-                been 3 months now without any medication. I&apos;m free of diabetes and much
+                há 3 meses sem tomar medicamentos. Estou livre da diabetes e muito mais
                 saudável. 🎁
               </p>
             </div>
@@ -1727,7 +1727,7 @@ function StepOffer() {
         <p className="mt-3 text-base font-black sm:text-lg">O seu risco é zero!</p>
         <p className="mt-3 text-[0.8rem] font-semibold leading-relaxed text-muted-foreground sm:text-sm">
           Ao abrigo do <span className="text-foreground">Código de Defesa do Consumidor</span>, todas as compras
-          estão protegidas por uma <span className="text-foreground">30-day de garantia</span>. If the
+          estão protegidas por uma <span className="text-foreground">garantia de 30 dias</span>. If the
           protocolo não <span className="text-foreground">NÃO</span> corresponder às suas expectativas e não
           obtiver resultados no prazo de{" "}
           <span className="text-foreground">30 dias</span>, devolveremos o seu dinheiro —{" "}
