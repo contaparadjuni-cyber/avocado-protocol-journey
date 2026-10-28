@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "655dc929-e68b-48ad-a1d3-6d41bdef1ad6",
-  "project_id": "eca69c53-ec11-4dbc-a315-8b9352500776",
-  "url": "/__l5e/assets-v1/655dc929-e68b-48ad-a1d3-6d41bdef1ad6/abacate-para-diabetes.webp",
-  "r2_key": "a/v1/eca69c53-ec11-4dbc-a315-8b9352500776/655dc929-e68b-48ad-a1d3-6d41bdef1ad6/abacate-para-diabetes.webp",
-  "original_filename": "abacate-para-diabetes.webp",
-  "size": 242816,
   "content_type": "image/webp",
-  "created_at": "2026-08-21T13:52:58Z"
+  "created_at": "2026-08-21T13:52:58Z",
+  "original_filename": "abacate-para-diabetes.webp",
+  "project_id": "91e7cb94-14b1-4257-acf3-3e2a242c24c9",
+  "r2_key": "a/v1/91e7cb94-14b1-4257-acf3-3e2a242c24c9/655dc929-e68b-48ad-a1d3-6d41bdef1ad6/abacate-para-diabetes.webp",
+  "size": 242816,
+  "url": "/__l5e/assets-v1/655dc929-e68b-48ad-a1d3-6d41bdef1ad6/abacate-para-diabetes.webp",
+  "version": 1
 }
