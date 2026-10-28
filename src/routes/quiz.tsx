@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
-import symptomsWoman from "@/assets/symptoms-woman.webp";
+import sintomasWoman from "@/assets/sintomas-woman.webp";
 import news600 from "@/assets/news-v2-600.webp.asset.json";
 import news900 from "@/assets/news-v2-900.webp.asset.json";
 import { SmartImage } from "@/components/SmartImage";
-import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
+import glicoseAntesDepois from "@/assets/glicose-before-after.webp.asset.json";
 
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
@@ -15,7 +15,7 @@ import avocadoImg from "@/assets/abacate-para-diabetes.webp.asset.json";
 import audioAna from "@/assets/som-01.mp3.asset.json";
 import audioProof from "@/assets/som-02.mp3.asset.json";
 import audioOffer from "@/assets/som-03.mp3.asset.json";
-import glucose14DaysV2 from "@/assets/glucose-255-118.webp.asset.json";
+import glicose14DaysV2 from "@/assets/glicose-255-118.webp.asset.json";
 import slide588 from "@/assets/slide-588.webp.asset.json";
 import slide198 from "@/assets/slide-198.webp.asset.json";
 import slide108 from "@/assets/slide-108.webp.asset.json";
@@ -28,16 +28,16 @@ import cartoonHappy from "@/assets/cartoon-happy-man.webp.asset.json";
 export const Route = createFileRoute("/quiz")({
   head: () => ({
     meta: [
-      { title: "Free Assessment | The Diabetes Protocol" },
+      { title: "Avaliação Gratuita | Protocolo da Diabetes" },
       {
         name: "description",
         content:
-          "Answer a few quick questions about your symptoms and discover the 14-day type 2 diabetes protocol.",
+          "Responda a algumas perguntas rápidas sobre os seus sintomas e conheça o protocolo de 14 dias para diabetes tipo 2.",
       },
-      { property: "og:title", content: "Free Assessment | The Diabetes Protocol" },
+      { property: "og:title", content: "Avaliação Gratuita | Protocolo da Diabetes" },
       {
         property: "og:description",
-        content: "Free quick test about your type 2 diabetes symptoms.",
+        content: "Teste rápido e gratuito sobre os sintomas da diabetes tipo 2.",
       },
     ],
   }),
@@ -49,16 +49,16 @@ const TOTAL_STEPS = 17;
 /* Replace with the real checkout link when the payment page is ready. */
 const CHECKOUT_URL = "#";
 
-const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
-const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
+const SYMPTOMS_LEFT = ["VISÃO TURVA", "SEDE EXCESSIVA", "CANSAÇO", "NÁUSEAS"];
+const SYMPTOMS_RIGHT = ["DOR NAS PERNAS", "FORMIGAMENTO", "INSÓNIA", "FADIGA"];
 
 const SYMPTOM_LIST = [
-  { label: "INSOMNIA", emoji: "😴" },
-  { label: "FATIGUE", emoji: "🥱" },
-  { label: "EXCESSIVE THIRST", emoji: "🥤" },
-  { label: "TINGLING", emoji: "🦶" },
-  { label: "BLURRY VISION", emoji: "👁️" },
-  { label: "BODY ACHES", emoji: "💪" },
+  { label: "INSÓNIA", emoji: "😴" },
+  { label: "FADIGA", emoji: "🥱" },
+  { label: "SEDE EXCESSIVA", emoji: "🥤" },
+  { label: "FORMIGAMENTO", emoji: "🦶" },
+  { label: "VISÃO TURVA", emoji: "👁️" },
+  { label: "DORES NO CORPO", emoji: "💪" },
 ];
 
 
@@ -103,11 +103,11 @@ function Quiz() {
 function StepGender({ onNext }: { onNext: () => void }) {
   return (
     <section>
-      <Heading>Let&apos;s start your assessment</Heading>
-      <Sub>Select your option below</Sub>
+      <Heading>Vamos começar a sua avaliação</Heading>
+      <Sub>Selecione uma das opções abaixo</Sub>
       <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4">
-        <GenderCard img={manImg} label="I'm a man" onClick={onNext} />
-        <GenderCard img={womanImg} label="I'm a woman" onClick={onNext} />
+        <GenderCard img={manImg} label="Sou homem" onClick={onNext} />
+        <GenderCard img={womanImg} label="Sou mulher" onClick={onNext} />
       </div>
     </section>
   );
@@ -119,14 +119,14 @@ function StepSymptomsIllustration({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Have you felt any of these symptoms{" "}
-        <span className="text-brand-green">for more than 1 year?</span>
+        Tem sentido algum destes sintomas{" "}
+        <span className="text-brand-green">há mais de 1 ano?</span>
       </Heading>
 
       <div className="relative mx-auto mt-6 w-full max-w-[22rem]">
         <img
-          src={symptomsWoman}
-          alt="Older woman sitting with diabetes symptoms"
+          src={sintomasWoman}
+          alt="Mulher idosa sentada, com sintomas associados à diabetes"
           width={768}
           height={896}
           decoding="async"
@@ -151,10 +151,10 @@ function StepSymptomsIllustration({ onNext }: { onNext: () => void }) {
 
       <div className="mt-7 space-y-3">
         <OptionButton emoji="🤧" onClick={onNext}>
-          I feel 1 or more
+          Sinto um ou mais sintomas
         </OptionButton>
         <OptionButton emoji="🤦" onClick={onNext}>
-          I feel 2 or more
+          Sinto dois ou mais sintomas
         </OptionButton>
       </div>
     </section>
@@ -169,13 +169,13 @@ function StepDeworming({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Have you ever <span className="text-brand-green">dewormed</span> in any way?
+        Alguma vez já <span className="text-brand-green">feito desparasitação</span> in any way?
       </Heading>
-      <Sub>Using medication or natural methods.</Sub>
+      <Sub>Com medicamentos ou métodos naturais.</Sub>
       <div className="mt-6 space-y-3">
         {[
-          { emoji: "😐", label: "No, I have never dewormed." },
-          { emoji: "😁", label: "Yes, I have dewormed before." },
+          { emoji: "😐", label: "Não, nunca fiz desparasitação." },
+          { emoji: "😁", label: "Sim, já fiz desparasitação." },
         ].map((opt) => (
           <button
             key={opt.label}
@@ -209,17 +209,17 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
     <section>
       <h2 className="text-center text-[1.05rem] font-black leading-snug sm:text-xl">
         <span className="text-destructive">
-          If you have never done a Natural Deworming, be careful:
+          Se nunca fez uma desparasitação natural, tenha cuidado:
         </span>{" "}
-        worms can multiply in your body and reach vital organs like the brain, heart and lungs.
-        Don&apos;t ignore this risk —{" "}
+        os vermes podem multiplicar-se no seu corpo e atingir órgãos vitais, como o cérebro, o coração e os pulmões.
+        Não ignore este risco —{" "}
         <span className="text-brand-green">
-          deworming at least once a year is essential!
+          fazer desparasitação pelo menos uma vez por ano é essencial!
         </span>
       </h2>
 
       <p className="mt-5 text-center text-sm font-bold underline sm:text-base">
-        See this news report 👇
+        Veja esta notícia 👇
       </p>
 
       <figure className="mt-4 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
@@ -227,7 +227,7 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
           src={news900.url}
           srcSet={`${news600.url} 600w, ${news900.url} 900w`}
           sizes="(max-width: 640px) 100vw, 600px"
-          alt="News report: young man dies after parasites are found in his brain, with MRI exam showing nodules caused by parasite eggs"
+          alt="Notícia sobre um jovem que morreu após serem encontrados parasitas no cérebro"
           width={900}
           height={1350}
           className="object-contain"
@@ -237,7 +237,7 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
 
 
 
-      <CtaButton onClick={onNext}>Continue</CtaButton>
+      <CtaButton onClick={onNext}>Continuar</CtaButton>
     </section>
   );
 }
@@ -248,14 +248,14 @@ function StepAwareness({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Are you aware that{" "}
-        <span className="text-brand-green">not taking care of this</span> can worsen your diabetes
-        and leave damage that may be irreversible?
+        Sabia que{" "}
+        <span className="text-brand-green">não tratar esta situação</span> pode agravar a diabetes
+        e causar danos que podem ser irreversíveis?
       </Heading>
-      <Sub>Please be honest.</Sub>
+      <Sub>Seja sincero, por favor.</Sub>
       <div className="mt-6 space-y-3">
         <OptionButton emoji="🥵" onClick={onNext}>
-          Yes, I know how serious it is to have parasites living in my gut.
+          Sim, sei como é grave ter parasitas no intestino.
         </OptionButton>
         <OptionButton emoji="😨" onClick={onNext}>
           I didn&apos;t know it was serious, but I want to take care of it.
@@ -271,15 +271,15 @@ function StepSweets({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Do you agree that most of the time{" "}
-        <span className="text-brand-green">eating too many sweets and poor food choices</span>{" "}
+        Concorda que, muitas vezes,{" "}
+        <span className="text-brand-green">comer demasiados doces e fazer escolhas alimentares pouco saudáveis</span>{" "}
         aren&apos;t our fault — that we get labelled as undisciplined when our body is actually
-        inflamed by intestinal parasites?
+        a sofrer de inflamação causada por parasitas intestinais?
       </Heading>
-      <Sub>Please be sincere, I want to help!</Sub>
+      <Sub>Seja sincero. Quero ajudar!</Sub>
       <div className="mt-6 space-y-3">
-        <OptionButton onClick={onNext}>I totally agree!</OptionButton>
-        <OptionButton onClick={onNext}>I partly agree.</OptionButton>
+        <OptionButton onClick={onNext}>Concordo totalmente!</OptionButton>
+        <OptionButton onClick={onNext}>Concordo em parte.</OptionButton>
       </div>
     </section>
   );
@@ -298,10 +298,10 @@ function StepSymptomPicker({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Among the <span className="text-brand-green">symptoms listed below</span>, which bother you
-        the most?
+        Entre os <span className="text-brand-green">sintomas indicados abaixo</span>, quais o incomodam
+        mais?
       </Heading>
-      <Sub>Select one or more.</Sub>
+      <Sub>Selecione uma ou mais opções.</Sub>
 
       <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
         {SYMPTOM_LIST.map(({ label, emoji }) => {
@@ -346,20 +346,20 @@ function StepSymptomPicker({ onNext }: { onNext: () => void }) {
 
       <p className="mt-4 text-center text-[0.8rem] font-semibold text-muted-foreground sm:text-sm">
         {selected.length === 0
-          ? "Select at least one symptom to continue"
-          : `${selected.length} symptom${selected.length > 1 ? "s" : ""} selected`}
+          ? "Selecione pelo menos um sintoma para continuar"
+          : `${selected.length} sintoma(s) selecionado(s)`}
       </p>
 
       <ValidationMessage
         show={error}
-        message="Please select at least one symptom to continue."
+        message="Selecione pelo menos um sintoma para continuar."
       />
 
       <CtaButton
         onClick={() => (selected.length === 0 ? setError(true) : onNext())}
         invalid={error}
       >
-        Continue
+        Continuar
       </CtaButton>
     </section>
   );
@@ -372,18 +372,18 @@ function StepImpact({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Have the symptoms you selected{" "}
-        <span className="text-brand-green">been disrupting your life?</span>
+        Os sintomas que selecionou{" "}
+        <span className="text-brand-green">têm afectado a sua vida?</span>
       </Heading>
       <div className="mt-6 space-y-3">
         <OptionButton emoji="☑️" onClick={onNext}>
-          Yes, a lot!
+          Sim, muito!
         </OptionButton>
         <OptionButton emoji="😅" onClick={onNext}>
           Yes, it&apos;s so normal in my life that I got used to it.
         </OptionButton>
         <OptionButton emoji="🤯" onClick={onNext}>
-          If you hadn&apos;t told me, I wouldn&apos;t even know it could be parasites.
+          Se não me tivessem dito, nem saberia que poderiam ser parasitas.
         </OptionButton>
         <OptionButton emoji="😌" onClick={onNext}>
           No, it doesn&apos;t bother me.
@@ -423,18 +423,18 @@ function StepResults({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <div className="rounded-xl bg-brand-green px-4 py-4 text-primary-foreground shadow-md sm:px-5">
-        <p className="text-sm font-black sm:text-base">⚠️ The results don&apos;t lie:</p>
+        <p className="text-sm font-black sm:text-base">⚠️ Os resultados não mentem:</p>
         <p className="mt-1.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
-          Your symptoms point to something very dangerous —{" "}
-          <span className="underline">listen carefully!</span>
+          Your sintomas point to something very dangerous —{" "}
+          <span className="underline">ouça com atenção!</span>
         </p>
       </div>
 
       <p className="mt-6 text-center text-sm font-bold sm:text-base">
-        Listen to this quick explanation 👇
+        Ouça esta breve explicação 👇
       </p>
       <p className="mt-1 text-center text-xs text-muted-foreground sm:text-sm">
-        If the audio doesn&apos;t start, just tap it.
+        Se o audio doesn&apos;t start, just tap it.
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
@@ -452,7 +452,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
             <button
               type="button"
               onClick={toggleAudio}
-              aria-label={playing ? "Pause Lerato's audio message" : "Play Lerato's audio message"}
+              aria-label={playing ? "Pausar a mensagem de áudio de Lerato" : "Reproduzir a mensagem de áudio de Lerato"}
               aria-pressed={playing}
               aria-controls="lerato-audio"
               className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -461,7 +461,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
             </button>
             <audio id="lerato-audio" ref={audioRef} src={audioAna.url} preload="none" />
             <span className="sr-only" aria-live="polite">
-              {playing ? "Audio playing" : "Audio paused"}
+              {playing ? "Áudio em reprodução" : "Áudio pausado"}
             </span>
             <div
               aria-hidden="true"
@@ -485,46 +485,46 @@ function StepResults({ onNext }: { onNext: () => void }) {
 
 
       <h3 className="mt-8 text-balance text-center text-lg font-black leading-snug sm:text-xl">
-        Just look at this case
+        Veja este caso
       </h3>
       <p className="mx-auto mt-1.5 max-w-[22rem] text-center text-xs leading-snug text-muted-foreground sm:text-sm">
-        1 week after starting the deworming
+        Uma semana após iniciar a desparasitação
       </p>
 
       <figure
         role="group"
-        aria-labelledby="glucose-caption"
+        aria-labelledby="glicose-caption"
         className="mt-4 overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
       >
         <SmartImage
-          src={glucoseBeforeAfter.url}
-          alt="Two Accu-Chek glucose meters side by side: the left one reads 240 mg/dL before the protocol, the right one reads 105 mg/dL one week after the deworming protocol."
+          src={glicoseAntesDepois.url}
+          alt="Dois medidores de glicose Accu-Chek lado a lado: antes do protocolo, 240 mg/dL; uma semana depois, 105 mg/dL."
           width={701}
           height={688}
           className="object-contain"
           wrapperClassName="w-full bg-muted"
         />
         <figcaption
-          id="glucose-caption"
+          id="glicose-caption"
           className="grid grid-cols-2 divide-x divide-border border-t border-border"
         >
           <span
-            aria-label="Before the protocol: 240 milligrams per deciliter"
+            aria-label="Antes do protocolo: 240 miligramas por decilitro"
             className="flex min-w-0 flex-col items-center gap-0.5 px-2 py-2.5 text-center"
           >
             <span className="text-[0.65rem] font-black uppercase tracking-[0.08em] text-muted-foreground sm:text-[0.7rem]">
-              Before
+              Antes
             </span>
             <span className="text-sm font-black leading-none text-destructive sm:text-base">
               240 mg/dL
             </span>
           </span>
           <span
-            aria-label="One week after the protocol: 105 milligrams per deciliter"
+            aria-label="Uma semana após o protocolo: 105 miligramas por decilitro"
             className="flex min-w-0 flex-col items-center gap-0.5 px-2 py-2.5 text-center"
           >
             <span className="text-[0.65rem] font-black uppercase tracking-[0.08em] text-muted-foreground sm:text-[0.7rem]">
-              After 1 week
+              Após 1 semana
             </span>
             <span className="text-sm font-black leading-none text-brand-green sm:text-base">
               105 mg/dL
@@ -539,7 +539,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
         <div className="flex items-start gap-2.5">
           <SmartImage
             src={avatarRita}
-            alt="Profile photo of Rachel Bennett"
+            alt="Fotografia de perfil de Rachel Bennett"
             width={160}
             height={160}
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
@@ -551,15 +551,15 @@ function StepResults({ onNext }: { onNext: () => void }) {
                 Rachel Bennett
               </p>
               <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
-                Thank you so much Lerato! I&apos;ve been deworming for 30 days and my glucose levels
-                are finally stable. I&apos;m so happy about this victory in my life 🎁 you were an
-                angel.
+                Muito obrigado, Lerato! Estou a fazer desparasitação há 30 dias e os meus níveis de glicose
+                estão finalmente estáveis. I&apos;m so happy about this victory in my life 🎁 you were an
+                anjo.
               </p>
             </div>
             <div className="mt-1.5 flex items-center gap-3 px-3 text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
               <span>2 h</span>
-              <span className="text-brand-green">Like</span>
-              <span className="text-brand-green">Reply</span>
+              <span className="text-brand-green">Gostar</span>
+              <span className="text-brand-green">Responder</span>
               <span className="ml-auto flex items-center gap-1">
                 <span aria-hidden="true">👍❤️</span>
                 <span aria-label="47 reactions">47</span>
@@ -570,7 +570,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
       </div>
 
 
-      <CtaButton onClick={onNext}>Continue</CtaButton>
+      <CtaButton onClick={onNext}>Continuar</CtaButton>
     </section>
   );
 }
@@ -578,13 +578,13 @@ function StepResults({ onNext }: { onNext: () => void }) {
 /* ---------- Step 10 ---------- */
 
 const MEDS = [
-  "Metformin",
+  "Metformina",
   "Glifage",
-  "Gliclazide",
-  "Glimepiride",
-  "Insulin",
-  "I take other medications",
-  "I'm not taking anything right now",
+  "Gliclazida",
+  "Glimepirida",
+  "Insulina",
+  "Tomo outros medicamentos",
+  "Não estou a tomar nenhum medicamento neste momento",
 ];
 
 function StepMedications({ onNext }: { onNext: () => void }) {
@@ -598,10 +598,10 @@ function StepMedications({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Are you currently taking any of{" "}
-        <span className="text-brand-green">these medications?</span>
+        Está actualmente a tomar algum destes{" "}
+        <span className="text-brand-green">estes medicamentos?</span>
       </Heading>
-      <Sub>Select all that apply.</Sub>
+      <Sub>Selecione todas as opções aplicáveis.</Sub>
       <div className="mt-6 space-y-3">
         {MEDS.map((m) => {
           const on = picked.includes(m);
@@ -636,13 +636,13 @@ function StepMedications({ onNext }: { onNext: () => void }) {
       </div>
       <ValidationMessage
         show={error}
-        message="Please select at least one option to continue."
+        message="Selecione pelo menos uma opção para continuar."
       />
       <CtaButton
         onClick={() => (picked.length === 0 ? setError(true) : onNext())}
         invalid={error}
       >
-        Continue
+        Continuar
       </CtaButton>
     </section>
   );
@@ -651,11 +651,11 @@ function StepMedications({ onNext }: { onNext: () => void }) {
 /* ---------- Step 11 ---------- */
 
 const MONITORING = [
-  { label: "ALWAYS BEFORE EATING", emoji: "⚠️" },
-  { label: "ONCE A DAY", emoji: "✅" },
-  { label: "SEVERAL TIMES A DAY", emoji: "😰" },
-  { label: "A FEW TIMES A WEEK", emoji: "🩸" },
-  { label: "I DON'T DO IT YET", emoji: "😳" },
+  { label: "SEMPRE ANTES DE COMER", emoji: "⚠️" },
+  { label: "UMA VEZ POR DIA", emoji: "✅" },
+  { label: "VÁRIAS VEZES POR DIA", emoji: "😰" },
+  { label: "ALGUMAS VEZES POR SEMANA", emoji: "🩸" },
+  { label: "AINDA NÃO FAÇO ISSO", emoji: "😳" },
 ];
 
 function StepMonitoring({ onNext }: { onNext: () => void }) {
@@ -664,9 +664,9 @@ function StepMonitoring({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        How often do you <span className="text-brand-green">monitor your glucose?</span>
+        How often do you <span className="text-brand-green">monitorizar a sua glicose?</span>
       </Heading>
-      <Sub>Pick the answer that fits you best.</Sub>
+      <Sub>Escolha a resposta que melhor se aplica a si.</Sub>
       <div className="mt-6 space-y-3">
         {MONITORING.map((o) => {
           const on = choice === o.label;
@@ -710,12 +710,12 @@ function StepInterest({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Would you be interested in receiving a{" "}
-        <span className="text-brand-green">personalized protocol</span> for Deworming in 14 days?
+        Gostaria de receber um{" "}
+        <span className="text-brand-green">protocolo personalizado</span> for Deworming in 14 days?
       </Heading>
       <div className="mx-auto mt-8 max-w-md space-y-4 sm:space-y-5">
         <OptionButton emoji="✅" onClick={onNext}>
-          Yes, I want it badly!
+          Sim, quero muito!
         </OptionButton>
         <OptionButton emoji="😍" onClick={onNext}>
           I&apos;m interested, but I have questions.
@@ -737,13 +737,13 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Do you commit to following our{" "}
-        <span className="text-brand-green">14-Day Protocol</span> at home?
+        Compromete-se a seguir o nosso{" "}
+        <span className="text-brand-green">Protocolo de 14 dias</span> at home?
       </Heading>
-      <Sub>I&apos;ll help you with everything you need.</Sub>
+      <Sub>Vou ajudar com tudo aquilo de que precisa.</Sub>
       <div className="mx-auto mt-8 max-w-md space-y-4 sm:space-y-5">
         <OptionButton emoji="😍" selected={choice === "commit"} onClick={() => pick("commit")}>
-          Yes, I commit!
+          Sim, comprometo-me!
         </OptionButton>
         <OptionButton emoji="🤪" selected={choice === "try"} onClick={() => pick("try")}>
           I&apos;ll try!
@@ -758,18 +758,18 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
 const COMMIT_SLIDES = [
   {
     src: slide588.url,
-    alt: "Glucose meter reading 588 mg/dL before the protocol",
-    caption: "Before: 588 mg/dL",
+    alt: "Leitura do medidor de glicose: 588 mg/dL antes do protocolo",
+    caption: "Antes: 588 mg/dL",
   },
   {
     src: slide198.url,
-    alt: "Woman showing a glucose meter reading 198 mg/dL",
-    caption: "Day 7: 198 mg/dL",
+    alt: "Mulher a mostrar um medidor de glicose com leitura de 198 mg/dL",
+    caption: "Dia 7: 198 mg/dL",
   },
   {
     src: slide108.url,
-    alt: "Glucose meter reading 108 mg/dL after the protocol",
-    caption: "Day 14: 108 mg/dL",
+    alt: "Leitura do medidor de glicose: 108 mg/dL após o protocolo",
+    caption: "Dia 14: 108 mg/dL",
   },
 ];
 
@@ -808,7 +808,7 @@ function PhotoCarousel() {
     <div
       className="mx-auto mt-7 w-full max-w-[19rem] sm:max-w-sm"
       aria-roledescription="carousel"
-      aria-label="Real glucose results gallery"
+      aria-label="Galeria de resultados de glicose"
       onPointerDown={(e) => {
         startX.current = e.clientX;
         setPaused(true);
@@ -834,7 +834,7 @@ function PhotoCarousel() {
               <button
                 type="button"
                 onClick={() => setFs(idx)}
-                aria-label={`Open photo ${idx + 1} fullscreen`}
+                aria-label={`Abrir a fotografia ${idx + 1} em ecrã inteiro`}
                 className="group relative block w-full bg-muted aspect-square sm:aspect-[5/6]"
               >
                 <SmartImage
@@ -866,7 +866,7 @@ function PhotoCarousel() {
           <button
             key={s.alt}
             type="button"
-            aria-label={`View photo ${idx + 1}`}
+            aria-label={`Ver fotografia ${idx + 1}`}
             aria-pressed={i === idx}
             onClick={() => go(idx)}
             className={`h-2.5 rounded-full transition-all duration-300 ${i === idx ? "w-7 bg-brand-green" : "w-2.5 bg-border"}`}
@@ -882,13 +882,13 @@ function PhotoCarousel() {
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/90 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
-          aria-label="Photo viewer"
+          aria-label="Visualizador de fotografias"
           onClick={() => setFs(null)}
         >
           <button
             type="button"
             onClick={() => setFs(null)}
-            aria-label="Close fullscreen"
+            aria-label="Fechar ecrã inteiro"
             className="absolute right-3 top-3 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/30"
           >
             <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round">
@@ -903,7 +903,7 @@ function PhotoCarousel() {
             <button
               type="button"
               onClick={() => setFs((p) => ((p ?? 0) - 1 + COMMIT_SLIDES.length) % COMMIT_SLIDES.length)}
-              aria-label="Previous photo"
+              aria-label="Fotografia anterior"
               className="absolute left-1 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/30"
             >
               <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
@@ -926,7 +926,7 @@ function PhotoCarousel() {
             <button
               type="button"
               onClick={() => setFs((p) => ((p ?? 0) + 1) % COMMIT_SLIDES.length)}
-              aria-label="Next photo"
+              aria-label="Fotografia seguinte"
               className="absolute right-1 z-10 grid h-10 w-10 place-items-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/30"
             >
               <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
@@ -975,10 +975,10 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <p className="text-center text-base font-black sm:text-lg">
-        Listen to the audio below: <span aria-hidden="true">👇</span>
+        Ouça o áudio abaixo: <span aria-hidden="true">👇</span>
       </p>
       <p className="mt-1.5 text-center text-xs text-muted-foreground sm:text-sm">
-        If the AUDIO doesn&apos;t start, just tap it!
+        Se o AUDIO doesn&apos;t start, just tap it!
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
@@ -995,7 +995,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
             <button
               type="button"
               onClick={toggleAudio}
-              aria-label={playing ? "Pause Lerato's audio message" : "Play Lerato's audio message"}
+              aria-label={playing ? "Pausar a mensagem de áudio de Lerato" : "Reproduzir a mensagem de áudio de Lerato"}
               aria-pressed={playing}
               aria-controls="lerato-audio-proof"
               className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -1004,7 +1004,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
             </button>
             <audio id="lerato-audio-proof" ref={audioRef} src={audioProof.url} preload="none" />
             <span className="sr-only" aria-live="polite">
-              {playing ? "Audio playing" : "Audio paused"}
+              {playing ? "Áudio em reprodução" : "Áudio pausado"}
             </span>
             <div aria-hidden="true" className="flex min-w-0 flex-1 items-end gap-[2px] overflow-hidden">
               {Array.from({ length: 34 }).map((_, i) => (
@@ -1021,16 +1021,16 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
       </div>
 
       <h3 className="mt-7 text-center text-lg font-black leading-snug sm:text-xl">
-        Just look at this case
+        Veja este caso
       </h3>
       <p className="mt-1.5 text-center text-xs leading-snug text-muted-foreground sm:text-sm">
-        1 week after starting the deworming
+        Uma semana após iniciar a desparasitação
       </p>
 
       <figure className="mt-4 overflow-hidden rounded-2xl border-2 border-brand-green bg-card shadow-md">
         <SmartImage
-          src={glucose14DaysV2.url}
-          alt="Two glucose meters side by side, labelled Before Deworming reading 255 mg/dL and 14 Days After Deworming reading 118 mg/dL."
+          src={glicose14DaysV2.url}
+          alt="Dois medidores de glicose lado a lado: antes da desparasitação, 255 mg/dL; 14 dias depois, 118 mg/dL."
           width={1537}
           height={1023}
           sizes="(max-width: 640px) 92vw, 480px"
@@ -1039,7 +1039,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
         />
       </figure>
 
-      <CtaButton onClick={onNext}>Generate Personalized Protocol! ✅</CtaButton>
+      <CtaButton onClick={onNext}>Gerar protocolo personalizado! ✅</CtaButton>
     </section>
   );
 }
@@ -1048,11 +1048,11 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
 
 
 const ANALYZING_TASKS = [
-  "Analyzing your answers",
-  "Checking your symptoms",
-  "Identifying possible parasites",
-  "Calculating your risk level",
-  "Building your custom protocol",
+  "A analisar as suas respostas",
+  "A verificar os seus sintomas",
+  "A identificar possíveis parasitas",
+  "A calcular o seu nível de risco",
+  "A preparar o seu protocolo personalizado",
 ];
 
 function StepAnalyzing({ onNext }: { onNext: () => void }) {
@@ -1081,11 +1081,11 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <div className="rounded-2xl bg-brand-green px-5 py-8 text-center text-primary-foreground shadow-lg">
-        <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em]">The Protocol of</p>
+        <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em]">O Protocolo da</p>
         <p className="mt-1 text-4xl font-black italic leading-none sm:text-5xl">Diabetes</p>
         <p className="mx-auto mt-5 max-w-[18rem] text-balance text-sm font-bold leading-snug sm:text-base">
-          I&apos;m analyzing your answers and building your{" "}
-          <span className="rounded bg-white/25 px-1.5 py-0.5">custom Protocol!</span>
+          I&apos;m analyzing as suas respostas and building your{" "}
+          <span className="rounded bg-white/25 px-1.5 py-0.5">protocolo personalizado!</span>
         </p>
       </div>
 
@@ -1101,11 +1101,11 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
 /* ---------- Step 16: Remedies vs Protocol + analysis + protocol ---------- */
 
 const ANALYSIS_ROWS: { label: string; value: number; tone: "red" | "green" }[] = [
-  { label: "Chances of having parasites in your body", value: 95, tone: "red" },
-  { label: "Life risk", value: 66, tone: "red" },
-  { label: "Chances of autoimmune diseases if untreated soon", value: 77, tone: "red" },
-  { label: "Chances of successful deworming", value: 100, tone: "green" },
-  { label: "Chances of fully eliminating diabetes", value: 100, tone: "green" },
+  { label: "Probabilidade de ter parasitas no organismo", value: 95, tone: "red" },
+  { label: "Risco para a vida", value: 66, tone: "red" },
+  { label: "Probabilidade de doenças autoimunes se não houver tratamento em breve", value: 77, tone: "red" },
+  { label: "Probabilidade de sucesso da desparasitação", value: 100, tone: "green" },
+  { label: "Probabilidade de eliminar completamente a diabetes", value: 100, tone: "green" },
 ];
 
 function StepProtocol({ onNext }: { onNext: () => void }) {
@@ -1131,7 +1131,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
         <figure className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
           <SmartImage
             src={remediesVsProtocol.url}
-            alt="Comparison table: traditional remedies versus our diabetes protocol"
+            alt="Tabela comparativa: remédios tradicionais e o nosso protocolo para diabetes"
             width={1426}
             height={1103}
             wrapperClassName="w-full bg-muted"
@@ -1139,8 +1139,8 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
         </figure>
 
         <p className="mt-7 text-balance text-center text-[1rem] font-black leading-snug sm:text-lg">
-          Below is the analysis of your current situation,{" "}
-          <span className="text-brand-green">based on your answers.</span> 👇
+          Abaixo está a análise da sua situação actual,{" "}
+          <span className="text-brand-green">com base nas suas respostas.</span> 👇
         </p>
 
         <div className="mt-5 space-y-4">
@@ -1150,8 +1150,8 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
         </div>
 
         <p className="mt-12 text-balance text-center text-[1.05rem] font-black leading-snug sm:text-xl">
-          <span className="text-brand-green">Possible parasitic agent</span> according to your
-          symptoms:
+          <span className="text-brand-green">Possível agente parasitário</span> according to your
+          sintomas:
         </p>
         <p className="mt-4 text-center text-base italic underline sm:text-lg">
           Ascaris lumbricoides
@@ -1160,25 +1160,25 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
         <figure className="mt-6 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
           <SmartImage
             src={ascarisPhoto.url}
-            alt="Endoscopic image of Ascaris lumbricoides roundworms inside the intestine"
+            alt="Imagem endoscópica de vermes Ascaris lumbricoides no intestino"
             width={350}
             height={275}
             wrapperClassName="w-full bg-muted"
           />
         </figure>
 
-        {/* Warning + deworming intro */}
+        {/* Warning + desparasitação intro */}
         <div className="mt-10 rounded-xl border border-border bg-card/90 p-4 shadow-sm backdrop-blur-sm sm:p-5">
-          <p className="text-sm font-black sm:text-base">⚠️ Attention!</p>
+          <p className="text-sm font-black sm:text-base">⚠️ Atenção!</p>
           <p className="mt-2.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
-            With our Protocol you can relax —{" "}
-            <span className="text-brand-green">no worm or parasite will come out alive</span> in an
-            uncomfortable way. They are eliminated{" "}
-            <span className="text-brand-green">already dead and broken down</span>, almost
+            Com o nosso protocolo, pode ficar tranquilo —{" "}
+            <span className="text-brand-green">nenhum verme ou parasita sairá vivo</span> in an
+            de forma desconfortável. São eliminados{" "}
+            <span className="text-brand-green">já morto e decomposto</span>, almost
             imperceptible. ☺️
           </p>
           <p className="mt-3 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
-            The deworming will start first with an avocado smoothie plus a secret ingredient that is
+            A desparasitação começa com um batido de abacate e um ingrediente secreto que é
             easy to find at any market and rarely used.
           </p>
         </div>
@@ -1186,7 +1186,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
         {/* Final protocol CTA block */}
         <div className="mt-6 rounded-xl border border-border bg-card/80 p-4 shadow-sm backdrop-blur-sm sm:p-5">
           <p className="text-balance text-center text-[0.95rem] font-bold leading-relaxed sm:text-base">
-            <span className="text-brand-green">The deworming starts</span> with an avocado smoothie
+            <span className="text-brand-green">A desparasitação começa</span> with an avocado smoothie
             plus a secret ingredient that is easy to find at any market and rarely used.
           </p>
         </div>
@@ -1194,14 +1194,14 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
         <figure className="mt-5 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
           <SmartImage
             src={avocadoImg.url}
-            alt="Hands holding a halved avocado on a wooden table"
+            alt="Mãos a segurar um abacate cortado ao meio sobre uma mesa de madeira"
             width={760}
             height={475}
             wrapperClassName="w-full bg-muted"
           />
         </figure>
 
-        <CtaButton onClick={onNext}>Gerar Protocolo de Tratamento! ✅</CtaButton>
+        <CtaButton onClick={onNext}>Gerar protocolo de tratamento! ✅</CtaButton>
       </div>
     </section>
   );
@@ -1384,12 +1384,12 @@ function CtaLink({ children }: { children: React.ReactNode }) {
 }
 
 const OFFER_ITEMS = [
-  { label: "Deworming preparation", price: "$37.90" },
-  { label: "Complete deworming protocol", price: "$57.00" },
-  { label: "1-on-1 individual support", price: "$97.00" },
-  { label: "Anti-parasite food guide", price: "$27.00" },
-  { label: "3 Q&A sessions with our team", price: "$17.00" },
-  { label: "Annual protocol maintenance", price: "$37.00" },
+  { label: "Preparação para a desparasitação", price: "$37.90" },
+  { label: "Protocolo completo de desparasitação", price: "$57.00" },
+  { label: "Acompanhamento individual", price: "$97.00" },
+  { label: "Guia alimentar antiparasitário", price: "$27.00" },
+  { label: "3 sessões de perguntas e respostas com a nossa equipa", price: "$17.00" },
+  { label: "Acompanhamento anual do protocolo", price: "$37.00" },
 ];
 
 function StepOffer() {
@@ -1421,26 +1421,26 @@ function StepOffer() {
     <section>
       {/* Success banner */}
       <p className="flex items-center justify-center gap-2 text-center text-sm font-black sm:text-base">
-        <span aria-hidden="true">🎉</span> Protocol generated with{" "}
-        <span className="underline">SUCCESS!</span>
+        <span aria-hidden="true">🎉</span> Protocolo gerado com{" "}
+        <span className="underline">SUCESSO!</span>
       </p>
 
       <div className="mt-4 rounded-2xl bg-brand-green px-4 py-5 text-center text-primary-foreground shadow-md sm:px-5">
         <h1 className="text-balance text-xl font-black leading-tight sm:text-2xl">
-          Your <span className="text-brand-green-light">exclusive protocol</span> is ready!
+          Your <span className="text-brand-green-light">protocolo exclusivo</span> is ready!
         </h1>
       </div>
 
-      {/* Before / After cartoons */}
+      {/* Antes / Depois cartoons */}
       <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5">
         <figure className="text-center">
           <figcaption className="text-[0.75rem] font-black uppercase tracking-[0.08em] text-muted-foreground sm:text-sm">
-            Before
+            Antes
           </figcaption>
           <div className="mt-2 rounded-xl border border-border bg-card p-2 shadow-sm">
             <SmartImage
               src={cartoonSick.url}
-              alt="Cartoon of a tired, suffering man holding his aching head"
+              alt="Ilustração de um homem cansado, com dores de cabeça"
               width={420}
               height={520}
               className="object-contain"
@@ -1448,11 +1448,11 @@ function StepOffer() {
             />
           </div>
           <p className="mt-2 text-[0.75rem] font-semibold leading-snug text-muted-foreground sm:text-sm">
-            This is you suffering with the parasites.
+            This is you suffering with the parasitas.
           </p>
           <div
             role="progressbar"
-            aria-label="Progress before the protocol"
+            aria-label="Progress antes do protocolo"
             aria-valuenow={30}
             aria-valuemin={0}
             aria-valuemax={100}
@@ -1464,12 +1464,12 @@ function StepOffer() {
 
         <figure className="text-center">
           <figcaption className="text-[0.75rem] font-black uppercase tracking-[0.08em] text-brand-green sm:text-sm">
-            After
+            Depois
           </figcaption>
           <div className="mt-2 rounded-xl border-2 border-brand-green/50 bg-card p-2 shadow-sm">
             <SmartImage
               src={cartoonHappy.url}
-              alt="Cartoon of a happy, healthy man giving two thumbs up"
+              alt="Ilustração de um homem feliz e saudável a fazer sinal positivo com os dois polegares"
               width={420}
               height={520}
               className="object-contain"
@@ -1477,11 +1477,11 @@ function StepOffer() {
             />
           </div>
           <p className="mt-2 text-[0.75rem] font-semibold leading-snug text-muted-foreground sm:text-sm">
-            This is you, <span className="text-brand-green">free of Diabetes</span>.
+            This is you, <span className="text-brand-green">livre da diabetes</span>.
           </p>
           <div
             role="progressbar"
-            aria-label="Progress after the protocol"
+            aria-label="Progress após o protocolo"
             aria-valuenow={95}
             aria-valuemin={0}
             aria-valuemax={100}
@@ -1494,8 +1494,8 @@ function StepOffer() {
 
       {/* Audio explainer */}
       <p className="mt-8 text-balance text-center text-sm font-bold leading-snug sm:text-base">
-        Listen to the audio. I&apos;ll explain{" "}
-        <span className="text-brand-green">how the Diabetes Protocol works</span>. 👇
+        Ouça o áudio. Vou explicar{" "}
+        <span className="text-brand-green">como funciona o Protocolo da Diabetes</span>. 👇
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
@@ -1512,7 +1512,7 @@ function StepOffer() {
             <button
               type="button"
               onClick={toggleAudio}
-              aria-label={playing ? "Pause the protocol explanation" : "Play the protocol explanation"}
+              aria-label={playing ? "Pausar a explicação do protocolo" : "Reproduzir a explicação do protocolo"}
               aria-pressed={playing}
               aria-controls="offer-audio"
               className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -1521,7 +1521,7 @@ function StepOffer() {
             </button>
             <audio id="offer-audio" ref={audioRef} src={audioOffer.url} preload="none" />
             <span className="sr-only" aria-live="polite">
-              {playing ? "Audio playing" : "Audio paused"}
+              {playing ? "Áudio em reprodução" : "Áudio pausado"}
             </span>
             <div
               aria-hidden="true"
@@ -1542,13 +1542,13 @@ function StepOffer() {
         </div>
       </div>
 
-      {/* Everything you'll get — price box */}
+      {/* Tudo o que vai receber — preços */}
       <div className="mt-8 rounded-2xl border-2 border-brand-green/60 bg-gradient-to-b from-brand-green/10 to-background p-4 shadow-md sm:p-6">
         <p className="text-center text-[0.7rem] font-black uppercase tracking-[0.2em] text-brand-green sm:text-xs">
-          The Diabetes Protocol
+          O Protocolo da Diabetes
         </p>
         <h2 className="mt-1.5 text-balance text-center text-lg font-black leading-snug sm:text-xl">
-          Everything you <span className="text-brand-green-light">will receive</span>
+          Everything you <span className="text-brand-green-light">irá receber</span>
         </h2>
 
         <ul className="mt-5 space-y-3">
@@ -1568,54 +1568,54 @@ function StepOffer() {
 
         <div className="mt-5 border-t border-border pt-4 text-center">
           <p className="text-sm font-bold text-muted-foreground sm:text-base">
-            Total value:{" "}
+            Valor total:{" "}
             <span className="text-lg font-black text-destructive sm:text-xl">$272.90</span>
           </p>
-          <p className="mt-1 text-base font-black sm:text-lg">Today, for only</p>
+          <p className="mt-1 text-base font-black sm:text-lg">Hoje, por apenas</p>
           <p className="text-4xl font-black leading-none text-brand-green sm:text-5xl">
             $37<span className="text-2xl sm:text-3xl">.90</span>
           </p>
         </div>
       </div>
 
-      <CtaLink>Access My Protocol Now! ✅</CtaLink>
+      <CtaLink>Aceder agora ao meu protocolo! ✅</CtaLink>
 
       {/* Payment reassurance */}
       <div className="mt-5 space-y-3 text-center">
         <div>
           <p className="text-sm font-black sm:text-base">
-            <span aria-hidden="true">💰</span> One single payment
+            <span aria-hidden="true">💰</span> Pagamento único
           </p>
           <p className="mt-0.5 text-xs font-semibold text-muted-foreground sm:text-sm">
-            No monthly fees.
+            Sem mensalidades.
           </p>
         </div>
         <div>
           <p className="text-sm font-black sm:text-base">
-            <span aria-hidden="true">✅</span> Immediate access
+            <span aria-hidden="true">✅</span> Acesso imediato
           </p>
           <p className="mt-0.5 text-xs font-semibold text-muted-foreground sm:text-sm">
-            Access right after payment.
+            Acesso logo após o pagamento.
           </p>
         </div>
       </div>
 
-      {/* 30-day guarantee seal */}
+      {/* garantia de 30 dias seal */}
       <div className="mt-6 flex items-center gap-4 rounded-2xl border border-border bg-gradient-to-r from-amber-100/70 to-amber-50/60 p-4 shadow-sm sm:p-5">
         <div
           aria-hidden="true"
           className="grid h-16 w-16 shrink-0 place-items-center rounded-full border-4 border-amber-600/70 bg-gradient-to-b from-amber-400 to-amber-600 text-center text-primary-foreground shadow-inner sm:h-20 sm:w-20"
         >
           <span className="text-[0.55rem] font-black uppercase leading-tight tracking-wide sm:text-[0.65rem]">
-            30 days
+            30 dias
             <br />
-            guarantee
+            de garantia
           </span>
         </div>
         <div>
-          <p className="text-base font-black leading-tight sm:text-lg">Safe Trial — 30 Days</p>
+          <p className="text-base font-black leading-tight sm:text-lg">Experimente com segurança — 30 dias</p>
           <p className="mt-1 text-[0.8rem] font-semibold leading-snug text-muted-foreground sm:text-sm">
-            Guaranteed results or your money back.
+            Se não ficar satisfeito, devolvemos o seu dinheiro.
           </p>
         </div>
       </div>
@@ -1629,7 +1629,7 @@ function StepOffer() {
         <div className="relative">
           <SmartImage
             src={womanImg}
-            alt="Maria, a doctor from Brazil, sharing her results with the protocol"
+            alt="Maria, a doctor from Brazil, sharing her results with o protocolo"
             width={600}
             height={750}
             className="object-cover"
@@ -1649,10 +1649,10 @@ function StepOffer() {
           </div>
           <figcaption className="absolute bottom-2 left-3 right-3 text-left">
             <p className="text-sm font-black text-white drop-shadow sm:text-base">
-              Testimonial — Maria
+              Testemunho — Maria
             </p>
             <p className="text-[0.7rem] font-semibold text-white/90 drop-shadow sm:text-xs">
-              Doctor, Brazil
+              Médica, Brasil
             </p>
           </figcaption>
         </div>
@@ -1661,27 +1661,27 @@ function StepOffer() {
       {/* 30-day trial box */}
       <div className="mt-5 flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
         <div>
-          <p className="text-sm font-black uppercase tracking-wide sm:text-base">30-Day Test</p>
+          <p className="text-sm font-black uppercase tracking-wide sm:text-base">Teste de 30 dias</p>
           <p className="mt-0.5 text-[0.8rem] font-semibold text-muted-foreground sm:text-sm">
-            No commitment
+            Sem compromisso
           </p>
         </div>
         <div className="text-right">
           <p className="text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
-            for only 3 payments of
+            por apenas 3 pagamentos de
           </p>
           <p className="text-lg font-black leading-tight text-brand-green sm:text-xl">$8.27</p>
         </div>
       </div>
 
-      <CtaLink>Access My Protocol Now! ✅</CtaLink>
+      <CtaLink>Aceder agora ao meu protocolo! ✅</CtaLink>
 
       {/* Facebook-style comment */}
       <div className="mt-6 rounded-xl border border-border bg-card p-4 shadow-sm">
         <div className="flex items-start gap-2.5">
           <SmartImage
             src={manImg}
-            alt="Profile photo of Sipho Dlamini"
+            alt="Fotografia de perfil de Sipho Dlamini"
             width={600}
             height={750}
             className="object-cover"
@@ -1697,14 +1697,14 @@ function StepOffer() {
               </p>
               <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
                 Thank you so much Lerato. I did everything exactly as you showed me, and it&apos;s
-                been 3 months now without any medication. I&apos;m free of diabetes and much
-                healthier. 🎁
+                há 3 meses sem tomar medicamentos. Estou livre da diabetes e muito mais
+                saudável. 🎁
               </p>
             </div>
             <div className="mt-1.5 flex items-center gap-3 px-3 text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
               <span>1 h</span>
-              <span className="text-brand-green">Like</span>
-              <span className="text-brand-green">Reply</span>
+              <span className="text-brand-green">Gostar</span>
+              <span className="text-brand-green">Responder</span>
               <span className="ml-auto flex items-center gap-1">
                 <span aria-hidden="true">👍❤️</span>
                 <span aria-label="32 reactions">32</span>
@@ -1714,7 +1714,7 @@ function StepOffer() {
         </div>
       </div>
 
-      <CtaLink>Access My Protocol Now! ✅</CtaLink>
+      <CtaLink>Aceder agora ao meu protocolo! ✅</CtaLink>
 
       {/* Zero risk box */}
       <div className="mt-6 rounded-2xl border border-border bg-card p-5 text-center shadow-sm sm:p-6">
@@ -1724,21 +1724,21 @@ function StepOffer() {
         >
           🛡️
         </span>
-        <p className="mt-3 text-base font-black sm:text-lg">Your risk is zero!</p>
+        <p className="mt-3 text-base font-black sm:text-lg">O seu risco é zero!</p>
         <p className="mt-3 text-[0.8rem] font-semibold leading-relaxed text-muted-foreground sm:text-sm">
-          Under the <span className="text-foreground">Consumer Defense Code</span>, every purchase
-          is protected by a <span className="text-foreground">30-day guarantee</span>. If the
-          protocol does <span className="text-foreground">NOT</span> meet your expectations and you
-          don&apos;t see results within{" "}
-          <span className="text-foreground">30 days</span>, we will refund your money —{" "}
-          <span className="text-foreground">no questions asked</span> and no bureaucracy.
+          Ao abrigo do <span className="text-foreground">Código de Defesa do Consumidor</span>, todas as compras
+          estão protegidas por uma <span className="text-foreground">garantia de 30 dias</span>. If the
+          protocolo não <span className="text-foreground">NÃO</span> corresponder às suas expectativas e não
+          obtiver resultados no prazo de{" "}
+          <span className="text-foreground">30 dias</span>, devolveremos o seu dinheiro —{" "}
+          <span className="text-foreground">sem perguntas</span> and no bureaucracy.
         </p>
         <p className="mt-3 text-[0.8rem] font-black leading-relaxed sm:text-sm">
-          Try it risk-free!
+          Experimente sem risco!
         </p>
       </div>
 
-      <CtaLink>Access My Protocol Now! ✅</CtaLink>
+      <CtaLink>Aceder agora ao meu protocolo! ✅</CtaLink>
     </section>
   );
 }

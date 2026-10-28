@@ -14,7 +14,7 @@ export function QuizShell({
         <BrandLogo />
         <div
           role="progressbar"
-          aria-label="Assessment progress"
+          aria-label="Progresso da avaliação"
           aria-valuemin={0}
           aria-valuemax={100}
           aria-valuenow={Math.round(Math.min(progress, 100))}

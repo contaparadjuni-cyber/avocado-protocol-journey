@@ -9,17 +9,17 @@ const HERO_SIZES = "(max-width: 640px) 100vw, (max-width: 1024px) 600px, 512px";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "14-Day Home Trick | Type 2 Diabetes Protocol" },
+      { title: "Método Caseiro de 14 Dias | Protocolo para Diabetes Tipo 2" },
       {
         name: "description",
         content:
-          "Take the free quick test and discover how to flush out the diabetes parasite and be free from type 2 diabetes.",
+          "Faça o teste rápido gratuito e conheça o protocolo de 14 dias para diabetes tipo 2.",
       },
-      { property: "og:title", content: "14-Day Home Trick | Type 2 Diabetes Protocol" },
+      { property: "og:title", content: "Método Caseiro de 14 Dias | Protocolo para Diabetes Tipo 2" },
       {
         property: "og:description",
         content:
-          "Free quick test: learn how to eliminate this parasite from your body and be free from diabetes.",
+          "Teste rápido gratuito: conheça o protocolo de 14 dias para diabetes tipo 2.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -44,14 +44,14 @@ function Index() {
     <main className="min-h-screen bg-background px-3 pb-8 pt-4 sm:px-5 sm:pt-6 md:pt-10">
       <div className="mx-auto w-full max-w-[34rem] md:max-w-[38rem]">
         <h1 className="sr-only">
-          Urgent: flush out a 14-day diabetes parasite and end type 2 diabetes
+          Conheça o protocolo de 14 dias para diabetes tipo 2
         </h1>
 
         <img
           src={hero768.url}
           srcSet={HERO_SRCSET}
           sizes={HERO_SIZES}
-          alt="Attention guide about type 2 diabetes: before and after glucose readings, the parasite seen under the microscope and a glucose meter being used"
+          alt="Guia informativo sobre diabetes tipo 2, com leituras de glicose antes e depois e imagens ilustrativas"
           width={1024}
           height={1536}
           decoding="async"
@@ -64,11 +64,11 @@ function Index() {
           to="/quiz"
           className="btn-glow mt-5 flex w-full items-center justify-center rounded-xl bg-brand-green px-4 py-[1.15rem] text-center text-[1rem] font-black uppercase leading-tight tracking-tight text-primary-foreground shadow-lg hover:bg-primary-strong active:scale-[0.99] sm:mt-7 sm:py-5 sm:text-lg"
         >
-          I want to learn it too!
+          Também quero conhecer!
         </Link>
 
         <p className="mt-3 text-center text-[0.7rem] leading-snug text-muted-foreground sm:text-xs">
-          Free quick test &middot; Takes less than 1 minute
+          Teste rápido gratuito &middot; Demora menos de 1 minuto
         </p>
       </div>
     </main>

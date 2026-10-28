@@ -1,20 +1,20 @@
-# Remix of Clone & Grow
+# Projecto de tradução para português
 
-quero que clone esse site, tal e qual depois vou adcionar e anexar outras paginas
+Projecto web criado com Lovable. O conteúdo visível do site está a ser traduzido para português.
 
 This project was built with [Lovable](https://lovable.dev).
 
-## Build with Lovable
+## Continuar a desenvolver com Lovable
 
 Continue developing this project in the [Lovable editor](https://lovable.dev/projects/eca69c53-ec11-4dbc-a315-8b9352500776).
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+- **Desenvolva mais depressa**: descreva o que pretende criar e o Lovable trata do código.
+- **Mantenha tudo sincronizado**: cada alteração feita no Lovable é guardada directamente neste repositório.
+- **Propriedade total**: this code is yours. Envie as alterações para a branch `main` do GitHub para as sincronizar com o Lovable.
 
-## Development
+## Desenvolvimento
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+Prefere trabalhar localmente? Precisa de Node.js e npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
 
 ```sh
 git clone <this-repository-url>
