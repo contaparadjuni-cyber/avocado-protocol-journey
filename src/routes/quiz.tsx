@@ -46,7 +46,7 @@ export const Route = createFileRoute("/quiz")({
 
 const TOTAL_STEPS = 17;
 
-/* Replace with the real checkout link when the payment page is ready. */
+/* Substituir pelo link real de pagamento quando a página de pagamento estiver pronta. */
 const CHECKOUT_URL = "#";
 
 const SYMPTOMS_LEFT = ["VISÃO TURVA", "SEDE EXCESSIVA", "CANSAÇO", "NÁUSEAS"];
@@ -66,7 +66,7 @@ function Quiz() {
   const [step, setStep] = useState(1);
   const next = () => setStep((s) => Math.min(s + 1, TOTAL_STEPS));
 
-  // Warm the heavy news image up one step before it is shown.
+  // Pré-carregar a imagem da notícia um passo antes de ser apresentada.
   useEffect(() => {
     if (step !== 3) return;
     const img = new Image();
@@ -273,7 +273,7 @@ function StepSweets({ onNext }: { onNext: () => void }) {
       <Heading>
         Concorda que, muitas vezes,{" "}
         <span className="text-brand-green">comer demasiados doces e fazer escolhas alimentares pouco saudáveis</span>{" "}
-        aren&apos;t our fault — that we get labelled as undisciplined when our body is actually
+        não são culpa nossa — muitas vezes somos chamados de indisciplinados, quando o nosso corpo está, na verdade,
         a sofrer de inflamação causada por parasitas intestinais?
       </Heading>
       <Sub>Seja sincero. Quero ajudar!</Sub>
@@ -380,13 +380,13 @@ function StepImpact({ onNext }: { onNext: () => void }) {
           Sim, muito!
         </OptionButton>
         <OptionButton emoji="😅" onClick={onNext}>
-          Yes, it&apos;s so normal in my life that I got used to it.
+          Sim, tornou-se tão normal na minha vida que já me habituei.
         </OptionButton>
         <OptionButton emoji="🤯" onClick={onNext}>
           Se não me tivessem dito, nem saberia que poderiam ser parasitas.
         </OptionButton>
         <OptionButton emoji="😌" onClick={onNext}>
-          No, it doesn&apos;t bother me.
+          Não, não me incomoda.
         </OptionButton>
       </div>
     </section>
@@ -425,7 +425,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
       <div className="rounded-xl bg-brand-green px-4 py-4 text-primary-foreground shadow-md sm:px-5">
         <p className="text-sm font-black sm:text-base">⚠️ Os resultados não mentem:</p>
         <p className="mt-1.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
-          Your sintomas point to something very dangerous —{" "}
+          Os seus sintomas podem indicar algo muito perigoso —{" "}
           <span className="underline">ouça com atenção!</span>
         </p>
       </div>
@@ -434,7 +434,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
         Ouça esta breve explicação 👇
       </p>
       <p className="mt-1 text-center text-xs text-muted-foreground sm:text-sm">
-        Se o audio doesn&apos;t start, just tap it.
+        Se o áudio não começar, toque no botão para o reproduzir.
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
@@ -552,7 +552,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
               </p>
               <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
                 Muito obrigado, Lerato! Estou a fazer desparasitação há 30 dias e os meus níveis de glicose
-                estão finalmente estáveis. I&apos;m so happy about this victory in my life 🎁 you were an
+                estão finalmente estáveis. Estou muito feliz com esta conquista na minha vida 🎁 foste um
                 anjo.
               </p>
             </div>
@@ -718,7 +718,7 @@ function StepInterest({ onNext }: { onNext: () => void }) {
           Sim, quero muito!
         </OptionButton>
         <OptionButton emoji="😍" onClick={onNext}>
-          I&apos;m interested, but I have questions.
+          Tenho interesse, mas tenho algumas perguntas.
         </OptionButton>
       </div>
     </section>
@@ -787,7 +787,7 @@ function PhotoCarousel() {
     return () => clearInterval(id);
   }, [paused]);
 
-  // lock body scroll while the fullscreen lightbox is open
+  // Impedir o deslocamento da página enquanto a imagem ampliada estiver aberta.
   useEffect(() => {
     if (fs === null) return;
     const prev = document.body.style.overflow;
@@ -978,7 +978,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
         Ouça o áudio abaixo: <span aria-hidden="true">👇</span>
       </p>
       <p className="mt-1.5 text-center text-xs text-muted-foreground sm:text-sm">
-        Se o AUDIO doesn&apos;t start, just tap it!
+        Se o áudio não começar, toque no botão para o reproduzir!
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
@@ -1084,7 +1084,7 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
         <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em]">O Protocolo da</p>
         <p className="mt-1 text-4xl font-black italic leading-none sm:text-5xl">Diabetes</p>
         <p className="mx-auto mt-5 max-w-[18rem] text-balance text-sm font-bold leading-snug sm:text-base">
-          I&apos;m analyzing as suas respostas and building your{" "}
+          Estou a analisar as suas respostas e a preparar o seu{" "}
           <span className="rounded bg-white/25 px-1.5 py-0.5">protocolo personalizado!</span>
         </p>
       </div>
@@ -1111,7 +1111,7 @@ const ANALYSIS_ROWS: { label: string; value: number; tone: "red" | "green" }[] =
 function StepProtocol({ onNext }: { onNext: () => void }) {
   return (
     <section className="relative overflow-hidden rounded-2xl">
-      {/* Background image with overlay for readability */}
+      {/* Imagem de fundo com sobreposição para facilitar a leitura */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0"
@@ -1167,7 +1167,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
           />
         </figure>
 
-        {/* Warning + desparasitação intro */}
+        {/* Aviso e introdução à desparasitação */}
         <div className="mt-10 rounded-xl border border-border bg-card/90 p-4 shadow-sm backdrop-blur-sm sm:p-5">
           <p className="text-sm font-black sm:text-base">⚠️ Atenção!</p>
           <p className="mt-2.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
@@ -1492,7 +1492,7 @@ function StepOffer() {
         </figure>
       </div>
 
-      {/* Audio explainer */}
+      {/* Explicação em áudio */}
       <p className="mt-8 text-balance text-center text-sm font-bold leading-snug sm:text-base">
         Ouça o áudio. Vou explicar{" "}
         <span className="text-brand-green">como funciona o Protocolo da Diabetes</span>. 👇
@@ -1658,7 +1658,7 @@ function StepOffer() {
         </div>
       </figure>
 
-      {/* 30-day trial box */}
+      {/* Caixa de garantia de 30 dias */}
       <div className="mt-5 flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
         <div>
           <p className="text-sm font-black uppercase tracking-wide sm:text-base">Teste de 30 dias</p>
