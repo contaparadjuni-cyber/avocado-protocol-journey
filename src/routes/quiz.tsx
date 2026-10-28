@@ -438,11 +438,11 @@ function StepResults({ onNext }: { onNext: () => void }) {
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
-        <p className="text-xs font-bold sm:text-sm">Lerato</p>
+        <p className="text-xs font-bold sm:text-sm">Ana</p>
         <div className="mt-2.5 flex items-center gap-3">
           <SmartImage
             src={avatarAna}
-            alt="Lerato"
+            alt="Ana"
             width={160}
             height={160}
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
@@ -452,7 +452,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
             <button
               type="button"
               onClick={toggleAudio}
-              aria-label={playing ? "Pausar a mensagem de áudio de Lerato" : "Reproduzir a mensagem de áudio de Lerato"}
+              aria-label={playing ? "Pausar a mensagem de áudio de Ana" : "Reproduzir a mensagem de áudio de Ana"}
               aria-pressed={playing}
               aria-controls="lerato-audio"
               className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -551,7 +551,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
                 Rachel Bennett
               </p>
               <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
-                Muito obrigado, Lerato! Estou a fazer desparasitação há 30 dias e os meus níveis de glicose
+                Muito obrigado, Ana! Estou a fazer desparasitação há 30 dias e os meus níveis de glicose
                 estão finalmente estáveis. Estou muito feliz com esta conquista na minha vida 🎁 foste um
                 anjo.
               </p>
@@ -982,11 +982,11 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
-        <p className="text-xs font-bold sm:text-sm">Lerato</p>
+        <p className="text-xs font-bold sm:text-sm">Ana</p>
         <div className="mt-2.5 flex items-center gap-3">
           <SmartImage
             src={avatarAna}
-            alt="Lerato"
+            alt="Ana"
             width={160}
             height={160}
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
@@ -995,7 +995,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
             <button
               type="button"
               onClick={toggleAudio}
-              aria-label={playing ? "Pausar a mensagem de áudio de Lerato" : "Reproduzir a mensagem de áudio de Lerato"}
+              aria-label={playing ? "Pausar a mensagem de áudio de Ana" : "Reproduzir a mensagem de áudio de Ana"}
               aria-pressed={playing}
               aria-controls="lerato-audio-proof"
               className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -1414,7 +1414,7 @@ function WistiaPlayerEmbed() {
 
   return (
     <div
-      aria-label="Testemunho em vídeo de Maria"
+      aria-label="Testemunho em vídeo"
       role="img"
       dangerouslySetInnerHTML={{
         __html:
@@ -1532,11 +1532,11 @@ function StepOffer() {
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
-        <p className="text-xs font-bold sm:text-sm">Lerato</p>
+        <p className="text-xs font-bold sm:text-sm">Ana</p>
         <div className="mt-2.5 flex items-center gap-3">
           <SmartImage
             src={avatarAna}
-            alt="Lerato"
+            alt="Ana"
             width={160}
             height={160}
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
@@ -1656,16 +1656,16 @@ function StepOffer() {
       {/* Video testimonial (Wistia) */}
       <figure
         role="group"
-        aria-label="Testemunho em vídeo de Maria"
+        aria-label="Testemunho em vídeo"
         className="mt-6 overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
       >
         <WistiaPlayerEmbed />
         <figcaption className="px-3 py-2.5 text-left">
           <p className="text-sm font-black sm:text-base">
-            Testemunho — Maria
+            Testemunho
           </p>
           <p className="text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
-            Médica, Brasil
+            Médica, Moçambique
           </p>
         </figcaption>
       </figure>
@@ -1693,7 +1693,7 @@ function StepOffer() {
         <div className="flex items-start gap-2.5">
           <SmartImage
             src={manImg}
-            alt="Fotografia de perfil de Sipho Dlamini"
+            alt="Fotografia de perfil de Tony Alberto"
             width={600}
             height={750}
             className="object-cover"
@@ -1702,13 +1702,13 @@ function StepOffer() {
           <div className="min-w-0 flex-1">
             <div className="rounded-2xl bg-muted px-3.5 py-2.5">
               <p className="truncate text-[0.85rem] font-bold leading-tight sm:text-sm">
-                Sipho Dlamini
+                Tony Alberto
               </p>
               <p className="text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
-                Johannesburg, ZA
+                Moçambique
               </p>
               <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
-                Muito obrigado, Lerato. Fiz tudo exactamente como me ensinou e já estou há 3 meses
+                Muito obrigado, Ana. Fiz tudo exactamente como me ensinou e já estou há 3 meses
                 sem tomar medicamentos. Estou livre da diabetes e muito mais saudável. 🎁
               </p>
             </div>
