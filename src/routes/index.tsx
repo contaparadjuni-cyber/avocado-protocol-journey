@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import hero480 from "@/assets/hero-480.webp.asset.json";
-import hero768 from "@/assets/hero-768.webp.asset.json";
-import hero1024 from "@/assets/hero-1024.webp.asset.json";
+import hero480 from "@/assets/hero-v2-480.webp.asset.json";
+import hero768 from "@/assets/hero-v2-768.webp.asset.json";
+import hero1024 from "@/assets/hero-v2-1024.webp.asset.json";
 
 const HERO_SRCSET = `${hero480.url} 480w, ${hero768.url} 768w, ${hero1024.url} 1024w`;
 const HERO_SIZES = "(max-width: 640px) 100vw, (max-width: 1024px) 600px, 512px";
@@ -51,7 +51,7 @@ function Index() {
           src={hero768.url}
           srcSet={HERO_SRCSET}
           sizes={HERO_SIZES}
-          alt="Before and after glucose readings and the diabetes parasite seen under a microscope"
+          alt="Attention guide about type 2 diabetes: before and after glucose readings, the parasite seen under the microscope and a glucose meter being used"
           width={1024}
           height={1536}
           decoding="async"

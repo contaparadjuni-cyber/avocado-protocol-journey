@@ -4,8 +4,8 @@ import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
 import symptomsWoman from "@/assets/symptoms-woman.webp";
-import news600 from "@/assets/news-600.webp.asset.json";
-import news900 from "@/assets/news-900.webp.asset.json";
+import news600 from "@/assets/news-v2-600.webp.asset.json";
+import news900 from "@/assets/news-v2-900.webp.asset.json";
 import { SmartImage } from "@/components/SmartImage";
 import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
 
@@ -14,11 +14,11 @@ import avatarRita from "@/assets/avatar-rita.webp";
 import avocadoImg from "@/assets/abacate-para-diabetes.webp.asset.json";
 import audioAna from "@/assets/diabetes-protocol-audio.mp3.asset.json";
 import audioProof from "@/assets/diabetes-protocol-audio-2.mp3.asset.json";
-import glucose14DaysV2 from "@/assets/glucose-14days-v2.png.asset.json";
+import glucose14DaysV2 from "@/assets/glucose-255-118.webp.asset.json";
 import slide588 from "@/assets/slide-588.webp.asset.json";
 import slide198 from "@/assets/slide-198.webp.asset.json";
 import slide108 from "@/assets/slide-108.webp.asset.json";
-import remediesVsProtocol from "@/assets/remedies-vs-protocol.webp.asset.json";
+import remediesVsProtocol from "@/assets/remedies-vs-protocol-v2.webp.asset.json";
 import ascarisPhoto from "@/assets/ascaris-lumbricoides.webp.asset.json";
 import avocadoBg from "@/assets/avocado-bg.webp.asset.json";
 import cartoonSick from "@/assets/cartoon-sick-man.webp.asset.json";
@@ -228,7 +228,7 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
           sizes="(max-width: 640px) 100vw, 600px"
           alt="News report: young man dies after parasites are found in his brain, with MRI exam showing nodules caused by parasite eggs"
           width={900}
-          height={1490}
+          height={1350}
           className="object-contain"
           wrapperClassName="w-full"
         />
