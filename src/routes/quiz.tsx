@@ -1376,7 +1376,7 @@ function CtaLink({ children }: { children: React.ReactNode }) {
   return (
     <a
       href={CHECKOUT_URL}
-      className="btn-glow mt-6 flex min-h-14 w-full select-none items-center justify-center rounded-xl bg-brand-green px-5 py-[1.1rem] text-center text-[1.05rem] font-black tracking-tight text-primary-foreground shadow-md [-webkit-tap-highlight-color:transparent] hover:bg-primary-strong active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:text-lg"
+      className="btn-glow cta-pulse mt-6 flex min-h-14 w-full select-none items-center justify-center rounded-xl bg-brand-green px-5 py-[1.1rem] text-center text-[1.05rem] font-black tracking-tight text-primary-foreground shadow-md [-webkit-tap-highlight-color:transparent] hover:bg-primary-strong active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:text-lg"
     >
       {children}
     </a>
