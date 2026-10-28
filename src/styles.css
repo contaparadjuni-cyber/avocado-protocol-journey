@@ -184,6 +184,28 @@
   }
 }
 
+/* Pulsação contínua apenas nos botões da oferta final do quiz. */
+@keyframes cta-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 color-mix(in oklch, var(--brand-green) 0%, transparent);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 0 8px color-mix(in oklch, var(--brand-green) 28%, transparent);
+  }
+}
+
+.cta-pulse {
+  animation: cta-pulse 1.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-pulse {
+    animation: none;
+  }
+}
+
 @keyframes shake-x {
   0%, 100% { transform: translateX(0); }
   25% { transform: translateX(-4px); }
