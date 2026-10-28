@@ -437,7 +437,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
         Se o áudio não começar, toque no botão para o reproduzir.
       </p>
 
-      <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
+      <div className="mt-6 w-full min-w-0 rounded-2xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
         <p className="text-xs font-bold sm:text-sm">Ana</p>
         <div className="mt-2.5 flex items-center gap-3">
           <SmartImage
@@ -448,7 +448,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
           />
 
-          <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-full bg-muted px-3 py-2">
+          <div className="flex min-w-0 w-full flex-1 items-center gap-2.5 rounded-xl bg-muted px-3 py-2">
             <button
               type="button"
               onClick={toggleAudio}
@@ -1157,7 +1157,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
           Ascaris lumbricoides
         </p>
 
-        <figure className="mt-6 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <figure className="mt-6 w-full min-w-0 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
           <SmartImage
             src={ascarisPhoto.url}
             alt="Imagem endoscópica de vermes Ascaris lumbricoides no intestino"
@@ -1376,7 +1376,7 @@ function CtaLink({ children }: { children: React.ReactNode }) {
   return (
     <a
       href={CHECKOUT_URL}
-      className="btn-glow mt-6 block w-full rounded-xl bg-brand-green px-5 py-[1.1rem] text-center text-[1.05rem] font-black tracking-tight text-primary-foreground shadow-lg hover:bg-primary-strong active:scale-[0.99] sm:text-lg"
+      className="btn-glow mt-6 flex min-h-14 w-full select-none items-center justify-center rounded-xl bg-brand-green px-5 py-[1.1rem] text-center text-[1.05rem] font-black tracking-tight text-primary-foreground shadow-md [-webkit-tap-highlight-color:transparent] hover:bg-primary-strong active:scale-[0.99] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:text-lg"
     >
       {children}
     </a>
@@ -1451,26 +1451,26 @@ function StepOffer() {
   }, []);
 
   return (
-    <section>
+    <section className="w-full min-w-0">
       {/* Success banner */}
       <p className="flex items-center justify-center gap-2 text-center text-sm font-black sm:text-base">
         <span aria-hidden="true">🎉</span> Protocolo gerado com{" "}
         <span className="underline">SUCESSO!</span>
       </p>
 
-      <div className="mt-4 rounded-2xl bg-brand-green px-4 py-5 text-center text-primary-foreground shadow-md sm:px-5">
+      <div className="mt-6 rounded-2xl bg-brand-green px-4 py-5 text-center text-primary-foreground shadow-md sm:px-5">
         <h1 className="text-balance text-xl font-black leading-tight sm:text-2xl">
           O seu <span className="text-brand-green-light">protocolo exclusivo</span> está pronto!
         </h1>
       </div>
 
       {/* Antes / Depois cartoons */}
-      <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5">
+      <div className="mt-6 grid min-w-0 grid-cols-2 gap-3 sm:gap-5">
         <figure className="text-center">
           <figcaption className="text-[0.75rem] font-black uppercase tracking-[0.08em] text-muted-foreground sm:text-sm">
             Antes
           </figcaption>
-          <div className="mt-2 rounded-xl border border-border bg-card p-2 shadow-sm">
+          <div className="mt-2 flex aspect-[21/26] items-center justify-center overflow-hidden rounded-xl border border-border bg-card p-2 shadow-sm">
             <SmartImage
               src={cartoonSick.url}
               alt="Ilustração de um homem cansado, com dores de cabeça"
@@ -1499,7 +1499,7 @@ function StepOffer() {
           <figcaption className="text-[0.75rem] font-black uppercase tracking-[0.08em] text-brand-green sm:text-sm">
             Depois
           </figcaption>
-          <div className="mt-2 rounded-xl border-2 border-brand-green/50 bg-card p-2 shadow-sm">
+          <div className="mt-2 flex aspect-[21/26] items-center justify-center overflow-hidden rounded-xl border border-border bg-card p-2 shadow-sm">
             <SmartImage
               src={cartoonHappy.url}
               alt="Ilustração de um homem feliz e saudável a fazer sinal positivo com os dois polegares"
@@ -1526,7 +1526,7 @@ function StepOffer() {
       </div>
 
       {/* Explicação em áudio */}
-      <p className="mt-8 text-balance text-center text-sm font-bold leading-snug sm:text-base">
+      <p className="mt-6 text-balance text-center text-sm font-bold leading-[1.45] sm:text-base">
         Ouça o áudio. Vou explicar{" "}
         <span className="text-brand-green">como funciona o Protocolo da Diabetes</span>. 👇
       </p>
@@ -1576,7 +1576,7 @@ function StepOffer() {
       </div>
 
       {/* Tudo o que vai receber — preços */}
-      <div className="mt-8 rounded-2xl border-2 border-brand-green/60 bg-gradient-to-b from-brand-green/10 to-background p-4 shadow-md sm:p-6">
+      <div className="mt-6 w-full min-w-0 rounded-2xl border border-border bg-gradient-to-b from-brand-green/10 to-background p-4 shadow-sm sm:p-6">
         <p className="text-center text-[0.7rem] font-black uppercase tracking-[0.2em] text-brand-green sm:text-xs">
           O Protocolo da Diabetes
         </p>
@@ -1584,17 +1584,17 @@ function StepOffer() {
           Tudo o que <span className="text-brand-green-light">vai receber</span>
         </h2>
 
-        <ul className="mt-5 space-y-3">
+        <ul className="mt-5 divide-y divide-border/70">
           {OFFER_ITEMS.map((item) => (
-            <li key={item.label} className="flex items-center gap-2.5 text-[0.85rem] sm:text-sm">
+            <li key={item.label} className="flex min-w-0 items-center gap-2.5 py-3 text-[0.85rem] leading-[1.45] sm:text-sm">
               <span
                 aria-hidden="true"
                 className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-green/15 text-brand-green"
               >
                 ✓
               </span>
-              <span className="min-w-0 flex-1 font-semibold leading-snug">{item.label}</span>
-              <span className="shrink-0 font-black text-muted-foreground">{item.price}</span>
+              <span className="min-w-0 flex-1 font-semibold leading-[1.45]">{item.label}</span>
+              <span className="shrink-0 text-right font-black tabular-nums text-muted-foreground">{item.price}</span>
             </li>
           ))}
         </ul>
@@ -1634,7 +1634,7 @@ function StepOffer() {
       </div>
 
       {/* garantia de 30 dias seal */}
-      <div className="mt-6 flex items-center gap-4 rounded-2xl border border-border bg-gradient-to-r from-amber-100/70 to-amber-50/60 p-4 shadow-sm sm:p-5">
+      <div className="mt-6 flex min-w-0 items-center gap-4 rounded-2xl border border-border bg-gradient-to-r from-amber-100/70 to-amber-50/60 p-4 shadow-sm sm:p-5">
         <div
           aria-hidden="true"
           className="grid h-16 w-16 shrink-0 place-items-center rounded-full border-4 border-amber-600/70 bg-gradient-to-b from-amber-400 to-amber-600 text-center text-primary-foreground shadow-inner sm:h-20 sm:w-20"
@@ -1646,7 +1646,7 @@ function StepOffer() {
           </span>
         </div>
         <div>
-          <p className="text-base font-black leading-tight sm:text-lg">Experimente com segurança — 30 dias</p>
+          <p className="text-base font-black leading-[1.4] sm:text-lg">Experimente com segurança — 30 dias</p>
           <p className="mt-1 text-[0.8rem] font-semibold leading-snug text-muted-foreground sm:text-sm">
             Se não ficar satisfeito, devolvemos o seu dinheiro.
           </p>
@@ -1671,7 +1671,7 @@ function StepOffer() {
       </figure>
 
       {/* Caixa de garantia de 30 dias */}
-      <div className="mt-5 flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
+      <div className="mt-6 flex min-w-0 items-center justify-between gap-3 rounded-2xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
         <div>
           <p className="text-sm font-black uppercase tracking-wide sm:text-base">Teste de 30 dias</p>
           <p className="mt-0.5 text-[0.8rem] font-semibold text-muted-foreground sm:text-sm">
@@ -1689,7 +1689,7 @@ function StepOffer() {
       <CtaLink>Aceder agora ao meu protocolo! ✅</CtaLink>
 
       {/* Facebook-style comment */}
-      <div className="mt-6 rounded-xl border border-border bg-card p-4 shadow-sm">
+      <div className="mt-6 w-full min-w-0 rounded-2xl border border-border bg-card p-4 shadow-sm">
         <div className="flex items-start gap-2.5">
           <SmartImage
             src={manImg}
@@ -1728,7 +1728,7 @@ function StepOffer() {
       <CtaLink>Aceder agora ao meu protocolo! ✅</CtaLink>
 
       {/* Zero risk box */}
-      <div className="mt-6 rounded-2xl border border-border bg-card p-5 text-center shadow-sm sm:p-6">
+      <div className="mt-6 w-full min-w-0 rounded-2xl border border-border bg-card p-5 text-center shadow-sm sm:p-6">
         <span
           aria-hidden="true"
           className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-brand-green/15 text-2xl text-brand-green"
