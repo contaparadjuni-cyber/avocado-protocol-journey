@@ -51,7 +51,7 @@ function Index() {
           src={hero768.url}
           srcSet={HERO_SRCSET}
           sizes={HERO_SIZES}
-          alt="Before and after glucose readings and the diabetes parasite seen under a microscope"
+          alt="Attention guide about type 2 diabetes: before and after glucose readings, the parasite seen under the microscope and a glucose meter being used"
           width={1024}
           height={1536}
           decoding="async"
