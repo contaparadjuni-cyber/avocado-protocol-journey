@@ -448,7 +448,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
           />
 
-          <div className="flex min-w-0 w-full flex-1 items-center gap-2.5 rounded-xl bg-muted px-3 py-2">
+          <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-full bg-muted px-3 py-2">
             <button
               type="button"
               onClick={toggleAudio}
@@ -1414,6 +1414,7 @@ function WistiaPlayerEmbed() {
 
   return (
     <div
+      className="w-full overflow-hidden rounded-xl"
       aria-label="Testemunho em vídeo"
       role="img"
       dangerouslySetInnerHTML={{
@@ -1541,7 +1542,7 @@ function StepOffer() {
             height={160}
             wrapperClassName="h-10 w-10 shrink-0 rounded-full"
           />
-          <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-full bg-muted px-3 py-2">
+          <div className="flex min-w-0 w-full flex-1 items-center gap-2.5 rounded-xl bg-muted px-3 py-2">
             <button
               type="button"
               onClick={toggleAudio}
@@ -1645,8 +1646,8 @@ function StepOffer() {
             de garantia
           </span>
         </div>
-        <div>
-          <p className="text-base font-black leading-[1.4] sm:text-lg">Experimente com segurança — 30 dias</p>
+        <div className="min-w-0 flex-1">
+          <p className="break-words text-base font-black leading-[1.4] sm:text-lg">Experimente com segurança — 30 dias</p>
           <p className="mt-1 text-[0.8rem] font-semibold leading-snug text-muted-foreground sm:text-sm">
             Se não ficar satisfeito, devolvemos o seu dinheiro.
           </p>
