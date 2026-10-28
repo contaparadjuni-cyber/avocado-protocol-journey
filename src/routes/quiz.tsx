@@ -1408,7 +1408,7 @@ function WistiaPlayerEmbed() {
     embed.src = `https://fast.wistia.com/embed/${WISTIA_MEDIA_ID}.js`;
     embed.type = "module";
     embed.async = true;
-    embed.dataset.wistiaMedia = WISTIA_MEDIA_ID;
+    embed.dataset["wistiaMedia"] = WISTIA_MEDIA_ID;
     document.head.appendChild(embed);
   }, []);
 
