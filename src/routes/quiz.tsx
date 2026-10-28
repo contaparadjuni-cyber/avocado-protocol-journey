@@ -1620,42 +1620,21 @@ function StepOffer() {
         </div>
       </div>
 
-      {/* Video testimonial */}
+      {/* Video testimonial (Wistia) */}
       <figure
         role="group"
         aria-label="Testemunho em vídeo de Maria"
         className="mt-6 overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
       >
-        <div className="relative">
-          <SmartImage
-            src={womanImg}
-            alt="Maria, médica brasileira, a partilhar os seus resultados com o protocolo"
-            width={600}
-            height={750}
-            className="object-cover"
-            wrapperClassName="w-full"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 grid place-items-center"
-          >
-            <span className="grid h-14 w-14 place-items-center rounded-xl bg-red-600/90 pl-1 text-2xl text-white shadow-lg">
-              ▶
-            </span>
-          </div>
-          <figcaption className="absolute bottom-2 left-3 right-3 text-left">
-            <p className="text-sm font-black text-white drop-shadow sm:text-base">
-              Testemunho — Maria
-            </p>
-            <p className="text-[0.7rem] font-semibold text-white/90 drop-shadow sm:text-xs">
-              Médica, Brasil
-            </p>
-          </figcaption>
-        </div>
+        <WistiaPlayerEmbed />
+        <figcaption className="px-3 py-2.5 text-left">
+          <p className="text-sm font-black sm:text-base">
+            Testemunho — Maria
+          </p>
+          <p className="text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
+            Médica, Brasil
+          </p>
+        </figcaption>
       </figure>
 
       {/* Caixa de garantia de 30 dias */}
