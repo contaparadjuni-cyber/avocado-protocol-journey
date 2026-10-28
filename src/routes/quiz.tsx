@@ -746,7 +746,7 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
           Sim, comprometo-me!
         </OptionButton>
         <OptionButton emoji="🤪" selected={choice === "try"} onClick={() => pick("try")}>
-          I&apos;ll try!
+          Vou experimentar!
         </OptionButton>
       </div>
 
