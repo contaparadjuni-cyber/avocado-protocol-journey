@@ -21,6 +21,8 @@ import slide108 from "@/assets/slide-108.webp.asset.json";
 import remediesVsProtocol from "@/assets/remedies-vs-protocol.webp.asset.json";
 import ascarisPhoto from "@/assets/ascaris-lumbricoides.webp.asset.json";
 import avocadoBg from "@/assets/avocado-bg.webp.asset.json";
+import cartoonSick from "@/assets/cartoon-sick-man.webp.asset.json";
+import cartoonHappy from "@/assets/cartoon-happy-man.webp.asset.json";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
@@ -41,7 +43,10 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 16;
+const TOTAL_STEPS = 17;
+
+/* Replace with the real checkout link when the payment page is ready. */
+const CHECKOUT_URL = "#";
 
 const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
@@ -86,7 +91,8 @@ function Quiz() {
       {step === 13 && <StepCommitment onNext={next} />}
       {step === 14 && <StepAudioProof onNext={next} />}
       {step === 15 && <StepAnalyzing onNext={next} />}
-      {step === 16 && <StepProtocol />}
+      {step === 16 && <StepProtocol onNext={next} />}
+      {step === 17 && <StepOffer />}
     </QuizShell>
   );
 }
@@ -1101,7 +1107,7 @@ const ANALYSIS_ROWS: { label: string; value: number; tone: "red" | "green" }[] =
   { label: "Chances of fully eliminating diabetes", value: 100, tone: "green" },
 ];
 
-function StepProtocol() {
+function StepProtocol({ onNext }: { onNext: () => void }) {
   return (
     <section className="relative overflow-hidden rounded-2xl">
       {/* Background image with overlay for readability */}
@@ -1194,7 +1200,7 @@ function StepProtocol() {
           />
         </figure>
 
-        <CtaButton>Gerar Protocolo de Tratamento! ✅</CtaButton>
+        <CtaButton onClick={onNext}>Gerar Protocolo de Tratamento! ✅</CtaButton>
       </div>
     </section>
   );
@@ -1360,5 +1366,378 @@ function Pill({ children }: { children: React.ReactNode }) {
     <span className="rounded-full bg-brand-green px-2.5 py-1 text-[0.55rem] font-bold uppercase tracking-wide text-primary-foreground shadow sm:text-[0.65rem]">
       {children}
     </span>
+  );
+}
+
+/* ---------- Step 17: Offer ---------- */
+
+function CtaLink({ children }: { children: React.ReactNode }) {
+  return (
+    <a
+      href={CHECKOUT_URL}
+      className="btn-glow mt-6 block w-full rounded-xl bg-brand-green px-5 py-[1.1rem] text-center text-[1.05rem] font-black tracking-tight text-primary-foreground shadow-lg hover:bg-primary-strong active:scale-[0.99] sm:text-lg"
+    >
+      {children}
+    </a>
+  );
+}
+
+const OFFER_ITEMS = [
+  { label: "Deworming preparation", price: "$37.90" },
+  { label: "Complete deworming protocol", price: "$57.00" },
+  { label: "1-on-1 individual support", price: "$97.00" },
+  { label: "Anti-parasite food guide", price: "$27.00" },
+  { label: "3 Q&A sessions with our team", price: "$17.00" },
+  { label: "Annual protocol maintenance", price: "$37.00" },
+];
+
+function StepOffer() {
+  const [playing, setPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const toggleAudio = () => {
+    const el = audioRef.current;
+    if (!el) return;
+    if (playing) {
+      el.pause();
+      setPlaying(false);
+    } else {
+      el.play()
+        .then(() => setPlaying(true))
+        .catch(() => setPlaying(false));
+    }
+  };
+
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el) return;
+    const onEnd = () => setPlaying(false);
+    el.addEventListener("ended", onEnd);
+    return () => el.removeEventListener("ended", onEnd);
+  }, []);
+
+  return (
+    <section>
+      {/* Success banner */}
+      <p className="flex items-center justify-center gap-2 text-center text-sm font-black sm:text-base">
+        <span aria-hidden="true">🎉</span> Protocol generated with{" "}
+        <span className="underline">SUCCESS!</span>
+      </p>
+
+      <div className="mt-4 rounded-2xl bg-brand-green px-4 py-5 text-center text-primary-foreground shadow-md sm:px-5">
+        <h1 className="text-balance text-xl font-black leading-tight sm:text-2xl">
+          Your <span className="text-brand-green-light">exclusive protocol</span> is ready!
+        </h1>
+      </div>
+
+      {/* Before / After cartoons */}
+      <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-5">
+        <figure className="text-center">
+          <figcaption className="text-[0.75rem] font-black uppercase tracking-[0.08em] text-muted-foreground sm:text-sm">
+            Before
+          </figcaption>
+          <div className="mt-2 rounded-xl border border-border bg-card p-2 shadow-sm">
+            <SmartImage
+              src={cartoonSick.url}
+              alt="Cartoon of a tired, suffering man holding his aching head"
+              width={420}
+              height={520}
+              className="object-contain"
+              wrapperClassName="w-full"
+            />
+          </div>
+          <p className="mt-2 text-[0.75rem] font-semibold leading-snug text-muted-foreground sm:text-sm">
+            This is you suffering with the parasites.
+          </p>
+          <div
+            role="progressbar"
+            aria-label="Progress before the protocol"
+            aria-valuenow={30}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            className="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-muted"
+          >
+            <div className="h-full w-[30%] rounded-full bg-destructive/70" />
+          </div>
+        </figure>
+
+        <figure className="text-center">
+          <figcaption className="text-[0.75rem] font-black uppercase tracking-[0.08em] text-brand-green sm:text-sm">
+            After
+          </figcaption>
+          <div className="mt-2 rounded-xl border-2 border-brand-green/50 bg-card p-2 shadow-sm">
+            <SmartImage
+              src={cartoonHappy.url}
+              alt="Cartoon of a happy, healthy man giving two thumbs up"
+              width={420}
+              height={520}
+              className="object-contain"
+              wrapperClassName="w-full"
+            />
+          </div>
+          <p className="mt-2 text-[0.75rem] font-semibold leading-snug text-muted-foreground sm:text-sm">
+            This is you, <span className="text-brand-green">free of Diabetes</span>.
+          </p>
+          <div
+            role="progressbar"
+            aria-label="Progress after the protocol"
+            aria-valuenow={95}
+            aria-valuemin={0}
+            aria-valuemax={100}
+            className="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-muted"
+          >
+            <div className="h-full w-[95%] rounded-full bg-brand-green" />
+          </div>
+        </figure>
+      </div>
+
+      {/* Audio explainer */}
+      <p className="mt-8 text-balance text-center text-sm font-bold leading-snug sm:text-base">
+        Listen to the audio. I&apos;ll explain{" "}
+        <span className="text-brand-green">how the Diabetes Protocol works</span>. 👇
+      </p>
+
+      <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
+        <p className="text-xs font-bold sm:text-sm">Lerato</p>
+        <div className="mt-2.5 flex items-center gap-3">
+          <SmartImage
+            src={avatarAna}
+            alt="Lerato"
+            width={160}
+            height={160}
+            wrapperClassName="h-10 w-10 shrink-0 rounded-full"
+          />
+          <div className="flex min-w-0 flex-1 items-center gap-2.5 rounded-full bg-muted px-3 py-2">
+            <button
+              type="button"
+              onClick={toggleAudio}
+              aria-label={playing ? "Pause the protocol explanation" : "Play the protocol explanation"}
+              aria-pressed={playing}
+              aria-controls="offer-audio"
+              className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-brand-green text-xs text-primary-foreground transition-shadow focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green-light focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
+            </button>
+            <audio id="offer-audio" ref={audioRef} src={audioAna.url} preload="none" />
+            <span className="sr-only" aria-live="polite">
+              {playing ? "Audio playing" : "Audio paused"}
+            </span>
+            <div
+              aria-hidden="true"
+              className="flex min-w-0 flex-1 items-end gap-[2px] overflow-hidden"
+            >
+              {Array.from({ length: 34 }).map((_, i) => (
+                <span
+                  key={i}
+                  className="w-[3px] shrink-0 rounded-full bg-muted-foreground/60"
+                  style={{ height: `${6 + ((i * 7) % 16)}px` }}
+                />
+              ))}
+            </div>
+            <span className="shrink-0 text-[0.7rem] font-semibold text-muted-foreground">
+              00:33
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Everything you'll get — price box */}
+      <div className="mt-8 rounded-2xl border-2 border-brand-green/60 bg-gradient-to-b from-brand-green/10 to-background p-4 shadow-md sm:p-6">
+        <p className="text-center text-[0.7rem] font-black uppercase tracking-[0.2em] text-brand-green sm:text-xs">
+          The Diabetes Protocol
+        </p>
+        <h2 className="mt-1.5 text-balance text-center text-lg font-black leading-snug sm:text-xl">
+          Everything you <span className="text-brand-green-light">will receive</span>
+        </h2>
+
+        <ul className="mt-5 space-y-3">
+          {OFFER_ITEMS.map((item) => (
+            <li key={item.label} className="flex items-center gap-2.5 text-[0.85rem] sm:text-sm">
+              <span
+                aria-hidden="true"
+                className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-green/15 text-brand-green"
+              >
+                ✓
+              </span>
+              <span className="min-w-0 flex-1 font-semibold leading-snug">{item.label}</span>
+              <span className="shrink-0 font-black text-muted-foreground">{item.price}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-5 border-t border-border pt-4 text-center">
+          <p className="text-sm font-bold text-muted-foreground sm:text-base">
+            Total value:{" "}
+            <span className="text-lg font-black text-destructive sm:text-xl">$272.90</span>
+          </p>
+          <p className="mt-1 text-base font-black sm:text-lg">Today, for only</p>
+          <p className="text-4xl font-black leading-none text-brand-green sm:text-5xl">
+            $37<span className="text-2xl sm:text-3xl">.90</span>
+          </p>
+        </div>
+      </div>
+
+      <CtaLink>Access My Protocol Now! ✅</CtaLink>
+
+      {/* Payment reassurance */}
+      <div className="mt-5 space-y-3 text-center">
+        <div>
+          <p className="text-sm font-black sm:text-base">
+            <span aria-hidden="true">💰</span> One single payment
+          </p>
+          <p className="mt-0.5 text-xs font-semibold text-muted-foreground sm:text-sm">
+            No monthly fees.
+          </p>
+        </div>
+        <div>
+          <p className="text-sm font-black sm:text-base">
+            <span aria-hidden="true">✅</span> Immediate access
+          </p>
+          <p className="mt-0.5 text-xs font-semibold text-muted-foreground sm:text-sm">
+            Access right after payment.
+          </p>
+        </div>
+      </div>
+
+      {/* 30-day guarantee seal */}
+      <div className="mt-6 flex items-center gap-4 rounded-2xl border border-border bg-gradient-to-r from-amber-100/70 to-amber-50/60 p-4 shadow-sm sm:p-5">
+        <div
+          aria-hidden="true"
+          className="grid h-16 w-16 shrink-0 place-items-center rounded-full border-4 border-amber-600/70 bg-gradient-to-b from-amber-400 to-amber-600 text-center text-primary-foreground shadow-inner sm:h-20 sm:w-20"
+        >
+          <span className="text-[0.55rem] font-black uppercase leading-tight tracking-wide sm:text-[0.65rem]">
+            30 days
+            <br />
+            guarantee
+          </span>
+        </div>
+        <div>
+          <p className="text-base font-black leading-tight sm:text-lg">Safe Trial — 30 Days</p>
+          <p className="mt-1 text-[0.8rem] font-semibold leading-snug text-muted-foreground sm:text-sm">
+            Guaranteed results or your money back.
+          </p>
+        </div>
+      </div>
+
+      {/* Video testimonial */}
+      <figure
+        role="group"
+        aria-label="Video testimonial from Maria"
+        className="mt-6 overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
+      >
+        <div className="relative">
+          <SmartImage
+            src={womanImg}
+            alt="Maria, a doctor from Brazil, sharing her results with the protocol"
+            width={600}
+            height={750}
+            className="object-cover"
+            wrapperClassName="w-full"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-background/70 via-transparent to-transparent"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 grid place-items-center"
+          >
+            <span className="grid h-14 w-14 place-items-center rounded-xl bg-red-600/90 pl-1 text-2xl text-white shadow-lg">
+              ▶
+            </span>
+          </div>
+          <figcaption className="absolute bottom-2 left-3 right-3 text-left">
+            <p className="text-sm font-black text-white drop-shadow sm:text-base">
+              Testimonial — Maria
+            </p>
+            <p className="text-[0.7rem] font-semibold text-white/90 drop-shadow sm:text-xs">
+              Doctor, Brazil
+            </p>
+          </figcaption>
+        </div>
+      </figure>
+
+      {/* 30-day trial box */}
+      <div className="mt-5 flex items-center justify-between gap-3 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
+        <div>
+          <p className="text-sm font-black uppercase tracking-wide sm:text-base">30-Day Test</p>
+          <p className="mt-0.5 text-[0.8rem] font-semibold text-muted-foreground sm:text-sm">
+            No commitment
+          </p>
+        </div>
+        <div className="text-right">
+          <p className="text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
+            for only 3 payments of
+          </p>
+          <p className="text-lg font-black leading-tight text-brand-green sm:text-xl">$8.27</p>
+        </div>
+      </div>
+
+      <CtaLink>Access My Protocol Now! ✅</CtaLink>
+
+      {/* Facebook-style comment */}
+      <div className="mt-6 rounded-xl border border-border bg-card p-4 shadow-sm">
+        <div className="flex items-start gap-2.5">
+          <SmartImage
+            src={manImg}
+            alt="Profile photo of Sipho Dlamini"
+            width={600}
+            height={750}
+            className="object-cover"
+            wrapperClassName="h-10 w-10 shrink-0 rounded-full"
+          />
+          <div className="min-w-0 flex-1">
+            <div className="rounded-2xl bg-muted px-3.5 py-2.5">
+              <p className="truncate text-[0.85rem] font-bold leading-tight sm:text-sm">
+                Sipho Dlamini
+              </p>
+              <p className="text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
+                Johannesburg, ZA
+              </p>
+              <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
+                Thank you so much Lerato. I did everything exactly as you showed me, and it&apos;s
+                been 3 months now without any medication. I&apos;m free of diabetes and much
+                healthier. 🎁
+              </p>
+            </div>
+            <div className="mt-1.5 flex items-center gap-3 px-3 text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
+              <span>1 h</span>
+              <span className="text-brand-green">Like</span>
+              <span className="text-brand-green">Reply</span>
+              <span className="ml-auto flex items-center gap-1">
+                <span aria-hidden="true">👍❤️</span>
+                <span aria-label="32 reactions">32</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <CtaLink>Access My Protocol Now! ✅</CtaLink>
+
+      {/* Zero risk box */}
+      <div className="mt-6 rounded-2xl border border-border bg-card p-5 text-center shadow-sm sm:p-6">
+        <span
+          aria-hidden="true"
+          className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-brand-green/15 text-2xl text-brand-green"
+        >
+          🛡️
+        </span>
+        <p className="mt-3 text-base font-black sm:text-lg">Your risk is zero!</p>
+        <p className="mt-3 text-[0.8rem] font-semibold leading-relaxed text-muted-foreground sm:text-sm">
+          Under the <span className="text-foreground">Consumer Defense Code</span>, every purchase
+          is protected by a <span className="text-foreground">30-day guarantee</span>. If the
+          protocol does <span className="text-foreground">NOT</span> meet your expectations and you
+          don&apos;t see results within{" "}
+          <span className="text-foreground">30 days</span>, we will refund your money —{" "}
+          <span className="text-foreground">no questions asked</span> and no bureaucracy.
+        </p>
+        <p className="mt-3 text-[0.8rem] font-black leading-relaxed sm:text-sm">
+          Try it risk-free!
+        </p>
+      </div>
+
+      <CtaLink>Access My Protocol Now! ✅</CtaLink>
+    </section>
   );
 }
