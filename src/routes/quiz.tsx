@@ -1384,11 +1384,11 @@ function CtaLink({ children }: { children: React.ReactNode }) {
 }
 
 const OFFER_ITEMS = [
-  { label: "Preparação para a desparasitação", price: "$37.90" },
-  { label: "Protocolo completo de desparasitação", price: "$57.00" },
-  { label: "Acompanhamento individual", price: "$97.00" },
-  { label: "Guia alimentar antiparasitário", price: "$27.00" },
-  { label: "3 sessões de perguntas e respostas com a nossa equipa", price: "$17.00" },
+  { label: "Preparação para a desparasitação", price: "397 MT" },
+  { label: "Protocolo completo de desparasitação", price: "597 MT" },
+  { label: "Acompanhamento individual", price: "797 MT" },
+  { label: "Guia alimentar antiparasitário", price: "247 MT" },
+  { label: "3 sessões de perguntas e respostas com a nossa equipa", price: "197 MT" },
   { label: "Acompanhamento anual do protocolo", price: "$37.00" },
 ];
 
@@ -1569,11 +1569,11 @@ function StepOffer() {
         <div className="mt-5 border-t border-border pt-4 text-center">
           <p className="text-sm font-bold text-muted-foreground sm:text-base">
             Valor total:{" "}
-            <span className="text-lg font-black text-destructive sm:text-xl">$272.90</span>
+            <span className="text-lg font-black text-destructive sm:text-xl">2.632 MT</span>
           </p>
           <p className="mt-1 text-base font-black sm:text-lg">Hoje, por apenas</p>
           <p className="text-4xl font-black leading-none text-brand-green sm:text-5xl">
-            $37<span className="text-2xl sm:text-3xl">.90</span>
+            297<span className="text-2xl sm:text-3xl"> MT</span>
           </p>
         </div>
       </div>
@@ -1668,9 +1668,9 @@ function StepOffer() {
         </div>
         <div className="text-right">
           <p className="text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
-            por apenas 3 pagamentos de
+            por apenas
           </p>
-          <p className="text-lg font-black leading-tight text-brand-green sm:text-xl">$8.27</p>
+          <p className="text-lg font-black leading-tight text-brand-green sm:text-xl">297 MT</p>
         </div>
       </div>
 
