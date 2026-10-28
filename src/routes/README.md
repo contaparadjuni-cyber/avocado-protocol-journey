@@ -1,21 +1,18 @@
-# Routes
+# Rotas
 
-TanStack Start uses **file-based routing**. Every `.tsx` file in this directory
-defines a route. Do **not** create `src/pages/`, `src/routes/_app/index.tsx`, or
-`app/layout.tsx` — those are Next.js / Remix conventions. The only root layout
-is `src/routes/__root.tsx`.
+O TanStack Start utiliza **rotas baseadas em ficheiros**. Cada ficheiro `.tsx` neste diretório define uma rota. Não crie `src/pages/`, `src/routes/_app/index.tsx` ou `app/layout.tsx` — essas são convenções do Next.js / Remix. O único layout raiz é `src/routes/__root.tsx`.
 
-## Conventions
+## Convenções
 
-| File | URL |
+| Ficheiro | URL |
 | --- | --- |
 | `index.tsx` | `/` |
 | `about.tsx` | `/about` |
 | `users/index.tsx` | `/users` |
-| `users/$id.tsx` | `/users/:id` (dynamic — bare `$`, no curly braces) |
-| `posts/{-$category}.tsx` | `/posts/:category?` (optional segment) |
-| `files/$.tsx` | `/files/*` (splat — read via `_splat` param, never `*`) |
-| `_layout.tsx` | layout route (renders children via `<Outlet />`) |
-| `__root.tsx` | app shell — wraps every page; preserve `<Outlet />` |
+| `users/$id.tsx` | `/users/:id` (dinâmica — usar `$` simples, sem chavetas) |
+| `posts/{-$category}.tsx` | `/posts/:category?` (segmento opcional) |
+| `files/$.tsx` | `/files/*` (rota abrangente — ler através do parâmetro `_splat`, nunca `*`) |
+| `_layout.tsx` | rota de layout (apresenta os elementos filhos através de `<Outlet />`) |
+| `__root.tsx` | estrutura principal da aplicação — envolve todas as páginas; preservar `<Outlet />` |
 
-`routeTree.gen.ts` is auto-generated. Don't edit it by hand.
+O ficheiro `routeTree.gen.ts` é gerado automaticamente. Não o edite manualmente.
