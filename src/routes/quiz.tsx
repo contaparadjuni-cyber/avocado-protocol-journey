@@ -21,6 +21,8 @@ import slide108 from "@/assets/slide-108.webp.asset.json";
 import remediesVsProtocol from "@/assets/remedies-vs-protocol.webp.asset.json";
 import ascarisPhoto from "@/assets/ascaris-lumbricoides.webp.asset.json";
 import avocadoBg from "@/assets/avocado-bg.webp.asset.json";
+import cartoonSick from "@/assets/cartoon-sick-man.webp.asset.json";
+import cartoonHappy from "@/assets/cartoon-happy-man.webp.asset.json";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
@@ -41,7 +43,10 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 16;
+const TOTAL_STEPS = 17;
+
+/* Replace with the real checkout link when the payment page is ready. */
+const CHECKOUT_URL = "#";
 
 const SYMPTOMS_LEFT = ["BLURRY VISION", "EXCESSIVE THIRST", "TIREDNESS", "NAUSEA"];
 const SYMPTOMS_RIGHT = ["LEG PAIN", "TINGLING", "INSOMNIA", "FATIGUE"];
@@ -86,7 +91,8 @@ function Quiz() {
       {step === 13 && <StepCommitment onNext={next} />}
       {step === 14 && <StepAudioProof onNext={next} />}
       {step === 15 && <StepAnalyzing onNext={next} />}
-      {step === 16 && <StepProtocol />}
+      {step === 16 && <StepProtocol onNext={next} />}
+      {step === 17 && <StepOffer />}
     </QuizShell>
   );
 }
@@ -1101,7 +1107,7 @@ const ANALYSIS_ROWS: { label: string; value: number; tone: "red" | "green" }[] =
   { label: "Chances of fully eliminating diabetes", value: 100, tone: "green" },
 ];
 
-function StepProtocol() {
+function StepProtocol({ onNext }: { onNext: () => void }) {
   return (
     <section className="relative overflow-hidden rounded-2xl">
       {/* Background image with overlay for readability */}
@@ -1194,7 +1200,7 @@ function StepProtocol() {
           />
         </figure>
 
-        <CtaButton>Gerar Protocolo de Tratamento! ✅</CtaButton>
+        <CtaButton onClick={onNext}>Gerar Protocolo de Tratamento! ✅</CtaButton>
       </div>
     </section>
   );
