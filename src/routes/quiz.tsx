@@ -73,10 +73,48 @@ function Quiz() {
     img.src = news900.url;
   }, [step]);
 
+  // Meta Pixel: carregar e registar PageView quando o quiz é aberto.
+  useEffect(() => {
+    const w = window as Window & {
+      fbq?: (...args: unknown[]) => void;
+      _fbq?: (...args: unknown[]) => void;
+    };
+
+    if (!w.fbq) {
+      const fbq = function (...args: unknown[]) {
+        const fn = fbq as typeof fbq & { callMethod?: (...args: unknown[]) => void; queue?: unknown[][] };
+        if (fn.callMethod) fn.callMethod(...args);
+        else (fn.queue ??= []).push(args);
+      } as typeof w.fbq & { queue?: unknown[][]; loaded?: boolean; version?: string };
+      w.fbq = fbq;
+      w._fbq = fbq;
+      fbq.queue = [];
+      fbq.loaded = true;
+      fbq.version = "2.0";
+
+      const script = document.createElement("script");
+      script.async = true;
+      script.src = "https://connect.facebook.net/en_US/fbevents.js";
+      document.head.appendChild(script);
+    }
+
+    w.fbq("init", "1513406960271858");
+    w.fbq("track", "PageView");
+  }, []);
+
 
 
   return (
     <QuizShell progress={(step / TOTAL_STEPS) * 100}>
+      <noscript>
+        <img
+          height="1"
+          width="1"
+          style={{ display: "none" }}
+          src="https://www.facebook.com/tr?id=1513406960271858&ev=PageView&noscript=1"
+          alt=""
+        />
+      </noscript>
       {step === 1 && <StepGender onNext={next} />}
       {step === 2 && <StepSymptomsIllustration onNext={next} />}
       {step === 3 && <StepDeworming onNext={next} />}
