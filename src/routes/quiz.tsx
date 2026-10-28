@@ -1392,6 +1392,39 @@ const OFFER_ITEMS = [
   { label: "Acompanhamento anual do protocolo", price: "397 MT" },
 ];
 
+// Wistia embed: injects the player scripts once and renders the custom element.
+const WISTIA_MEDIA_ID = "qmwv20xd56";
+
+function WistiaPlayerEmbed() {
+  useEffect(() => {
+    if (document.querySelector(`script[data-wistia-media="${WISTIA_MEDIA_ID}"]`)) return;
+
+    const player = document.createElement("script");
+    player.src = "https://fast.wistia.com/player.js";
+    player.async = true;
+    document.head.appendChild(player);
+
+    const embed = document.createElement("script");
+    embed.src = `https://fast.wistia.com/embed/${WISTIA_MEDIA_ID}.js`;
+    embed.type = "module";
+    embed.async = true;
+    embed.dataset.wistiaMedia = WISTIA_MEDIA_ID;
+    document.head.appendChild(embed);
+  }, []);
+
+  return (
+    <div
+      aria-label="Testemunho em vídeo de Maria"
+      role="img"
+      dangerouslySetInnerHTML={{
+        __html:
+          `<style>wistia-player[media-id='${WISTIA_MEDIA_ID}']:not(:defined){background:center / contain no-repeat url('https://fast.wistia.com/embed/medias/${WISTIA_MEDIA_ID}/swatch');display:block;filter:blur(5px);padding-top:177.22%;}</style>` +
+          `<wistia-player media-id="${WISTIA_MEDIA_ID}" aspect="0.5642633228840125"></wistia-player>`,
+      }}
+    />
+  );
+}
+
 function StepOffer() {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
