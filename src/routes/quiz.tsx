@@ -212,7 +212,7 @@ function StepNewsWarning({ onNext }: { onNext: () => void }) {
           Se nunca fez uma desparasitação natural, tenha cuidado:
         </span>{" "}
         os vermes podem multiplicar-se no seu corpo e atingir órgãos vitais, como o cérebro, o coração e os pulmões.
-        Don&apos;t ignore this risk —{" "}
+        Não ignore este risco —{" "}
         <span className="text-brand-green">
           fazer desparasitação pelo menos uma vez por ano é essencial!
         </span>
@@ -552,7 +552,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
               </p>
               <p className="mt-1 text-[0.85rem] leading-relaxed sm:text-sm">
                 Muito obrigado, Lerato! Estou a fazer desparasitação há 30 dias e os meus níveis de glicose
-                are finally stable. I&apos;m so happy about this victory in my life 🎁 you were an
+                estão finalmente estáveis. I&apos;m so happy about this victory in my life 🎁 you were an
                 anjo.
               </p>
             </div>
@@ -1171,7 +1171,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
         <div className="mt-10 rounded-xl border border-border bg-card/90 p-4 shadow-sm backdrop-blur-sm sm:p-5">
           <p className="text-sm font-black sm:text-base">⚠️ Atenção!</p>
           <p className="mt-2.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
-            With our Protocol you can relax —{" "}
+            Com o nosso protocolo, pode ficar tranquilo —{" "}
             <span className="text-brand-green">nenhum verme ou parasita sairá vivo</span> in an
             de forma desconfortável. São eliminados{" "}
             <span className="text-brand-green">já morto e decomposto</span>, almost
@@ -1421,7 +1421,7 @@ function StepOffer() {
     <section>
       {/* Success banner */}
       <p className="flex items-center justify-center gap-2 text-center text-sm font-black sm:text-base">
-        <span aria-hidden="true">🎉</span> Protocol generated with{" "}
+        <span aria-hidden="true">🎉</span> Protocolo gerado com{" "}
         <span className="underline">SUCESSO!</span>
       </p>
 
@@ -1542,7 +1542,7 @@ function StepOffer() {
         </div>
       </div>
 
-      {/* Everything you'll get — price box */}
+      {/* Tudo o que vai receber — preços */}
       <div className="mt-8 rounded-2xl border-2 border-brand-green/60 bg-gradient-to-b from-brand-green/10 to-background p-4 shadow-md sm:p-6">
         <p className="text-center text-[0.7rem] font-black uppercase tracking-[0.2em] text-brand-green sm:text-xs">
           O Protocolo da Diabetes
