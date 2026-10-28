@@ -46,8 +46,8 @@ export const Route = createFileRoute("/quiz")({
 
 const TOTAL_STEPS = 17;
 
-/* Substituir pelo link real de pagamento quando a página de pagamento estiver pronta. */
-const CHECKOUT_URL = "#";
+/* Link de pagamento do Protocolo da Diabetes. */
+const CHECKOUT_URL = "https://pagar.co.mz/p/protocolo-da-diabetes-q6g921";
 
 const SYMPTOMS_LEFT = ["VISÃO TURVA", "SEDE EXCESSIVA", "CANSAÇO", "NÁUSEAS"];
 const SYMPTOMS_RIGHT = ["DOR NAS PERNAS", "FORMIGAMENTO", "INSÓNIA", "FADIGA"];
