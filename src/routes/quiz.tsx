@@ -174,8 +174,8 @@ function StepDeworming({ onNext }: { onNext: () => void }) {
       <Sub>Com medicamentos ou métodos naturais.</Sub>
       <div className="mt-6 space-y-3">
         {[
-          { emoji: "😐", label: "No, I have never feito desparasitação." },
-          { emoji: "😁", label: "Yes, I have feito desparasitação before." },
+          { emoji: "😐", label: "Não, nunca fiz desparasitação." },
+          { emoji: "😁", label: "Sim, já fiz desparasitação." },
         ].map((opt) => (
           <button
             key={opt.label}
@@ -498,7 +498,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
       >
         <SmartImage
           src={glucoseAntesAfter.url}
-          alt="Two Accu-Chek glucose meters side by side: the left one reads 240 mg/dL antes do protocolo, the right one reads 105 mg/dL one week after the deworming protocol."
+          alt="Dois medidores de glicose Accu-Chek lado a lado: antes do protocolo, 240 mg/dL; uma semana depois, 105 mg/dL."
           width={701}
           height={688}
           className="object-contain"
@@ -580,8 +580,8 @@ function StepResults({ onNext }: { onNext: () => void }) {
 const MEDS = [
   "Metformina",
   "Glifage",
-  "Gliclazide",
-  "Glimepiride",
+  "Gliclazida",
+  "Glimepirida",
   "Insulina",
   "Tomo outros medicamentos",
   "Não estou a tomar nenhum medicamento neste momento",
@@ -1030,7 +1030,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
       <figure className="mt-4 overflow-hidden rounded-2xl border-2 border-brand-green bg-card shadow-md">
         <SmartImage
           src={glucose14DaysV2.url}
-          alt="Two glucose meters side by side, labelled Antes Deworming reading 255 mg/dL and 14 Days After Deworming reading 118 mg/dL."
+          alt="Dois medidores de glicose lado a lado: antes da desparasitação, 255 mg/dL; 14 dias depois, 118 mg/dL."
           width={1537}
           height={1023}
           sizes="(max-width: 640px) 92vw, 480px"
@@ -1173,7 +1173,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
           <p className="mt-2.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
             With our Protocol you can relax —{" "}
             <span className="text-brand-green">nenhum verme ou parasita sairá vivo</span> in an
-            uncomfortable way. They are eliminated{" "}
+            de forma desconfortável. São eliminados{" "}
             <span className="text-brand-green">já morto e decomposto</span>, almost
             imperceptible. ☺️
           </p>
@@ -1384,7 +1384,7 @@ function CtaLink({ children }: { children: React.ReactNode }) {
 }
 
 const OFFER_ITEMS = [
-  { label: "Deworming preparation", price: "$37.90" },
+  { label: "Preparação para a desparasitação", price: "$37.90" },
   { label: "Protocolo completo de desparasitação", price: "$57.00" },
   { label: "Acompanhamento individual", price: "$97.00" },
   { label: "Guia alimentar antiparasitário", price: "$27.00" },
@@ -1568,7 +1568,7 @@ function StepOffer() {
 
         <div className="mt-5 border-t border-border pt-4 text-center">
           <p className="text-sm font-bold text-muted-foreground sm:text-base">
-            Total value:{" "}
+            Valor total:{" "}
             <span className="text-lg font-black text-destructive sm:text-xl">$272.90</span>
           </p>
           <p className="mt-1 text-base font-black sm:text-lg">Hoje, por apenas</p>
@@ -1681,7 +1681,7 @@ function StepOffer() {
         <div className="flex items-start gap-2.5">
           <SmartImage
             src={manImg}
-            alt="Profile photo of Sipho Dlamini"
+            alt="Fotografia de perfil de Sipho Dlamini"
             width={600}
             height={750}
             className="object-cover"
