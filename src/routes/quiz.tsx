@@ -12,8 +12,9 @@ import glucoseBeforeAfter from "@/assets/glucose-before-after.webp.asset.json";
 import avatarAna from "@/assets/avatar-ana.webp";
 import avatarRita from "@/assets/avatar-rita.webp";
 import avocadoImg from "@/assets/abacate-para-diabetes.webp.asset.json";
-import audioAna from "@/assets/diabetes-protocol-audio.mp3.asset.json";
-import audioProof from "@/assets/diabetes-protocol-audio-2.mp3.asset.json";
+import audioAna from "@/assets/som-01.mp3.asset.json";
+import audioProof from "@/assets/som-02.mp3.asset.json";
+import audioOffer from "@/assets/som-03.mp3.asset.json";
 import glucose14DaysV2 from "@/assets/glucose-255-118.webp.asset.json";
 import slide588 from "@/assets/slide-588.webp.asset.json";
 import slide198 from "@/assets/slide-198.webp.asset.json";
@@ -1518,7 +1519,7 @@ function StepOffer() {
             >
               <span aria-hidden="true">{playing ? "❚❚" : "▶"}</span>
             </button>
-            <audio id="offer-audio" ref={audioRef} src={audioAna.url} preload="none" />
+            <audio id="offer-audio" ref={audioRef} src={audioOffer.url} preload="none" />
             <span className="sr-only" aria-live="polite">
               {playing ? "Audio playing" : "Audio paused"}
             </span>
