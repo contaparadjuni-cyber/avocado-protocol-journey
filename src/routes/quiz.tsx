@@ -1389,7 +1389,7 @@ const OFFER_ITEMS = [
   { label: "Acompanhamento individual", price: "797 MT" },
   { label: "Guia alimentar antiparasitário", price: "247 MT" },
   { label: "3 sessões de perguntas e respostas com a nossa equipa", price: "197 MT" },
-  { label: "Acompanhamento anual do protocolo", price: "$37.00" },
+  { label: "Acompanhamento anual do protocolo", price: "397 MT" },
 ];
 
 function StepOffer() {
