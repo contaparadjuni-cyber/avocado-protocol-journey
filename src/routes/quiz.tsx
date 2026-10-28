@@ -75,22 +75,24 @@ function Quiz() {
 
   // Meta Pixel: carregar e registar PageView quando o quiz é aberto.
   useEffect(() => {
-    const w = window as Window & {
-      fbq?: (...args: unknown[]) => void;
-      _fbq?: (...args: unknown[]) => void;
+    type MetaPixel = ((...args: unknown[]) => void) & {
+      callMethod?: (...args: unknown[]) => void;
+      queue: unknown[][];
+      loaded: boolean;
+      version: string;
     };
+    const w = window as Window & { fbq?: MetaPixel; _fbq?: MetaPixel };
 
     if (!w.fbq) {
-      const fbq = function (...args: unknown[]) {
-        const fn = fbq as typeof fbq & { callMethod?: (...args: unknown[]) => void; queue?: unknown[][] };
-        if (fn.callMethod) fn.callMethod(...args);
-        else (fn.queue ??= []).push(args);
-      } as typeof w.fbq & { queue?: unknown[][]; loaded?: boolean; version?: string };
-      w.fbq = fbq;
-      w._fbq = fbq;
-      fbq.queue = [];
-      fbq.loaded = true;
-      fbq.version = "2.0";
+      const pixel = function (...args: unknown[]) {
+        if (pixel.callMethod) pixel.callMethod(...args);
+        else pixel.queue.push(args);
+      } as MetaPixel;
+      pixel.queue = [];
+      pixel.loaded = true;
+      pixel.version = "2.0";
+      w.fbq = pixel;
+      w._fbq = pixel;
 
       const script = document.createElement("script");
       script.async = true;
@@ -98,10 +100,11 @@ function Quiz() {
       document.head.appendChild(script);
     }
 
-    w.fbq("init", "1513406960271858");
-    w.fbq("track", "PageView");
+    const pixel = w.fbq;
+    if (!pixel) return;
+    pixel("init", "1513406960271858");
+    pixel("track", "PageView");
   }, []);
-
 
 
   return (
