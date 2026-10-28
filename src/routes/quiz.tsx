@@ -437,7 +437,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
         Se o áudio não começar, toque no botão para o reproduzir.
       </p>
 
-      <div className="mt-6 w-full min-w-0 rounded-2xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
+      <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
         <p className="text-xs font-bold sm:text-sm">Ana</p>
         <div className="mt-2.5 flex items-center gap-3">
           <SmartImage
@@ -1532,7 +1532,7 @@ function StepOffer() {
         <span className="text-brand-green">como funciona o Protocolo da Diabetes</span>. 👇
       </p>
 
-      <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
+      <div className="mt-6 w-full min-w-0 rounded-2xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
         <p className="text-xs font-bold sm:text-sm">Ana</p>
         <div className="mt-2.5 flex items-center gap-3">
           <SmartImage
