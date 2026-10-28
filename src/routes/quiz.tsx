@@ -103,7 +103,7 @@ function Quiz() {
 function StepGender({ onNext }: { onNext: () => void }) {
   return (
     <section>
-      <Heading>Let&apos;s start your assessment</Heading>
+      <Heading>Vamos começar a sua avaliação</Heading>
       <Sub>Selecione uma das opções abaixo</Sub>
       <div className="mt-6 grid grid-cols-2 gap-3 sm:gap-4">
         <GenderCard img={manImg} label="Sou homem" onClick={onNext} />
@@ -423,7 +423,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <div className="rounded-xl bg-brand-green px-4 py-4 text-primary-foreground shadow-md sm:px-5">
-        <p className="text-sm font-black sm:text-base">⚠️ The results don&apos;t lie:</p>
+        <p className="text-sm font-black sm:text-base">⚠️ Os resultados não mentem:</p>
         <p className="mt-1.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
           Your symptoms point to something very dangerous —{" "}
           <span className="underline">ouça com atenção!</span>
@@ -434,7 +434,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
         Ouça esta breve explicação 👇
       </p>
       <p className="mt-1 text-center text-xs text-muted-foreground sm:text-sm">
-        If the audio doesn&apos;t start, just tap it.
+        Se o audio doesn&apos;t start, just tap it.
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
@@ -498,7 +498,7 @@ function StepResults({ onNext }: { onNext: () => void }) {
       >
         <SmartImage
           src={glucoseAntesAfter.url}
-          alt="Two Accu-Chek glucose meters side by side: the left one reads 240 mg/dL before the protocol, the right one reads 105 mg/dL one week after the deworming protocol."
+          alt="Two Accu-Chek glucose meters side by side: the left one reads 240 mg/dL antes do protocolo, the right one reads 105 mg/dL one week after the deworming protocol."
           width={701}
           height={688}
           className="object-contain"
@@ -558,8 +558,8 @@ function StepResults({ onNext }: { onNext: () => void }) {
             </div>
             <div className="mt-1.5 flex items-center gap-3 px-3 text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
               <span>2 h</span>
-              <span className="text-brand-green">Like</span>
-              <span className="text-brand-green">Reply</span>
+              <span className="text-brand-green">Gostar</span>
+              <span className="text-brand-green">Responder</span>
               <span className="ml-auto flex items-center gap-1">
                 <span aria-hidden="true">👍❤️</span>
                 <span aria-label="47 reactions">47</span>
@@ -582,7 +582,7 @@ const MEDS = [
   "Glifage",
   "Gliclazide",
   "Glimepiride",
-  "Insulin",
+  "Insulina",
   "Tomo outros medicamentos",
   "Não estou a tomar nenhum medicamento neste momento",
 ];
@@ -598,10 +598,10 @@ function StepMedications({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Are you currently taking any of{" "}
-        <span className="text-brand-green">these medications?</span>
+        Está actualmente a tomar algum destes{" "}
+        <span className="text-brand-green">estes medicamentos?</span>
       </Heading>
-      <Sub>Select all that apply.</Sub>
+      <Sub>Selecione todas as opções aplicáveis.</Sub>
       <div className="mt-6 space-y-3">
         {MEDS.map((m) => {
           const on = picked.includes(m);
@@ -664,9 +664,9 @@ function StepMonitoring({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        How often do you <span className="text-brand-green">monitor your glucose?</span>
+        How often do you <span className="text-brand-green">monitorizar a sua glicose?</span>
       </Heading>
-      <Sub>Pick the answer that fits you best.</Sub>
+      <Sub>Escolha a resposta que melhor se aplica a si.</Sub>
       <div className="mt-6 space-y-3">
         {MONITORING.map((o) => {
           const on = choice === o.label;
@@ -710,8 +710,8 @@ function StepInterest({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Would you be interested in receiving a{" "}
-        <span className="text-brand-green">personalized protocol</span> for Deworming in 14 days?
+        Gostaria de receber um{" "}
+        <span className="text-brand-green">protocolo personalizado</span> for Deworming in 14 days?
       </Heading>
       <div className="mx-auto mt-8 max-w-md space-y-4 sm:space-y-5">
         <OptionButton emoji="✅" onClick={onNext}>
@@ -737,10 +737,10 @@ function StepCommitment({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <Heading>
-        Do you commit to following our{" "}
-        <span className="text-brand-green">14-Day Protocol</span> at home?
+        Compromete-se a seguir o nosso{" "}
+        <span className="text-brand-green">Protocolo de 14 dias</span> at home?
       </Heading>
-      <Sub>I&apos;ll help you with everything you need.</Sub>
+      <Sub>Vou ajudar com tudo aquilo de que precisa.</Sub>
       <div className="mx-auto mt-8 max-w-md space-y-4 sm:space-y-5">
         <OptionButton emoji="😍" selected={choice === "commit"} onClick={() => pick("commit")}>
           Sim, comprometo-me!
@@ -978,7 +978,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
         Ouça o áudio abaixo: <span aria-hidden="true">👇</span>
       </p>
       <p className="mt-1.5 text-center text-xs text-muted-foreground sm:text-sm">
-        If the AUDIO doesn&apos;t start, just tap it!
+        Se o AUDIO doesn&apos;t start, just tap it!
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
@@ -1039,7 +1039,7 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
         />
       </figure>
 
-      <CtaButton onClick={onNext}>Generate Personalized Protocol! ✅</CtaButton>
+      <CtaButton onClick={onNext}>Gerar protocolo personalizado! ✅</CtaButton>
     </section>
   );
 }
@@ -1081,11 +1081,11 @@ function StepAnalyzing({ onNext }: { onNext: () => void }) {
   return (
     <section>
       <div className="rounded-2xl bg-brand-green px-5 py-8 text-center text-primary-foreground shadow-lg">
-        <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em]">The Protocol of</p>
+        <p className="text-[0.7rem] font-bold uppercase tracking-[0.25em]">O Protocolo da</p>
         <p className="mt-1 text-4xl font-black italic leading-none sm:text-5xl">Diabetes</p>
         <p className="mx-auto mt-5 max-w-[18rem] text-balance text-sm font-bold leading-snug sm:text-base">
           I&apos;m analyzing your answers and building your{" "}
-          <span className="rounded bg-white/25 px-1.5 py-0.5">custom Protocol!</span>
+          <span className="rounded bg-white/25 px-1.5 py-0.5">protocolo personalizado!</span>
         </p>
       </div>
 
@@ -1140,7 +1140,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
 
         <p className="mt-7 text-balance text-center text-[1rem] font-black leading-snug sm:text-lg">
           Abaixo está a análise da sua situação actual,{" "}
-          <span className="text-brand-green">based on your answers.</span> 👇
+          <span className="text-brand-green">com base nas suas respostas.</span> 👇
         </p>
 
         <div className="mt-5 space-y-4">
@@ -1150,7 +1150,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
         </div>
 
         <p className="mt-12 text-balance text-center text-[1.05rem] font-black leading-snug sm:text-xl">
-          <span className="text-brand-green">Possible parasitic agent</span> according to your
+          <span className="text-brand-green">Possível agente parasitário</span> according to your
           sintomas:
         </p>
         <p className="mt-4 text-center text-base italic underline sm:text-lg">
@@ -1169,12 +1169,12 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
 
         {/* Warning + deworming intro */}
         <div className="mt-10 rounded-xl border border-border bg-card/90 p-4 shadow-sm backdrop-blur-sm sm:p-5">
-          <p className="text-sm font-black sm:text-base">⚠️ Attention!</p>
+          <p className="text-sm font-black sm:text-base">⚠️ Atenção!</p>
           <p className="mt-2.5 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
             With our Protocol you can relax —{" "}
-            <span className="text-brand-green">no worm or parasite will come out alive</span> in an
+            <span className="text-brand-green">nenhum verme ou parasita sairá vivo</span> in an
             uncomfortable way. They are eliminated{" "}
-            <span className="text-brand-green">already dead and broken down</span>, almost
+            <span className="text-brand-green">já morto e decomposto</span>, almost
             imperceptible. ☺️
           </p>
           <p className="mt-3 text-[0.85rem] font-semibold leading-relaxed sm:text-sm">
@@ -1186,7 +1186,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
         {/* Final protocol CTA block */}
         <div className="mt-6 rounded-xl border border-border bg-card/80 p-4 shadow-sm backdrop-blur-sm sm:p-5">
           <p className="text-balance text-center text-[0.95rem] font-bold leading-relaxed sm:text-base">
-            <span className="text-brand-green">The deworming starts</span> with an avocado smoothie
+            <span className="text-brand-green">A desparasitação começa</span> with an avocado smoothie
             plus a secret ingredient that is easy to find at any market and rarely used.
           </p>
         </div>
@@ -1201,7 +1201,7 @@ function StepProtocol({ onNext }: { onNext: () => void }) {
           />
         </figure>
 
-        <CtaButton onClick={onNext}>Gerar Protocolo de Tratamento! ✅</CtaButton>
+        <CtaButton onClick={onNext}>Gerar protocolo de tratamento! ✅</CtaButton>
       </div>
     </section>
   );
@@ -1385,11 +1385,11 @@ function CtaLink({ children }: { children: React.ReactNode }) {
 
 const OFFER_ITEMS = [
   { label: "Deworming preparation", price: "$37.90" },
-  { label: "Complete deworming protocol", price: "$57.00" },
-  { label: "1-on-1 individual support", price: "$97.00" },
-  { label: "Anti-parasite food guide", price: "$27.00" },
-  { label: "3 Q&A sessions with our team", price: "$17.00" },
-  { label: "Annual protocol maintenance", price: "$37.00" },
+  { label: "Protocolo completo de desparasitação", price: "$57.00" },
+  { label: "Acompanhamento individual", price: "$97.00" },
+  { label: "Guia alimentar antiparasitário", price: "$27.00" },
+  { label: "3 sessões de perguntas e respostas com a nossa equipa", price: "$17.00" },
+  { label: "Acompanhamento anual do protocolo", price: "$37.00" },
 ];
 
 function StepOffer() {
@@ -1422,12 +1422,12 @@ function StepOffer() {
       {/* Success banner */}
       <p className="flex items-center justify-center gap-2 text-center text-sm font-black sm:text-base">
         <span aria-hidden="true">🎉</span> Protocol generated with{" "}
-        <span className="underline">SUCCESS!</span>
+        <span className="underline">SUCESSO!</span>
       </p>
 
       <div className="mt-4 rounded-2xl bg-brand-green px-4 py-5 text-center text-primary-foreground shadow-md sm:px-5">
         <h1 className="text-balance text-xl font-black leading-tight sm:text-2xl">
-          Your <span className="text-brand-green-light">exclusive protocol</span> is ready!
+          Your <span className="text-brand-green-light">protocolo exclusivo</span> is ready!
         </h1>
       </div>
 
@@ -1452,7 +1452,7 @@ function StepOffer() {
           </p>
           <div
             role="progressbar"
-            aria-label="Progress before the protocol"
+            aria-label="Progress antes do protocolo"
             aria-valuenow={30}
             aria-valuemin={0}
             aria-valuemax={100}
@@ -1477,7 +1477,7 @@ function StepOffer() {
             />
           </div>
           <p className="mt-2 text-[0.75rem] font-semibold leading-snug text-muted-foreground sm:text-sm">
-            This is you, <span className="text-brand-green">free of Diabetes</span>.
+            This is you, <span className="text-brand-green">livre da diabetes</span>.
           </p>
           <div
             role="progressbar"
@@ -1495,7 +1495,7 @@ function StepOffer() {
       {/* Audio explainer */}
       <p className="mt-8 text-balance text-center text-sm font-bold leading-snug sm:text-base">
         Listen to the audio. I&apos;ll explain{" "}
-        <span className="text-brand-green">how the Diabetes Protocol works</span>. 👇
+        <span className="text-brand-green">como funciona o Protocolo da Diabetes</span>. 👇
       </p>
 
       <div className="mt-4 rounded-xl border border-border bg-card p-3.5 shadow-sm sm:p-4">
@@ -1548,7 +1548,7 @@ function StepOffer() {
           The Diabetes Protocol
         </p>
         <h2 className="mt-1.5 text-balance text-center text-lg font-black leading-snug sm:text-xl">
-          Everything you <span className="text-brand-green-light">will receive</span>
+          Everything you <span className="text-brand-green-light">irá receber</span>
         </h2>
 
         <ul className="mt-5 space-y-3">
@@ -1703,8 +1703,8 @@ function StepOffer() {
             </div>
             <div className="mt-1.5 flex items-center gap-3 px-3 text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
               <span>1 h</span>
-              <span className="text-brand-green">Like</span>
-              <span className="text-brand-green">Reply</span>
+              <span className="text-brand-green">Gostar</span>
+              <span className="text-brand-green">Responder</span>
               <span className="ml-auto flex items-center gap-1">
                 <span aria-hidden="true">👍❤️</span>
                 <span aria-label="32 reactions">32</span>
@@ -1726,11 +1726,11 @@ function StepOffer() {
         </span>
         <p className="mt-3 text-base font-black sm:text-lg">O seu risco é zero!</p>
         <p className="mt-3 text-[0.8rem] font-semibold leading-relaxed text-muted-foreground sm:text-sm">
-          Under the <span className="text-foreground">Código de Defesa do Consumidor</span>, every purchase
-          is protected by a <span className="text-foreground">30-day de garantia</span>. If the
-          protocol does <span className="text-foreground">NÃO</span> meet your expectations and you
-          don&apos;t see results within{" "}
-          <span className="text-foreground">30 dias</span>, we will refund your money —{" "}
+          Ao abrigo do <span className="text-foreground">Código de Defesa do Consumidor</span>, todas as compras
+          estão protegidas por uma <span className="text-foreground">30-day de garantia</span>. If the
+          protocolo não <span className="text-foreground">NÃO</span> corresponder às suas expectativas e não
+          obtiver resultados no prazo de{" "}
+          <span className="text-foreground">30 dias</span>, devolveremos o seu dinheiro —{" "}
           <span className="text-foreground">sem perguntas</span> and no bureaucracy.
         </p>
         <p className="mt-3 text-[0.8rem] font-black leading-relaxed sm:text-sm">
