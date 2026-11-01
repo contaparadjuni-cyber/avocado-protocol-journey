@@ -102,7 +102,7 @@ function Quiz() {
 
     const pixel = w.fbq;
     if (!pixel) return;
-    pixel("init", "1513406960271858");
+    pixel("init", "2110814099508793", {}, { agent: "lovable" });
     pixel("track", "PageView");
   }, []);
 
@@ -114,7 +114,7 @@ function Quiz() {
           height="1"
           width="1"
           style={{ display: "none" }}
-          src="https://www.facebook.com/tr?id=1513406960271858&ev=PageView&noscript=1"
+          src="https://www.facebook.com/tr?id=2110814099508793&ev=PageView&noscript=1"
           alt=""
         />
       </noscript>
