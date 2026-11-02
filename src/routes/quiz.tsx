@@ -44,7 +44,7 @@ export const Route = createFileRoute("/quiz")({
   component: Quiz,
 });
 
-const TOTAL_STEPS = 17;
+const TOTAL_STEPS = 18;
 
 /* Link de pagamento do Protocolo da Diabetes. */
 const CHECKOUT_URL = "https://pagar.co.mz/p/protocolo-da-diabetes-q6g921";
@@ -132,9 +132,10 @@ function Quiz() {
       {step === 12 && <StepMonitoring onNext={next} />}
       {step === 13 && <StepCommitment onNext={next} />}
       {step === 14 && <StepAudioProof onNext={next} />}
-      {step === 15 && <StepAnalyzing onNext={next} />}
-      {step === 16 && <StepProtocol onNext={next} />}
-      {step === 17 && <StepOffer />}
+      {step === 15 && <StepVideoExplanation onNext={next} />}
+      {step === 16 && <StepAnalyzing onNext={next} />}
+      {step === 17 && <StepProtocol onNext={next} />}
+      {step === 18 && <StepOffer />}
     </QuizShell>
   );
 }
@@ -1081,6 +1082,166 @@ function StepAudioProof({ onNext }: { onNext: () => void }) {
       </figure>
 
       <CtaButton onClick={onNext}>Gerar protocolo personalizado! ✅</CtaButton>
+    </section>
+  );
+}
+
+/* ---------- Step 15: vídeo explicativo Wistia ---------- */
+
+const VIDEO_STEP_MEDIA_ID = "h87iy690i3";
+const VIDEO_STEP_UNLOCK_KEY = "diabetes-video-step-unlocked";
+
+type WistiaPlayerElement = HTMLElement & {
+  currentTime?: number;
+  time?: () => number;
+};
+
+function StepVideoExplanation({ onNext }: { onNext: () => void }) {
+  const playerRef = useRef<WistiaPlayerElement | null>(null);
+  const [unlocked, setUnlocked] = useState(
+    () => sessionStorage.getItem(VIDEO_STEP_UNLOCK_KEY) === "true",
+  );
+
+  useEffect(() => {
+    const w = window as Window & {
+      fbq?: (...args: unknown[]) => void;
+    };
+    w.fbq?.("trackCustom", "VideoStepView");
+
+    // Carrega os scripts do Wistia apenas uma vez, quando esta etapa é aberta.
+    if (!document.querySelector('script[data-wistia-player="true"]')) {
+      const playerScript = document.createElement("script");
+      playerScript.src = "https://fast.wistia.com/player.js";
+      playerScript.async = true;
+      playerScript.dataset.wistiaPlayer = "true";
+      document.head.appendChild(playerScript);
+    }
+
+    if (!document.querySelector(`script[data-wistia-media="${VIDEO_STEP_MEDIA_ID}"]`)) {
+      const embedScript = document.createElement("script");
+      embedScript.src = `https://fast.wistia.com/embed/${VIDEO_STEP_MEDIA_ID}.js`;
+      embedScript.type = "module";
+      embedScript.async = true;
+      embedScript.dataset.wistiaMedia = VIDEO_STEP_MEDIA_ID;
+      document.head.appendChild(embedScript);
+    }
+
+    if (sessionStorage.getItem(VIDEO_STEP_UNLOCK_KEY) === "true") return;
+
+    let active = true;
+    let intervalId: number | undefined;
+    let failureTimer: number | undefined;
+    let fallbackTimer: number | undefined;
+    const player = playerRef.current;
+
+    const unlock = () => {
+      if (!active) return;
+      active = false;
+      sessionStorage.setItem(VIDEO_STEP_UNLOCK_KEY, "true");
+      setUnlocked(true);
+      w.fbq?.("trackCustom", "VideoStepComplete");
+      if (intervalId !== undefined) window.clearInterval(intervalId);
+      if (failureTimer !== undefined) window.clearTimeout(failureTimer);
+      if (fallbackTimer !== undefined) window.clearTimeout(fallbackTimer);
+      player?.removeEventListener("secondchange", onSecondChange);
+    };
+
+    const readCurrentTime = () => {
+      const p = playerRef.current;
+      if (!p) return 0;
+      if (typeof p.currentTime === "number") return p.currentTime;
+      if (typeof p.time === "function") {
+        const value = p.time();
+        return typeof value === "number" ? value : 0;
+      }
+      return 0;
+    };
+
+    const onSecondChange = (event: Event) => {
+      const detail = (event as CustomEvent<{ currentTime?: number; time?: number }>).detail;
+      const current = typeof detail?.currentTime === "number"
+        ? detail.currentTime
+        : typeof detail?.time === "number"
+          ? detail.time
+          : readCurrentTime();
+      if (current >= 156) unlock();
+    };
+
+    player?.addEventListener("secondchange", onSecondChange);
+    intervalId = window.setInterval(() => {
+      if (readCurrentTime() >= 156) unlock();
+    }, 500);
+
+    // Se o player não ficar disponível nos primeiros 10 segundos, activar
+    // uma alternativa para evitar que o utilizador fique bloqueado.
+    failureTimer = window.setTimeout(() => {
+      const p = playerRef.current;
+      const playerAvailable = !!p && (
+        typeof p.currentTime === "number" || typeof p.time === "function"
+      );
+      if (!playerAvailable && active) {
+        fallbackTimer = window.setTimeout(unlock, 160000);
+      }
+    }, 10000);
+
+    return () => {
+      active = false;
+      if (intervalId !== undefined) window.clearInterval(intervalId);
+      if (failureTimer !== undefined) window.clearTimeout(failureTimer);
+      if (fallbackTimer !== undefined) window.clearTimeout(fallbackTimer);
+      player?.removeEventListener("secondchange", onSecondChange);
+    };
+  }, []);
+
+  return (
+    <section className="w-full min-w-0">
+      <div className="mb-5">
+        <p className="text-center text-base font-black sm:text-lg">Protocolo da Diabetes</p>
+        <div
+          className="mt-3 h-2 w-full overflow-hidden rounded-full bg-muted"
+          role="progressbar"
+          aria-label="Progresso da avaliação"
+          aria-valuenow={15}
+          aria-valuemin={0}
+          aria-valuemax={18}
+        >
+          <div className="h-full w-[83.33%] rounded-full bg-brand-green" />
+        </div>
+      </div>
+
+      <Heading>Assista ao vídeo abaixo até ao final 👇</Heading>
+      <Sub>Este vídeo explica como funciona o seu protocolo personalizado.</Sub>
+
+      <div className="mt-5 w-full overflow-hidden rounded-2xl border border-border bg-card shadow-md">
+        <style>{`
+          wistia-player[media-id='${VIDEO_STEP_MEDIA_ID}']:not(:defined) {
+            display: block;
+            padding-top: 176.94%;
+            background: center / contain no-repeat
+              url('https://fast.wistia.com/embed/medias/${VIDEO_STEP_MEDIA_ID}/swatch');
+            filter: blur(5px);
+          }
+        `}</style>
+        {React.createElement("wistia-player", {
+          ref: playerRef,
+          "media-id": VIDEO_STEP_MEDIA_ID,
+          aspect: "0.565149136577708",
+          playbar: "false",
+        })}
+      </div>
+
+      <button
+        id="botao-continuar"
+        type="button"
+        onClick={onNext}
+        aria-hidden={!unlocked}
+        tabIndex={unlocked ? 0 : -1}
+        className={`btn-glow mt-7 w-full rounded-xl bg-brand-green px-5 py-[1.1rem] text-[1.05rem] font-black tracking-tight text-primary-foreground shadow-lg transition-opacity duration-700 hover:bg-primary-strong active:scale-[0.99] sm:text-lg ${
+          unlocked ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      >
+        Continuar ➜
+      </button>
     </section>
   );
 }
