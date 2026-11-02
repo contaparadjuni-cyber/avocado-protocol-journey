@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { createElement, useEffect, useRef, useState } from "react";
 import { QuizShell } from "@/components/QuizShell";
 import manImg from "@/assets/man.webp";
 import womanImg from "@/assets/woman.webp";
@@ -1223,7 +1223,7 @@ function StepVideoExplanation({ onNext }: { onNext: () => void }) {
             filter: blur(5px);
           }
         `}</style>
-        {React.createElement("wistia-player", {
+        {createElement("wistia-player", {
           ref: playerRef,
           "media-id": VIDEO_STEP_MEDIA_ID,
           aspect: "0.565149136577708",
