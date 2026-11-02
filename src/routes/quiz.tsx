@@ -1196,20 +1196,6 @@ function StepVideoExplanation({ onNext }: { onNext: () => void }) {
 
   return (
     <section className="w-full min-w-0">
-      <div className="mb-5">
-        <p className="text-center text-base font-black sm:text-lg">Protocolo da Diabetes</p>
-        <div
-          className="mt-3 h-2 w-full overflow-hidden rounded-full bg-muted"
-          role="progressbar"
-          aria-label="Progresso da avaliação"
-          aria-valuenow={15}
-          aria-valuemin={0}
-          aria-valuemax={18}
-        >
-          <div className="h-full w-[83.33%] rounded-full bg-brand-green" />
-        </div>
-      </div>
-
       <Heading>Assista ao vídeo abaixo até ao final 👇</Heading>
       <Sub>Este vídeo explica como funciona o seu protocolo personalizado.</Sub>
 
@@ -1810,7 +1796,7 @@ function StepOffer() {
           </p>
           <p className="mt-1 text-base font-black sm:text-lg">Hoje, por apenas</p>
           <p className="text-4xl font-black leading-none text-brand-green sm:text-5xl">
-            297<span className="text-2xl sm:text-3xl"> MT</span>
+            197<span className="text-2xl sm:text-3xl"> MT</span>
           </p>
         </div>
       </div>
@@ -1886,7 +1872,7 @@ function StepOffer() {
           <p className="text-[0.7rem] font-semibold text-muted-foreground sm:text-xs">
             por apenas
           </p>
-          <p className="text-lg font-black leading-tight text-brand-green sm:text-xl">297 MT</p>
+          <p className="text-lg font-black leading-tight text-brand-green sm:text-xl">197 MT</p>
         </div>
       </div>
 
