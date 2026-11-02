@@ -1098,9 +1098,7 @@ type WistiaPlayerElement = HTMLElement & {
 
 function StepVideoExplanation({ onNext }: { onNext: () => void }) {
   const playerRef = useRef<WistiaPlayerElement | null>(null);
-  const [unlocked, setUnlocked] = useState(
-    () => sessionStorage.getItem(VIDEO_STEP_UNLOCK_KEY) === "true",
-  );
+  const [unlocked, setUnlocked] = useState(false);
 
   useEffect(() => {
     const w = window as Window & {
@@ -1126,7 +1124,10 @@ function StepVideoExplanation({ onNext }: { onNext: () => void }) {
       document.head.appendChild(embedScript);
     }
 
-    if (sessionStorage.getItem(VIDEO_STEP_UNLOCK_KEY) === "true") return;
+    if (sessionStorage.getItem(VIDEO_STEP_UNLOCK_KEY) === "true") {
+      setUnlocked(true);
+      return;
+    }
 
     let active = true;
     let intervalId: number | undefined;
